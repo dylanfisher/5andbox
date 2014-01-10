@@ -40,14 +40,14 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      beforeconcat: ['js/*.js']
+      beforeconcat: ['js/application/*.js']
     },
 
     concat: {
       dist: {
         src: [
           'js/vendor/*.js',
-          'js/application.js'
+          'js/application/*.js'
         ],
         dest: 'js/build/application.js'
       }
@@ -75,14 +75,14 @@ module.exports = function(grunt) {
       options: {
         livereload: true,
       },
-      html: {
+      php: {
         files: ['*.php'],
         options: {
           spawn: false,
         }
       },
       scripts: {
-        files: ['js/*.js'],
+        files: ['js/application/*.js'],
         tasks: ['jshint', 'concat', 'uglify'],
         options: {
           spawn: false,
