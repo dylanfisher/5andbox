@@ -1,0 +1,2 @@
+# 5andbox Wordpress theme
+This theme builds on the original Sandbox theme (http://wordpress.org/themes/sandbox) and incorporates the HTML5 boilerplate, SASS, a Grunt workflow, and a few other things that I use when I start a new WP site. 
