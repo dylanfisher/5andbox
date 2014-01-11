@@ -482,10 +482,10 @@ add_filter( 'archive_meta', 'wpautop' );
 ///////////////////////////////////
 
 // Disable Wordpress Generator meta tag for security reasons
-function my_remove_version_info() {
+function sandbox_version_info() {
      return '';
 }
-add_filter('the_generator', 'my_remove_version_info');
+add_filter('the_generator', 'sandbox_version_info');
 
 // Remove unnecessary wp_head items
 remove_action('wp_head', 'rsd_link');
@@ -505,7 +505,7 @@ show_admin_bar( false );
 add_theme_support( 'menus' );
 
 // Function to create slug out of text
-function slugify( $text )
+function sandbox_slugify( $text )
 {
     $str = strtolower( trim( $text ) );
     $str = preg_replace( '/[^a-z0-9-]/', '-', $str );
@@ -514,7 +514,7 @@ function slugify( $text )
 }
 
 // Custom excerpt size
-function excerpt($limit) {
+function sandbox_custom_excerpt($limit) {
   $excerpt = explode(' ', get_the_excerpt(), $limit);
   if (count($excerpt)>=$limit) {
 	array_pop($excerpt);
@@ -526,7 +526,7 @@ function excerpt($limit) {
   return $excerpt;
 }
 
-function content($limit) {
+function sandbox_content($limit) {
   $content = explode(' ', get_the_content(), $limit);
   if (count($content)>=$limit) {
 	array_pop($content);
@@ -546,15 +546,15 @@ add_image_size( 'custom-image-size-name', 300, 300, true ); // Custom Image - Na
  */
 
 // Open external links in new windows
-/* function autoblank($text) {
+/* function sandbox_autoblank($text) {
 $return = str_replace('href=', 'target="_blank" href=', $text);
 $return = str_replace('target="_blank" href="echo home_url()', 'echo home_url()', $return);
 $return = str_replace('target="_blank" href="#', 'href="#', $return);
 $return = str_replace(' target = "_blank">', '>', $return);
 return $return;
 }
-add_filter('the_content', 'autoblank');
-add_filter('comment_text', 'autoblank'); */
+add_filter('the_content', 'sandbox_autoblank');
+add_filter('comment_text', 'sandbox_autoblank'); */
 
 // Check for custom Single Post templates by category ID. Format for new template names is single-category[ID#].php (ommiting the brackets)
 /* 
@@ -564,32 +564,32 @@ add_filter('single_template', create_function('$t', 'foreach( (array) get_the_ca
 // Custom Wordpress UI options
 // CUSTOM ADMIN LOGIN HEADER LOGO
 /*
-function my_custom_login_logo(){
+function sandbox_login_logo(){
     echo '<style  type="text/css"> h1 a {  background-image:url(' . get_bloginfo('template_directory') . '/images/logo_admin.png)  !important; } </style>';}
-add_action('login_head',  'my_custom_login_logo');
+add_action('login_head',  'sandbox_login_logo');
 */
 
 // CUSTOM ADMIN DASHBOARD HEADER LOGO
 /*
-function custom_admin_logo(){
+function sandbox_admin_logo(){
     echo '<style type="text/css">#header-logo { background-image: url(' . get_bloginfo('template_directory') . '/images/logo_admin_dashboard.png) !important; }</style>';}
-add_action('admin_head', 'custom_admin_logo');
+add_action('admin_head', 'sandbox_admin_logo');
 */
 
 // Admin footer modification
 /*
-function remove_footer_admin (){
+function sandbox_remove_footer_admin (){
     echo '<span id="footer-backend">Developed by <a href="http://www.designerswebsite.com" target="_blank">Your Name</a></span>';}
-add_filter('admin_footer_text', 'remove_footer_admin');
+add_filter('admin_footer_text', 'sandbox_remove_footer_admin');
 */
 
 // REMOVE META BOXES FROM WORDPRESS DASHBOARD FOR ALL USERS
-function example_remove_dashboard_widgets(){
+function sandbox_remove_dashboard_widgets(){
     // Globalize the metaboxes array, this holds all the widgets for wp-admin
     global $wp_meta_boxes;
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
 	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);}
-add_action('wp_dashboard_setup', 'example_remove_dashboard_widgets' );
+add_action('wp_dashboard_setup', 'sandbox_remove_dashboard_widgets' );
 ?>
