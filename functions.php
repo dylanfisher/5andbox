@@ -261,73 +261,6 @@ function sandbox_commenter_link() {
 	echo $avatar . ' <span class="fn n">' . $commenter . '</span>';
 }
 
-// Function to filter the default gallery shortcode
-function sandbox_gallery($attr) {
-	global $post;
-	if ( isset($attr['orderby']) ) {
-		$attr['orderby'] = sanitize_sql_orderby($attr['orderby']);
-		if ( !$attr['orderby'] )
-			unset($attr['orderby']);
-	}
-
-	extract(shortcode_atts( array(
-		'orderby'    => 'menu_order ASC, ID ASC',
-		'id'         => $post->ID,
-		'itemtag'    => 'dl',
-		'icontag'    => 'dt',
-		'captiontag' => 'dd',
-		'columns'    => 3,
-		'size'       => 'thumbnail',
-	), $attr ));
-
-	$id           =  intval($id);
-	$orderby      =  addslashes($orderby);
-	$attachments  =  get_children("post_parent=$id&post_type=attachment&post_mime_type=image&orderby={$orderby}");
-
-	if ( empty($attachments) )
-		return null;
-
-	if ( is_feed() ) {
-		$output = "\n";
-		foreach ( $attachments as $id => $attachment )
-			$output .= wp_get_attachment_link( $id, $size, true ) . "\n";
-		return $output;
-	}
-
-	$listtag     =  tag_escape($listtag);
-	$itemtag     =  tag_escape($itemtag);
-	$captiontag  =  tag_escape($captiontag);
-	$columns     =  intval($columns);
-	$itemwidth   =  $columns > 0 ? floor(100/$columns) : 100;
-
-	$output = apply_filters( 'gallery_style', "\n" . '<div class="gallery">', 9 ); // Available filter: gallery_style
-
-	foreach ( $attachments as $id => $attachment ) {
-		$img_lnk = get_attachment_link($id);
-		$img_src = wp_get_attachment_image_src( $id, $size );
-		$img_src = $img_src[0];
-		$img_alt = $attachment->post_excerpt;
-		if ( $img_alt == null )
-			$img_alt = $attachment->post_title;
-		$img_rel = apply_filters( 'gallery_img_rel', 'attachment' ); // Available filter: gallery_img_rel
-		$img_class = apply_filters( 'gallery_img_class', 'gallery-image' ); // Available filter: gallery_img_class
-
-		$output  .=  "\n\t" . '<' . $itemtag . ' class="gallery-item gallery-columns-' . $columns .'">';
-		$output  .=  "\n\t\t" . '<' . $icontag . ' class="gallery-icon"><a href="' . $img_lnk . '" title="' . $img_alt . '" rel="' . $img_rel . '"><img src="' . $img_src . '" alt="' . $img_alt . '" class="' . $img_class . ' attachment-' . $size . '" /></a></' . $icontag . '>';
-
-		if ( $captiontag && trim($attachment->post_excerpt) ) {
-			$output .= "\n\t\t" . '<' . $captiontag . ' class="gallery-caption">' . $attachment->post_excerpt . '</' . $captiontag . '>';
-		}
-
-		$output .= "\n\t" . '</' . $itemtag . '>';
-		if ( $columns > 0 && ++$i % $columns == 0 )
-			$output .= "\n</div>\n" . '<div class="gallery">';
-	}
-	$output .= "\n</div>\n";
-
-	return $output;
-}
-
 // Widget: Search; to match the Sandbox style and replace Widget plugin default
 function widget_sandbox_search($args) {
 	extract($args);
@@ -441,7 +374,7 @@ function sandbox_widgets_init() {
 		'description'  =>  __( "A search form for your blog (Sandbox)", "sandbox" )
 	);
 	wp_register_sidebar_widget( 'search', __( 'Search', 'sandbox' ), 'widget_sandbox_search', $widget_ops );
-	unregister_widget_control('search'); // We're being Sandbox-specific; remove WP default
+	wp_unregister_widget_control('search'); // We're being Sandbox-specific; remove WP default
 	wp_register_widget_control( 'search', __( 'Search', 'sandbox' ), 'widget_sandbox_search_control' );
 
 	// Sandbox Meta widget
@@ -450,7 +383,7 @@ function sandbox_widgets_init() {
 		'description'  =>  __( "Log in/out and administration links (Sandbox)", "sandbox" )
 	);
 	wp_register_sidebar_widget( 'meta', __( 'Meta', 'sandbox' ), 'widget_sandbox_meta', $widget_ops );
-	unregister_widget_control('meta'); // We're being Sandbox-specific; remove WP default
+	wp_unregister_widget_control('meta'); // We're being Sandbox-specific; remove WP default
 	wp_register_widget_control( 'meta', __( 'Meta', 'sandbox' ), 'wp_widget_meta_control' );
 
 	//Sandbox RSS Links widget
@@ -468,9 +401,6 @@ load_theme_textdomain('sandbox');
 // Runs our code at the end to check that everything needed has loaded
 add_action( 'init', 'sandbox_widgets_init' );
 
-// Registers our function to filter default gallery shortcode
-add_filter( 'post_gallery', 'sandbox_gallery', $attr );
-
 // Adds filters for the description/meta content in archives.php
 add_filter( 'archive_meta', 'wptexturize' );
 add_filter( 'archive_meta', 'convert_smilies' );
@@ -480,6 +410,27 @@ add_filter( 'archive_meta', 'wpautop' );
 ///////////////////////////////////
 //     END SANDBOX FUNCTIONS     //
 ///////////////////////////////////
+
+// Add support for Advanced Custom Fields JSON data in JSON-API plugin
+add_filter('json_api_encode', 'sandbox_json_api_encode_acf');
+function sandbox_json_api_encode_acf($response) 
+{
+    if (isset($response['posts'])) {
+        foreach ($response['posts'] as $post) {
+            sandbox_json_api_add_acf($post); // Add specs to each post
+        }
+    } 
+    else if (isset($response['post'])) {
+        sandbox_json_api_add_acf($response['post']); // Add a specs property
+    }
+
+    return $response;
+}
+
+function sandbox_json_api_add_acf(&$post) 
+{
+    $post->acf = get_fields($post->id);
+}
 
 // Disable Wordpress Generator meta tag for security reasons
 function sandbox_version_info() {
@@ -499,7 +450,7 @@ remove_action('wp_head', 'parent_post_rel_link', 10, 0);
 remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
 
 // Disable Admin Bar
-show_admin_bar( false );
+// show_admin_bar( false );
 
 // Adds custom menu support
 add_theme_support( 'menus' );
@@ -592,4 +543,59 @@ function sandbox_remove_dashboard_widgets(){
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
 	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);}
 add_action('wp_dashboard_setup', 'sandbox_remove_dashboard_widgets' );
+
+//
+// AJAX Functions
+//
+
+add_action('wp_ajax_nopriv_do_ajax', 'our_ajax_function');
+add_action('wp_ajax_do_ajax', 'our_ajax_function');
+function our_ajax_function(){
+ 
+   // the first part is a SWTICHBOARD that fires specific functions
+   // according to the value of Query Var 'fn'
+ 
+     switch($_REQUEST['fn']){
+          case 'get_latest_posts':
+               $output = ajax_get_latest_posts($_REQUEST['category']);
+          break;
+          case 'get_single_post':
+               $output = ajax_get_single_post($_REQUEST['id']);
+          break;
+          default:
+              $output = 'No function specified, check your jQuery.ajax() call';
+          break;
+ 
+     }
+ 
+   // at this point, $output contains some sort of valuable data!
+   // Now, convert $output to JSON and echo it to the browser 
+   // That way, we can recapture it with jQuery and run our success function
+ 
+          $output=json_encode($output);
+         if(is_array($output)){
+        print_r($output);   
+         }
+         else{
+        echo $output;
+         }
+         die;
+ 
+}
+
+function ajax_get_latest_posts($category){
+     $posts = get_posts(
+     	'category='.$category,
+     	'posts_per_page'.'1'
+     	);
+     return $posts;
+}
+
+function ajax_get_single_post($id){
+     $posts = get_post(
+     	$id
+	);
+     return $posts;
+}
+
 ?>
