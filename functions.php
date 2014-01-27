@@ -82,7 +82,7 @@ function sandbox_body_class( $print = true ) {
 		$page_children = wp_list_pages("child_of=$pageID&echo=0");
 		the_post();
 		$c[] = 'page pageid-' . $pageID;
-		$c[] = 'page-author-' . sanitize_title_with_dashes(strtolower(get_the_author('login')));
+		$c[] = 'page-author-' . sanitize_title_with_dashes(strtolower(get_the_author()));
 		// Checks to see if the page has children and/or is a child page; props to Adam
 		if ( $page_children )
 			$c[] = 'page-parent';
@@ -145,7 +145,7 @@ function sandbox_post_class( $print = true ) {
 	$c = array( 'hentry', "p$sandbox_post_alt", $post->post_type, $post->post_status );
 
 	// Author for the post queried
-	$c[] = 'author-' . sanitize_title_with_dashes(strtolower(get_the_author('login')));
+	$c[] = 'author-' . sanitize_title_with_dashes(strtolower(get_the_author()));
 
 	// Category for the post queried
 	foreach ( (array) get_the_category() as $cat )
@@ -328,8 +328,8 @@ function widget_sandbox_rsslinks($args) {
 		<?php echo $before_widget; ?>
 			<?php echo $before_title . $title . $after_title; ?>
 			<ul>
-				<li><a href="<?php bloginfo('rss2_url') ?>" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?> <?php _e( 'Posts RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All posts', 'sandbox' ) ?></a></li>
-				<li><a href="<?php bloginfo('comments_rss2_url') ?>" title="<?php echo wp_specialchars(bloginfo('name'), 1) ?> <?php _e( 'Comments RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All comments', 'sandbox' ) ?></a></li>
+				<li><a href="<?php bloginfo('rss2_url') ?>" title="<?php echo wp_specialchars( get_bloginfo('url'), 1 ) ?> <?php _e( 'Posts RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All posts', 'sandbox' ) ?></a></li>
+				<li><a href="<?php bloginfo('comments_rss2_url') ?>" title="<?php echo esc_html(bloginfo('url'), 1) ?> <?php _e( 'Comments RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All comments', 'sandbox' ) ?></a></li>
 			</ul>
 		<?php echo $after_widget; ?>
 <?php
