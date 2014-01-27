@@ -19,7 +19,7 @@
 		<![endif]-->
 		<div class="wrapper">
 			<header>
-				<h1 id="site-title"><span><a href="<?php bloginfo('home') ?>/" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
+				<h1 id="site-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo wp_specialchars( bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
 				<nav>
 					<?php wp_nav_menu( array( 'sort_column' => 'menu_order', 'container_class' => 'menu-header' ) ); ?>
 				</nav>
