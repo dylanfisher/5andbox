@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><?php wp_title( '-', true, 'right' ); echo wp_specialchars( get_bloginfo('name'), 1 ) ?></title>
+		<title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ) ?></title>
 		<meta name="description" content="<?php echo get_bloginfo('description') ?>">
 		<meta name="keywords" content="">
 		<meta name="viewport" content="width=device-width">
@@ -19,7 +19,7 @@
 		<![endif]-->
 		<div class="wrapper">
 			<header>
-				<h1 id="site-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo wp_specialchars( bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
+				<h1 id="site-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo esc_html( bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
 				<nav>
 					<?php wp_nav_menu( array( 'sort_column' => 'menu_order', 'container_class' => 'menu-header' ) ); ?>
 				</nav>
