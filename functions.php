@@ -299,7 +299,7 @@ remove_action('wp_head', 'parent_post_rel_link', 10, 0);
 remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
 
 // Disable Admin Bar
-// show_admin_bar( false );
+// add_filter('show_admin_bar', '__return_false');
 
 // Adds custom menu support
 add_theme_support( 'menus' );
@@ -375,9 +375,9 @@ add_action('wp_dashboard_setup', 'sandbox_remove_dashboard_widgets' );
 // AJAX Functions
 //
 
-add_action('wp_ajax_nopriv_do_ajax', 'our_ajax_function');
-add_action('wp_ajax_do_ajax', 'our_ajax_function');
-function our_ajax_function(){
+add_action('wp_ajax_nopriv_do_ajax', 'sandbox_our_ajax_function');
+add_action('wp_ajax_do_ajax', 'sandbox_our_ajax_function');
+function sandbox_our_ajax_function(){
  
    // the first part is a SWTICHBOARD that fires specific functions
    // according to the value of Query Var 'fn'
@@ -410,7 +410,7 @@ function our_ajax_function(){
  
 }
 
-function ajax_get_latest_posts($category){
+function sandbox_ajax_get_latest_posts($category){
      $posts = get_posts(
      	'category='.$category,
      	'posts_per_page'.'1'
@@ -418,7 +418,7 @@ function ajax_get_latest_posts($category){
      return $posts;
 }
 
-function ajax_get_single_post($id){
+function sandbox_ajax_get_single_post($id){
      $posts = get_post(
      	$id
 	);
