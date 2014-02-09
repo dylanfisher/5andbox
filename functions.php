@@ -375,9 +375,9 @@ add_action('wp_dashboard_setup', 'sandbox_remove_dashboard_widgets' );
 // AJAX Functions
 //
 
-// add_action('wp_ajax_nopriv_do_ajax', 'sandbox_our_ajax_function');
-// add_action('wp_ajax_do_ajax', 'sandbox_our_ajax_function');
-function sandbox_our_ajax_function(){
+// add_action('wp_ajax_nopriv_do_ajax', 'sandbox_ajax_function');
+// add_action('wp_ajax_do_ajax', 'sandbox_ajax_function');
+function sandbox_ajax_function(){
  
    // the first part is a SWTICHBOARD that fires specific functions
    // according to the value of Query Var 'fn'
