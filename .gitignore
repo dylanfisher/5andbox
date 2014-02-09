@@ -1,6 +1,6 @@
-#
-# Default global rules
-#
+########################
+# Default global rules #
+########################
 
 # Compiled source #
 ###################
@@ -40,10 +40,16 @@
 ehthumbs.db
 Thumbs.db
 
-#
-# Custom rules
-#
+################
+# Custom rules #
+################
 
 .sass-cache
 *.sublime-project
 *.sublime-workspace
+
+# Grunt files #
+###############
+node_modules
+.npm-debug.log
+tmp
