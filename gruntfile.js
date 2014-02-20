@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: [
-          'js/vendor/*.js',
+          'js/application/vendor/*.js',
           'js/application/*.js'
         ],
         dest: 'js/build/application.js'
@@ -75,6 +75,12 @@ module.exports = function(grunt) {
       options: {
         livereload: true,
       },
+      html: {
+        files: ['*.html'],
+        options: {
+          spawn: false,
+        }
+      },
       php: {
         files: ['*.php'],
         options: {
@@ -82,7 +88,7 @@ module.exports = function(grunt) {
         }
       },
       scripts: {
-        files: ['js/application/*.js'],
+        files: ['js/application/**/*.js'],
         tasks: ['jshint', 'concat', 'uglify'],
         options: {
           spawn: false,
