@@ -5,119 +5,119 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    pkg: grunt.file.readJSON('package.json'),
+  pkg: grunt.file.readJSON('package.json'),
 
-    sass: {
-      dist: {
-        options: {
-          // cssmin will minify later
-          style: 'expanded'
-        },
-        files: {
-          'css/build/application.css': 'css/sass/application.scss'
-        }
-      }
+  sass: {
+    dist: {
+    options: {
+      // cssmin will minify later
+      style: 'expanded'
     },
+    files: {
+      'css/build/application.css': 'css/sass/application.scss'
+    }
+    }
+  },
 
-    autoprefixer: {
-      options: {
-        browsers: ['last 2 version']
-      },
-      multiple_files: {
-        expand: true,
-        flatten: true,
-        src: 'css/build/*.css',
-        dest: 'css/build/prefixed/'
-      }
+  autoprefixer: {
+    options: {
+    browsers: ['last 2 version']
     },
+    multiple_files: {
+    expand: true,
+    flatten: true,
+    src: 'css/build/*.css',
+    dest: 'css/build/prefixed/'
+    }
+  },
 
-    cssmin: {
-      combine: {
-        files: {
-          'css/build/minified/application.css': ['css/build/prefixed/application.css']
-        }
-      }
-    },
+  cssmin: {
+    combine: {
+    files: {
+      'css/build/minified/application.css': ['css/build/prefixed/application.css']
+    }
+    }
+  },
 
-    jshint: {
-      beforeconcat: ['js/application/*.js']
-    },
+  jshint: {
+    beforeconcat: ['js/application/*.js']
+  },
 
-    concat: {
-      dist: {
-        src: [
-          'js/application/vendor/*.js',
-          'js/application/*.js'
-        ],
-        dest: 'js/build/application.js'
-      }
-    },
+  concat: {
+    dist: {
+    src: [
+      'js/application/vendor/*.js',
+      'js/application/*.js'
+    ],
+    dest: 'js/build/application.js'
+    }
+  },
 
-    uglify: {
-      build: {
-        src: 'js/build/application.js',
-        dest: 'js/build/application.min.js'
-      }
-    },
+  uglify: {
+    build: {
+    src: 'js/build/application.js',
+    dest: 'js/build/application.min.js'
+    }
+  },
 
-    imagemin: {
-      dynamic: {
-        files: [{
-          expand: true,
-          cwd: 'images/',
-          src: ['**/*.{png,jpg,gif}'],
-          dest: 'images/'
-        }]
-      }
-    },
+  imagemin: {
+    dynamic: {
+    files: [{
+      expand: true,
+      cwd: 'images/',
+      src: ['**/*.{png,jpg,gif}'],
+      dest: 'images/'
+    }]
+    }
+  },
 
-    watch: {
-      options: {
-        livereload: true,
-      },
-      html: {
-        files: ['*.html'],
-        options: {
-          spawn: false,
-        }
-      },
-      php: {
-        files: ['*.php'],
-        options: {
-          spawn: false,
-        }
-      },
-      scripts: {
-        files: ['js/application/**/*.js'],
-        tasks: ['jshint', 'concat', 'uglify'],
-        options: {
-          spawn: false,
-        }
-      },
-      css: {
-        files: ['css/sass/**/*.scss'],
-        tasks: ['sass', 'autoprefixer', 'cssmin'],
-        options: {
-          spawn: false,
-        }
-      },
-      images: {
-        files: ['images/**/*.{png,jpg,gif}', 'images/*.{png,jpg,gif}'],
-        tasks: ['imagemin'],
-        options: {
-          spawn: false,
-        }
-      }
+  watch: {
+    options: {
+    livereload: true,
     },
+    html: {
+    files: ['*.html'],
+    options: {
+      spawn: false,
+    }
+    },
+    php: {
+    files: ['*.php'],
+    options: {
+      spawn: false,
+    }
+    },
+    scripts: {
+    files: ['js/application/**/*.js'],
+    tasks: ['jshint', 'concat', 'uglify'],
+    options: {
+      spawn: false,
+    }
+    },
+    css: {
+    files: ['css/sass/**/*.scss'],
+    tasks: ['sass', 'autoprefixer', 'cssmin'],
+    options: {
+      spawn: false,
+    }
+    },
+    images: {
+    files: ['images/**/*.{png,jpg,gif}', 'images/*.{png,jpg,gif}'],
+    tasks: ['imagemin'],
+    options: {
+      spawn: false,
+    }
+    }
+  },
 
-    connect: {
-      server: {
-        options: {
-          port: 8000,
-          base: './'
-        }
-      }
-    },
+  connect: {
+    server: {
+    options: {
+      port: 8000,
+      base: './'
+    }
+    }
+  },
 
   });
 
