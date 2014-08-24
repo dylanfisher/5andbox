@@ -11,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo  bloginfo('stylesheet_url'); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo  get_bloginfo('template_url'); ?>/css/build/minified/application.css" />
     <script src="<?php echo get_bloginfo('template_url'); ?>/js/modernizr-2.6.2.min.js"></script>
-  <?php wp_head() // For plugins ?>
+    <?php wp_enqueue_script('jquery') // runs in noConflict mode ?>
+    <?php wp_head() // For plugins ?>
   </head>
   <body <?php body_class() ?>>
     <!--[if lte IE 9]>

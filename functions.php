@@ -55,6 +55,9 @@ add_filter('comment_text', 'sandbox_autoblank');
 // Disables
 //
 
+// Disable Admin Bar
+add_filter('show_admin_bar', '__return_false');
+
 // Disable Wordpress Generator meta tag
 function sandbox_version_info() {
    return '';
@@ -72,9 +75,6 @@ remove_action('wp_head', 'start_post_rel_link', 10, 0);
 remove_action('wp_head', 'parent_post_rel_link', 10, 0);
 remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
 
-// Disable Admin Bar
-add_filter('show_admin_bar', '__return_false');
-
 // Remove meta boxes from dashboard
 function sandbox_remove_dashboard_widgets(){
   global $wp_meta_boxes;
@@ -83,6 +83,21 @@ function sandbox_remove_dashboard_widgets(){
   unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
   unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);}
 add_action('wp_dashboard_setup', 'sandbox_remove_dashboard_widgets' );
+
+// Remove unneccesary admin menu panels. Uncomment to disable
+function sandbox_remove_menus(){
+  // remove_menu_page( 'index.php' );                  //Dashboard
+  // remove_menu_page( 'edit.php' );                   //Posts
+  // remove_menu_page( 'upload.php' );                 //Media
+  // remove_menu_page( 'edit.php?post_type=page' );    //Pages
+  // remove_menu_page( 'edit-comments.php' );          //Comments
+  // remove_menu_page( 'themes.php' );                 //Appearance
+  // remove_menu_page( 'plugins.php' );                //Plugins
+  // remove_menu_page( 'users.php' );                  //Users
+  // remove_menu_page( 'tools.php' );                  //Tools
+  // remove_menu_page( 'options-general.php' );        //Settings
+}
+add_action( 'admin_menu', 'sandbox_remove_menus' );
 
 
 //
