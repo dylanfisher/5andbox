@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html class="no-js">
   <head>
+<!--
+                          _
+                        .' `'.__
+                       /      \ `'"-,
+      .-''''--...__..-/ .     |      \
+    .'               ; :'     '.  a   |
+   /                 | :.       \     =\
+  ;                   \':.      /  ,-.__;.-;`
+ /|     .              '--._   /-.7`._..-;`
+; |       '                |`-'      \  =|
+|/\        .   -' /     /  ;         |  =/
+(( ;.       ,_  .:|     | /     /\   | =|
+ ) / `\     | `""`;     / |    | /   / =/
+   | ::|    |      \    \ \    \ `--' =/
+  /  '/\    /       )    |/     `-...-`
+ /    | |  `\    /-'    /;
+ \  ,,/ |    \   D    .'  \
+  `""`   \  nnh  D_.-'L__nnh
+          `"""`
+
+Website developed by Dylan Fisher
+-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ) ?></title>
