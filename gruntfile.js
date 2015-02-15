@@ -3,6 +3,8 @@
 
 module.exports = function(grunt) {
 
+  require('time-grunt')(grunt);
+
   grunt.initConfig({
 
   pkg: grunt.file.readJSON('package.json'),
@@ -14,7 +16,7 @@ module.exports = function(grunt) {
       style: 'expanded'
     },
     files: {
-      'css/build/application.css': 'css/sass/application.scss'
+      'css/build/style.css': 'css/sass/style.scss'
     }
     }
   },
@@ -34,7 +36,7 @@ module.exports = function(grunt) {
   cssmin: {
     combine: {
     files: {
-      'css/build/minified/application.css': ['css/build/prefixed/application.css']
+      'style.css': ['css/build/prefixed/style.css']
     }
     }
   },
@@ -82,7 +84,7 @@ module.exports = function(grunt) {
     }
     },
     php: {
-    files: ['*.php'],
+    files: ['**/*.php'],
     options: {
       spawn: false,
     }
