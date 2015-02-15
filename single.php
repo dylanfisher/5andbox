@@ -1,13 +1,13 @@
 <?php get_header() ?>
-    <div class="content">
+  <div class="content">
 <?php the_post() ?>
-      <div id="post-<?php the_ID() ?>" <?php post_class() ?>>
-        <h2 class="entry-title"><?php the_title() ?></h2>
-        <div class="entry-content">
+    <div id="post-<?php the_ID() ?>" <?php post_class() ?>>
+      <h2 class="entry-title"><?php the_title() ?></h2>
+      <div class="entry-content">
 <?php the_content() ?>
-        </div>
-      </div><!-- .post -->
-    </div><!-- .content -->
+      </div>
+    </div><!-- .post -->
+  </div><!-- .content -->
 <?php get_footer() ?>
 </body>
 </html>
