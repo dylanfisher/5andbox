@@ -41,8 +41,8 @@ Website developed by Dylan Fisher
   <![endif]-->
   <div class="wrapper">
     <header>
-      <h1 id="site-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo esc_html( bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
-      <nav>
-        <?php wp_nav_menu( array( 'sort_column' => 'menu_order', 'container_class' => 'menu-header' ) ); ?>
-      </nav>
+      <h1 class="site-title">
+        <a href="<?php bloginfo('url') ?>/" title="<?php echo esc_html( bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a>
+      </h1>
+      <nav><?php wp_nav_menu(); ?></nav>
     </header>
