@@ -115,4 +115,15 @@ function sandbox_content($limit) {
 // Filters
 //
 
+// Add page slug to body class
+function sandbox_add_slug_body_class( $classes ) {
+  global $post;
+  if ( isset( $post ) ) {
+    $classes[] = $post->post_type . '-' . $post->post_name;
+  }
+  return $classes;
+}
+add_filter( 'body_class', 'sandbox_add_slug_body_class' );
+
+
 ?>
