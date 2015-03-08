@@ -14,36 +14,6 @@
 // Custom menus
 add_theme_support( 'menus' );
 
-// Enable support for Advanced Custom Fields JSON data in JSON-API plugin
-add_filter('json_api_encode', 'sandbox_json_api_encode_acf');
-function sandbox_json_api_encode_acf($response) {
-  if (isset($response['posts'])) {
-    foreach ($response['posts'] as $post) {
-      sandbox_json_api_add_acf($post); // Add specs to each post
-    }
-  }
-  else if (isset($response['post'])) {
-    sandbox_json_api_add_acf($response['post']); // Add a specs property
-  }
-
-  return $response;
-}
-
-function sandbox_json_api_add_acf(&$post) {
-  $post->acf = get_fields($post->id);
-}
-
-// Open external links in new windows by default
-function sandbox_autoblank($text) {
-  $return = str_replace('href=', 'target="_blank" href=', $text);
-  $return = str_replace('target="_blank" href="echo home_url()', 'echo home_url()', $return);
-  $return = str_replace('target="_blank" href="#', 'href="#', $return);
-  $return = str_replace(' target = "_blank">', '>', $return);
-  return $return;
-}
-add_filter('the_content', 'sandbox_autoblank');
-add_filter('comment_text', 'sandbox_autoblank');
-
 // Custom Image Sizes
 // add_image_size( 'custom-image-size-name', 300, 300, true ); // Custom Image - Name, Width, Height, Hard Crop boolean
 
@@ -139,5 +109,10 @@ function sandbox_content($limit) {
   $content = str_replace(']]>', ']]&gt;', $content);
   return $content;
 }
+
+
+//
+// Filters
+//
 
 ?>
