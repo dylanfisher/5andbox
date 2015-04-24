@@ -14,8 +14,8 @@
 // Custom menus
 add_theme_support( 'menus' );
 
-// Custom Image Sizes
-// add_image_size( 'custom-image-size-name', 300, 300, true ); // Custom Image - Name, Width, Height, Hard Crop boolean
+// Custom Image Sizes (Name, Width, Height, Hard Crop boolean)
+// add_image_size( 'medium-crop', 600, 325, true );
 
 // Check for custom Single Post templates by category ID. Format for new template names is single-category[ID#].php (ommiting the brackets)
 // add_filter('single_template', create_function('$t', 'foreach( (array) get_the_category() as $cat ) { if ( file_exists(TEMPLATEPATH . "/single-{$cat->term_id}.php") ) return TEMPLATEPATH . "/single-{$cat->term_id}.php"; } return $t;' ));
@@ -60,7 +60,7 @@ function sandbox_remove_menus(){
   // remove_menu_page( 'edit.php' );                   //Posts
   // remove_menu_page( 'upload.php' );                 //Media
   // remove_menu_page( 'edit.php?post_type=page' );    //Pages
-  // remove_menu_page( 'edit-comments.php' );          //Comments
+  remove_menu_page( 'edit-comments.php' );          //Comments
   // remove_menu_page( 'themes.php' );                 //Appearance
   // remove_menu_page( 'plugins.php' );                //Plugins
   // remove_menu_page( 'users.php' );                  //Users
@@ -73,6 +73,18 @@ add_action( 'admin_menu', 'sandbox_remove_menus' );
 //
 // Custom functions
 //
+
+// Get an <img> at size from an ACF image field
+function sandbox_image($acf_image_field_name, $image_size) {
+  $image = get_field($acf_image_field_name);
+  $alt = $image['alt'];
+  if(empty($alt)) $alt = $image['title'];
+  $size = $image_size;
+  $url = $image['sizes'][$size];
+  $width = $image['sizes'][$size.'-width'];
+  $height = $image['sizes'][$size.'-height'];
+  echo '<img src="'.$url.'" width="'.$width.'" height="'.$height.'">';
+}
 
 // Function to create slug out of text
 function sandbox_slugify( $text ) {
@@ -125,5 +137,32 @@ function sandbox_add_slug_body_class( $classes ) {
 }
 add_filter( 'body_class', 'sandbox_add_slug_body_class' );
 
+function sandbox_add_slug_class_to_menu_item($output){
+  $ps = get_option('permalink_structure');
+  if(!empty($ps)){
+    $idstr = preg_match_all('/<li id="menu-item-(\d+)/', $output, $matches);
+    foreach($matches[1] as $mid){
+      $id = get_post_meta($mid, '_menu_item_object_id', true);
+      $slug = basename(get_permalink($id));
+      $output = preg_replace('/menu-item-'.$mid.'">/', 'menu-item-'.$mid.'" data-slug="'.$slug.'">', $output, 1);
+    }
+  }
+  return $output;
+}
+add_filter('wp_nav_menu', 'sandbox_add_slug_class_to_menu_item');
+
+//
+// Shortcode functions
+//
+
+// function sandbox_example_shortcode( $atts, $content = null ) {
+//   $a = shortcode_atts( array(
+//       'name' => 'Name of staff',
+//       'title' => 'Title of staff'
+//   ), $atts );
+
+//   return '<div class="staff-member"><div class="staff-member-name">'.$a['name'].'</div><div class="staff-member-title">'.$a['title'].'</div><div class="staff-member-bio">'.$content.'</div><div class="staff-member-bio-link">View Bio</div></div>';
+// }
+// add_shortcode( 'example', 'sandbox_example_shortcode' );
 
 ?>
