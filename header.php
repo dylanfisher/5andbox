@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js">
-  <head>
+<head>
+  <meta charset="utf-8">
 <!--
                           _
                         .' `'.__
@@ -23,7 +24,6 @@
 
 Website developed by Dylan Fisher
 -->
-  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ) ?></title>
   <meta name="description" content="<?php echo get_bloginfo('description') ?>">
