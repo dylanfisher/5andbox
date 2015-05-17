@@ -58,3 +58,6 @@ tmp
 ###############
 /uploads
 /upgrade
+cache/
+advanced-cache.php
+wp-cache-config.php

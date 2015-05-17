@@ -1,3 +1,5 @@
+NProgress.configure({ showSpinner: false });
+
 (function($){
 
   var app = (function() {
@@ -13,13 +15,13 @@
   app.init();
 
   // pjax start
-  // $(document).on('pjax:start', function() {
-  //   console.log("starting pjax");
-  // });
+  $(document).on('pjax:start', function() {
+    NProgress.start();
+  });
 
   // pjax end
   $(document).on('pjax:end', function() {
-    // console.log("ending pjax");
+    NProgress.done();
     app.init();
   });
 
