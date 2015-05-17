@@ -36,6 +36,7 @@ class acf_field_message extends acf_field {
 		$this->label = __("Message",'acf');
 		$this->category = 'layout';
 		$this->defaults = array(
+			'value'		=> false, // prevents acf_render_fields() from attempting to load value
 			'message'	=> '',
 			'esc_html'	=> 0
 		);

@@ -37,6 +37,7 @@ function acf_get_setting( $name, $allow_filter = true ) {
 	
 	// return
 	return $r;
+	
 }
 
 
@@ -561,7 +562,7 @@ function acf_get_post_types( $exclude = array(), $include = array() ) {
 	
 	
 	// core exclude
-	$exclude = wp_parse_args( $exclude, array( 'acf-field', 'acf-field-group', 'revision', 'nav_menu_item' ) );
+	$exclude = wp_parse_args( $exclude, array('acf-field', 'acf-field-group', 'revision', 'nav_menu_item') );
 	
 	
 	// include
@@ -588,6 +589,10 @@ function acf_get_post_types( $exclude = array(), $include = array() ) {
 		unset( $post_types[ $i ] );
 		
 	}
+	
+	
+	// simplify keys
+	$post_types = array_values($post_types);
 	
 	
 	// return
@@ -1845,17 +1850,6 @@ function acf_debug_end() {
 
 function acf_get_updates() {
 	
-	// cache
-	$found = false;
-	$cache = wp_cache_get( 'acf_get_updates', 'acf', false, $found );
-	
-	if( $found ) {
-	
-		return $cache;
-		
-	}
-	
-	
 	// vars
 	$updates = array();
 	$plugin_version = acf_get_setting('version');
@@ -1907,10 +1901,6 @@ function acf_get_updates() {
         
     }
     
-    
-    // set cache
-	wp_cache_set( 'acf_get_updates', $updates, 'acf' );
-	
     
     // return
     return $updates;
@@ -2343,7 +2333,7 @@ function acf_get_valid_post_id( $post_id = 0 ) {
 	
 		$autosave = wp_get_post_autosave( $_GET['preview_id'] );
 		
-		if( $autosave->post_parent == $post_id ) {
+		if( $autosave && $autosave->post_parent == $post_id ) {
 		
 			$post_id = (int) $autosave->ID;
 			
@@ -3012,6 +3002,36 @@ function acf_get_valid_terms( $terms = false, $taxonomy = 'category' ) {
 	// return
 	return $terms;
 	
+}
+
+
+/*
+*  _acf_settings_uploader
+*
+*  Dynamic logic for uploader setting
+*
+*  @type	function
+*  @date	7/05/2015
+*  @since	5.2.3
+*
+*  @param	$uploader (string)
+*  @return	$uploader
+*/
+
+add_filter('acf/settings/uploader', '_acf_settings_uploader');
+
+function _acf_settings_uploader( $uploader ) {
+	
+	// if can't upload files
+	if( !current_user_can('upload_files') ) {
+		
+		$uploader = 'basic';
+		
+	}
+	
+	
+	// return
+	return $uploader;
 }
 
 

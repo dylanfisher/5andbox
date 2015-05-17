@@ -30,7 +30,9 @@
 *  Postbox: Fields
 *
 *---------------------------------------------------------------------------------------------*/
-#acf-field-group-fields > .inside {
+#acf-field-group-fields > .inside,
+#acf-field-group-locations > .inside,
+#acf-field-group-options > .inside {
   padding: 0;
   margin: 0;
 }

@@ -1,3 +1,37 @@
 //
 //  Mixins
 //
+
+// Breakpoint mixin
+@mixin break($size) {
+  @if ($size == ext){
+    @media (max-width: $break-ext) {
+      @content;
+    }
+  }
+
+  @if ($size == desk){
+    @media (max-width: $break-desk) {
+      @content;
+    }
+  }
+
+  @if ($size == tab){
+    @media (max-width: $break-tab) {
+      @content;
+    }
+  }
+
+  @if ($size == hand){
+    @media (max-width: $break-hand) {
+      @content;
+    }
+  }
+
+  // Pixel density media query
+  @if ($size == retina){
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      @content;
+    }
+  }
+}

@@ -692,7 +692,7 @@ class acf_field_repeater extends acf_field {
 						$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
 						
 						
-						// update field
+						// update value
 						acf_update_value( $v, $post_id, $sub_field );
 						
 					}
@@ -717,7 +717,12 @@ class acf_field_repeater extends acf_field {
 				
 				foreach( $field['sub_fields'] as $sub_field ) {
 					
-					acf_delete_value( $post_id, "{$field['name']}_{$i}_{$sub_field['name']}" );
+					// modify name for delete
+					$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
+					
+					
+					// delete value
+					acf_delete_value( $post_id, $sub_field );
 				
 				}
 				// foreach

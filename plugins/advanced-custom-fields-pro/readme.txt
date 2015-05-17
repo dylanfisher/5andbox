@@ -1,17 +1,16 @@
 === Advanced Custom Fields Pro ===
 Contributors: elliotcondon
 Tags: custom, field, custom field, advanced, simple fields, magic fields, more fields, repeater, matrix, post, type, text, textarea, file, image, edit, admin
-Requires at least: 3.5.0
+Requires at least: 3.6.0
 Tested up to: 4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Fully customise WordPress edit screens with powerful fields. Boasting a professional interface and a powerful API, it’s a must have for any web developer working with WordPress.Field types include: Wysiwyg, text, textarea, image, file, select, checkbox, page link, post object, date picker, color picker and more!
-
+Customise WordPress with powerful, professional and intuitive fields
 
 == Description ==
 
-Advanced Custom Fields is the perfect solution for any WordPress website which needs more flexible data like other Content Management Systems. 
+Advanced Custom Fields is the perfect solution for any wordpress website which needs more flexible data like other Content Management Systems. 
 
 * Visually create your Fields
 * Select from multiple input types (text, textarea, wysiwyg, image, file, page link, post object, relationship, select, checkbox, radio buttons, date picker, true / false, repeater, flexible content, gallery and more to come!)
@@ -29,24 +28,24 @@ Advanced Custom Fields is the perfect solution for any WordPress website which n
 * WYSIWYG (a wordpress wysiwyg editor, api returns html)
 * Image (upload an image, api returns the url)
 * File (upload a file, api returns the url)
-* Select (drop down list of choices, api returns chosen item/s)
-* Checkbox (tickbox list of choices, api returns chosen item/s)
-* Radio Buttons ( radio button list of choices, api returns chosen item/s)
+* Select (drop down list of choices, api returns chosen item)
+* Checkbox (tickbox list of choices, api returns array of choices)
+* Radio Buttons ( radio button list of choices, api returns chosen item)
 * True / False (tick box with message, api returns true or false)
-* Page Link (select 1 or more page, post or custom post types, api returns the selected urls)
+* Page Link (select 1 or more page, post or custom post types, api returns the selected url)
 * Post Object (select 1 or more page, post or custom post types, api returns the selected post objects)
 * Relationship (search, select and order post objects with a tidy interface, api returns the selected post objects)
 * Taxonomy (select taxonomy terms with options to load, display and save, api returns the selected term objects)
 * User (select 1 or more WP users, api returns the selected user objects)
-* Google Maps (interactive map, api returns lat, lng, address data)
-* Date Picker (jQuery date picker, options for format, api returns string)
+* Google Maps (interactive map, api returns lat,lng,address data)
+* Date Picker (jquery date picker, options for format, api returns string)
 * Color Picker (WP color swatch picker)
 * Tab (Group fields into tabs)
 * Message (Render custom messages into the fields)
 * Repeater (ability to create repeatable blocks of fields!)
 * Flexible Content (ability to create flexible blocks of fields!)
 * Gallery (Add, edit and order multiple images in 1 simple field)
-* [Custom](http://www.advancedcustomfields.com/resources/creating-a-new-field-type/) (Create your own field type!)
+* [Custom](http://www.advancedcustomfields.com/resources/tutorials/creating-a-new-field-type/) (Create your own field type!)
 
 = Tested on =
 * Mac Firefox 	:)
@@ -106,6 +105,49 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.2.5 =
+* Core: Fixed JS error preventing changes to large field groups
+* Language: Added Romanian translation - thanks to Eduard Ungureanu
+
+= 5.2.4 =
+* WYSIWYG field: Fixed bug where new editor is not focused when adding media
+* Core: Added new 'uploader' setting to `acf_form()` options for basic upload inputs
+* Core: Fixed Multisite loop when WordPress MU Domain Mapping plugin is active
+* Core: Improved CSS when editing taxonomy terms and users
+* Core: Fixed validation bugs when clicking save or preview 
+* Core: Added compatibility with WPML translations when field group is not set as a translatable post type
+* Core: Many minor fixes and improvements
+
+= 5.2.3 =
+* Taxonomy field: Added button and popup to create new terms
+* Taxonomy field: Added new 'Create Terms' setting to prevent popup
+* Core: Added network database upgrade admin page and functionality
+* Core: Increased required WP version from 3.5 to 3.6
+* Core: Fixed Select2 dependancy conflict with WooCommerce
+* Core: Fixed WPML bug where field group translation information is lost
+* Core: Fixed conditional logic bug where showing a parent field would override sub field conditional logic
+* Core: Minor fixes and improvements
+* Language: Updated Persian translation - thanks to Kamel
+
+= 5.2.2 =
+* Image field: Fixed UI bug when image has been removed via media library
+* Relationship field: Added new minimum selection setting
+* Select field: Fixed bug when searching for a numeric value
+* Tab field: Fixed conditional logic bug
+* Field group: Added compatibility for custom status in 'Post Status' location rule
+* Core: Added new `show_updates` setting to prevent plugin updates
+* Core: Added compatibility for 3rd party update management websites
+* Core: Added spinner when saving taxonomy term, user and front end form
+* Core: Minor fixes and improvements
+* Language: Updated Slovak translation - thanks to Ján Fajčák
+ 
+= 5.2.1 =
+* Core: Fixed bug where 'Taxonomy' field group location rule would change to 'Post Taxonomy'
+* Core: Fixed bug where field group postboxes would disappear from post edit screen
+* Core: Fixed bug where 'Uploaded to post' setting would not work on front end image/file/gallery fields
+* Core: Fixed bug where multiple conditional logic tabs would not display correctly
+* Language: Updated Japanese translation - thanks to Shogo Kato
 
 = 5.2.0 =
 * Taxonomy field: Fixed bug where term relationships were not saved when using the `update_field()` function

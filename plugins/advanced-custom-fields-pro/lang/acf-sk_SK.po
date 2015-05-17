@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields\n"
-"POT-Creation-Date: 2015-03-05 11:24+1000\n"
-"PO-Revision-Date: 2015-03-05 11:27+1000\n"
+"Project-Id-Version: Advanced Custom Fields PRO 5.2.1\n"
+"POT-Creation-Date: 2015-03-05 11:15+1000\n"
+"PO-Revision-Date: 2015-03-26 10:20+1000\n"
 "Last-Translator: Elliot Condon <e@elliotcondon.com>\n"
-"Language-Team: wp.sk <michal.vittek@wp.sk>\n"
+"Language-Team: wp.sk <michal.vittek@wp.sk, ja@fajo.name>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,19 +14,17 @@ msgstr ""
 "_n_noop:1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_html__;"
 "esc_html_e;esc_html_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Basepath: /Users/elliotcondon/Dropbox/Work/Sites/acf5/wp-content/"
-"plugins/advanced-custom-fields-pro\n"
+"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: acf.php:63
 msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgstr "Rozšírené vlastné polia"
 
 #: acf.php:251
-#, fuzzy
 msgid "Field Groups"
-msgstr "Pole a skupiny"
+msgstr "Skupiny polí"
 
 #: acf.php:252
 msgid "Field Group"
@@ -38,45 +36,37 @@ msgid "Add New"
 msgstr "Pridať novú"
 
 #: acf.php:254
-#, fuzzy
 msgid "Add New Field Group"
-msgstr "Pridať novú skupinu polí"
+msgstr "Pridať novú skupinu polí "
 
 #: acf.php:255
-#, fuzzy
 msgid "Edit Field Group"
-msgstr "Upraviť skupinu polí"
+msgstr "Upraviť skupinu polí "
 
 #: acf.php:256
-#, fuzzy
 msgid "New Field Group"
-msgstr "Pridať novú skupinu polí"
+msgstr "Pridať novú skupinu polí "
 
 #: acf.php:257
-#, fuzzy
 msgid "View Field Group"
-msgstr "Zobraziť skupinu polí"
+msgstr "Zobraziť skupinu polí "
 
 #: acf.php:258
-#, fuzzy
 msgid "Search Field Groups"
-msgstr "Hľadať skupinu polí"
+msgstr "Hľadať skupinu polí "
 
 #: acf.php:259
-#, fuzzy
 msgid "No Field Groups found"
-msgstr "Nenašla sa skupina polí"
+msgstr "Nenašla sa skupina polí "
 
 #: acf.php:260
-#, fuzzy
 msgid "No Field Groups found in Trash"
-msgstr "V koši sa nenašla skupina polí"
+msgstr "V koši sa nenašla skupina polí "
 
 #: acf.php:283 admin/field-group.php:178 admin/field-group.php:210
 #: admin/field-group.php:249 admin/field-groups.php:487
-#, fuzzy
 msgid "Fields"
-msgstr "Polia"
+msgstr "Polia "
 
 #: acf.php:284
 msgid "Field"
@@ -92,9 +82,8 @@ msgstr "Upraviť pole"
 
 #: acf.php:288 admin/views/field-group-fields.php:18
 #: admin/views/settings-info.php:109
-#, fuzzy
 msgid "New Field"
-msgstr "Nové pole"
+msgstr "Nové pole "
 
 #: acf.php:289
 msgid "View Field"
@@ -113,72 +102,56 @@ msgid "No Fields found in Trash"
 msgstr "V koši sa nenašli polia"
 
 #: admin/admin.php:52 admin/views/field-group-options.php:93
-#, fuzzy
 msgid "Custom Fields"
-msgstr "Vlastné polia"
+msgstr "Vlastné polia "
 
 #: admin/field-group.php:68 admin/field-group.php:69 admin/field-group.php:71
-#, fuzzy
 msgid "Field group updated."
-msgstr "Skupina polí aktualizovaná."
+msgstr "Skupina polí aktualizovaná. "
 
 #: admin/field-group.php:70
-#, fuzzy
 msgid "Field group deleted."
-msgstr "Skupina polí aktualizovaná."
+msgstr "Skupina polí aktualizovaná. "
 
 #: admin/field-group.php:73
-#, fuzzy
 msgid "Field group published."
-msgstr "Skupina polí aktualizovaná."
+msgstr "Skupina polí aktualizovaná. "
 
 #: admin/field-group.php:74
-#, fuzzy
 msgid "Field group saved."
-msgstr "Skupina polí uložená."
+msgstr "Skupina polí uložená. "
 
 #: admin/field-group.php:75
-#, fuzzy
 msgid "Field group submitted."
-msgstr "Skupina polí odoslaná."
+msgstr "Skupina polí odoslaná. "
 
 #: admin/field-group.php:76
-#, fuzzy
 msgid "Field group scheduled for."
-msgstr "Skupina polí naplánovaná na."
+msgstr "Skupina polí naplánovaná na. "
 
 #: admin/field-group.php:77
-#, fuzzy
 msgid "Field group draft updated."
-msgstr "Koncept skupiny polí uložený."
+msgstr "Koncept skupiny polí uložený. "
 
 #: admin/field-group.php:172
-#, fuzzy
 msgid "Move to trash. Are you sure?"
-msgstr "Presunúť do koša. Naozaj?"
+msgstr "Presunúť do koša. Naozaj? "
 
 #: admin/field-group.php:173
-#, fuzzy
 msgid "checked"
-msgstr "zaškrtnuté"
+msgstr "zaškrtnuté "
 
 #: admin/field-group.php:174
-#, fuzzy
 msgid "No toggle fields available"
-msgstr "Nedostupné prepínacie polia"
+msgstr "Prepínacie polia nenájdené"
 
 #: admin/field-group.php:175
-#, fuzzy
 msgid "Field group title is required"
-msgstr "Nadpis skupiny poľa je povinný"
+msgstr "Nadpis skupiny poľa je povinný "
 
 #: admin/field-group.php:176 api/api-field-group.php:609
-#: assets/_build/js/field-group.js:919 assets/_build/js/field-group.js:920
-#: assets/js/acf-field-group.js:919 assets/js/acf-field-group.js:920
-#: assets/js/acf-field-group.min.js:1
-#, fuzzy
 msgid "copy"
-msgstr "kopírovať"
+msgstr "kopírovať "
 
 #: admin/field-group.php:177
 #: admin/views/field-group-field-conditional-logic.php:67
@@ -189,58 +162,49 @@ msgid "or"
 msgstr "alebo"
 
 #: admin/field-group.php:179
-#, fuzzy
 msgid "Parent fields"
-msgstr "Nadradené polia"
+msgstr "Nadradené polia "
 
 #: admin/field-group.php:180
-#, fuzzy
 msgid "Sibling fields"
-msgstr "Podobné polia"
+msgstr "Podobné polia "
 
 #: admin/field-group.php:181
-#, fuzzy
 msgid "Hide / Show All"
-msgstr "Schovať / Zobraziť všetky"
+msgstr "Schovať / Zobraziť všetky "
 
 #: admin/field-group.php:182
-#, fuzzy
 msgid "Move Custom Field"
-msgstr "Presunúť pole do inej skupiny"
+msgstr "Presunúť pole do inej skupiny "
 
 #: admin/field-group.php:183
 msgid "This field cannot be moved until its changes have been saved"
 msgstr "Kým nebudú uložené zmeny, pole nemôže byť presunuté"
 
 #: admin/field-group.php:184
-#, fuzzy
 msgid "Null"
-msgstr "Povoliť nulovú hodnotu?"
+msgstr "Nulová hodnota"
 
 #: admin/field-group.php:185 core/input.php:128
 msgid "The changes you made will be lost if you navigate away from this page"
 msgstr "Ak odítete zo stránky, zmeny nebudú uložené"
 
 #: admin/field-group.php:186
-#, fuzzy
 msgid "The string \"field_\" may not be used at the start of a field name"
-msgstr "Pole %s teraz nájdete v poli skupiny %s"
+msgstr "Reťazec \"field_\" nesmie byť použitý na začiatku názvu poľa"
 
 #: admin/field-group.php:211
-#, fuzzy
 msgid "Location"
-msgstr "Poloha"
+msgstr "Umiestnenie "
 
 #: admin/field-group.php:212 pro/api/api-options-page.php:22
 #: pro/api/api-options-page.php:23
-#, fuzzy
 msgid "Options"
-msgstr "Nastavenia"
+msgstr "Nastavenia "
 
 #: admin/field-group.php:253
-#, fuzzy
 msgid "Show Field Keys"
-msgstr "Zobraziť kľúč poľa:"
+msgstr "Zobraziť kľúč poľa"
 
 #: admin/field-group.php:254
 #: admin/views/field-group-field-conditional-logic.php:40
@@ -250,9 +214,8 @@ msgstr "Zobraziť kľúč poľa:"
 #: fields/select.php:411 fields/select.php:425 fields/select.php:439
 #: fields/taxonomy.php:751 fields/user.php:377 fields/user.php:391
 #: fields/wysiwyg.php:384 pro/admin/views/settings-updates.php:93
-#, fuzzy
 msgid "Yes"
-msgstr "Áno"
+msgstr "Áno "
 
 #: admin/field-group.php:255
 #: admin/views/field-group-field-conditional-logic.php:41
@@ -266,95 +229,79 @@ msgid "No"
 msgstr "Nie"
 
 #: admin/field-group.php:642 pro/admin/views/options-page.php:52
-#, fuzzy
 msgid "Publish"
-msgstr "Publikovať"
+msgstr "Publikovať "
 
 #: admin/field-group.php:643
-#, fuzzy
 msgid "Pending Review"
-msgstr "Recenzia čaká na schválenie"
+msgstr "Recenzia čaká na schválenie "
 
 #: admin/field-group.php:644
-#, fuzzy
 msgid "Draft"
-msgstr "Koncept"
+msgstr "Koncept "
 
 #: admin/field-group.php:645
-#, fuzzy
 msgid "Future"
-msgstr "Budúce"
+msgstr "Budúce "
 
 #: admin/field-group.php:646
-#, fuzzy
 msgid "Private"
-msgstr "Súkromné"
+msgstr "Súkromné "
 
 #: admin/field-group.php:647
-#, fuzzy
 msgid "Revision"
-msgstr "Revízia"
+msgstr "Revízia "
 
 #: admin/field-group.php:648
-#, fuzzy
 msgid "Trash"
-msgstr "Kôš"
+msgstr "Kôš "
 
 #: admin/field-group.php:712
-#, fuzzy
 msgid "Front Page"
-msgstr "Úvodná stránka"
+msgstr "Úvodná stránka "
 
 #: admin/field-group.php:713
-#, fuzzy
 msgid "Posts Page"
-msgstr "Stránka príspevkov"
+msgstr "Stránka príspevkov "
 
 #: admin/field-group.php:714
-#, fuzzy
 msgid "Top Level Page (no parent)"
-msgstr "Najvyššia úroveň stránok (nemá nadradené stránky)"
+msgstr "Najvyššia úroveň stránok (nemá nadradené stránky) "
 
 #: admin/field-group.php:715
-#, fuzzy
 msgid "Parent Page (has children)"
-msgstr "Nadradená stránka (má odvodené)"
+msgstr "Nadradená stránka (má odvodené) "
 
 #: admin/field-group.php:716
-#, fuzzy
 msgid "Child Page (has parent)"
-msgstr "Odvodená stránka (má nadradené)"
+msgstr "Odvodená stránka (má nadradené) "
 
 #: admin/field-group.php:732
-#, fuzzy
 msgid "Default Template"
-msgstr "Základná šablóna"
+msgstr "Základná šablóna "
 
 #: admin/field-group.php:754
-#, fuzzy
 msgid "Logged in"
-msgstr "Typ prihláseného používatela"
+msgstr "Typ prihláseného používatela "
 
 #: admin/field-group.php:755
 msgid "Viewing front end"
-msgstr ""
+msgstr "Zobrazenie stránok"
 
 #: admin/field-group.php:756
 msgid "Viewing back end"
-msgstr ""
+msgstr "Zobrazenie administrácie"
 
 #: admin/field-group.php:775
-#, fuzzy
 msgid "Super Admin"
-msgstr "Super Admin"
+msgstr "Super Admin "
 
 #: admin/field-group.php:786 admin/field-group.php:794
 #: admin/field-group.php:808 admin/field-group.php:815
 #: admin/field-group.php:830 admin/field-group.php:840 fields/file.php:234
 #: fields/image.php:223 pro/fields/gallery.php:656
-#, fuzzy
 msgid "All"
-msgstr "Všetky"
+msgstr "Všetky "
 
 #: admin/field-group.php:795
 msgid "Add / Edit"
@@ -386,139 +333,118 @@ msgid "Move Field"
 msgstr "Presunúť pole"
 
 #: admin/field-groups.php:109
-#, fuzzy, php-format
+#, php-format
 msgid "Field group duplicated. %s"
-msgstr "Skupina polí aktualizovaná."
+msgstr "Skupina polí duplikovaná. %s"
 
 #: admin/field-groups.php:113
-#, fuzzy, php-format
+#, php-format
 msgid "%s field group duplicated."
 msgid_plural "%s field groups duplicated."
-msgstr[0] "Skupina polí aktualizovaná."
-msgstr[1] "Skupina polí aktualizovaná."
-msgstr[2] "Skupina polí aktualizovaná."
+msgstr[0] "%s skupina polí bola duplikovaná."
+msgstr[1] "%s skupiny polí boli duplikované."
+msgstr[2] "%s skupín polí bolo duplikovaných."
 
 #: admin/field-groups.php:195
-#, fuzzy, php-format
+#, php-format
 msgid "Field group synchronised. %s"
-msgstr "Skupina polí uložená."
+msgstr "Skupina polí bola synchronizovaná. %s"
 
 #: admin/field-groups.php:199
-#, fuzzy, php-format
+#, php-format
 msgid "%s field group synchronised."
 msgid_plural "%s field groups synchronised."
-msgstr[0] "Nezvolili ste skupiny poľa"
-msgstr[1] "Nezvolili ste skupiny poľa"
-msgstr[2] "Nezvolili ste skupiny poľa"
+msgstr[0] "%s skupina polí bola synchronizovaná."
+msgstr[1] "%s skupiny polí boli synchronizované."
+msgstr[2] "%s skupín polí bolo synchronizovaných."
 
 #: admin/field-groups.php:370
-#, fuzzy
 msgid "Sync available"
-msgstr "Dostupná aktualizácia"
+msgstr "Dostupná aktualizácia "
 
 #: admin/field-groups.php:486
-#, fuzzy
 msgid "Title"
 msgstr "Názov"
 
 #: admin/field-groups.php:544 admin/settings-info.php:76
 #: pro/admin/views/settings-updates.php:111
-#, fuzzy
 msgid "Changelog"
-msgstr "Záznam zmien"
+msgstr "Záznam zmien "
 
 #: admin/field-groups.php:545
-#, fuzzy
 msgid "See what's new in"
-msgstr "Pozrite sa čo je nové"
+msgstr "Pozrite sa, čo je nové:"
 
 #: admin/field-groups.php:545
-#, fuzzy
 msgid "version"
-msgstr "verzia"
+msgstr "verzia "
 
 #: admin/field-groups.php:547
-#, fuzzy
 msgid "Resources"
-msgstr "Zdroje"
+msgstr "Zdroje "
 
 #: admin/field-groups.php:549
-#, fuzzy
 msgid "Getting Started"
-msgstr "Začíname"
+msgstr "Začíname "
 
 #: admin/field-groups.php:550 pro/admin/settings-updates.php:51
 #: pro/admin/views/settings-updates.php:17
-#, fuzzy
 msgid "Updates"
-msgstr ""
-"Každý doplnok môže byť nainštalovaný ako modul(získava aktualizácie), alebo "
-"môže byť zahrnutý do témy (nezískava aktualizácie)."
+msgstr "Aktualizácie"
 
 #: admin/field-groups.php:551
-#, fuzzy
 msgid "Field Types"
-msgstr "Typy polí"
+msgstr "Typy polí "
 
 #: admin/field-groups.php:552
-#, fuzzy
 msgid "Functions"
-msgstr "Funkcie"
+msgstr "Funkcie "
 
 #: admin/field-groups.php:553
-#, fuzzy
 msgid "Actions"
-msgstr "Akcie"
+msgstr "Akcie "
 
 #: admin/field-groups.php:554 fields/relationship.php:719
-#, fuzzy
 msgid "Filters"
-msgstr "Filtre"
+msgstr "Filtre "
 
 #: admin/field-groups.php:555
-#, fuzzy
 msgid "'How to' guides"
-msgstr "Návody \"Ako na to\""
+msgstr "Návody \"Ako na to\" "
 
 #: admin/field-groups.php:556
-#, fuzzy
 msgid "Tutorials"
-msgstr "Návody"
+msgstr "Návody "
 
 #: admin/field-groups.php:561
-#, fuzzy
 msgid "Created by"
-msgstr "Vytvoril"
+msgstr "Vytvoril "
 
 #: admin/field-groups.php:596
-#, fuzzy
 msgid "Duplicate this item"
-msgstr "Duplikovať toto pole"
+msgstr "Duplikovať toto pole "
 
 #: admin/field-groups.php:596 admin/field-groups.php:605
 #: admin/views/field-group-field.php:55 pro/fields/flexible-content.php:520
-#, fuzzy
 msgid "Duplicate"
-msgstr "Duplikovať"
+msgstr "Duplikovať "
 
 #: admin/field-groups.php:635
-#, fuzzy, php-format
+#, php-format
 msgid "Select %s"
-msgstr "Vybrať"
+msgstr "Vybrať %s"
 
 #: admin/field-groups.php:641
-#, fuzzy
 msgid "Synchronise field group"
-msgstr "Zobraziť túto skupinu poľa ak"
+msgstr "Zobraziť túto skupinu poľa, ak"
 
 #: admin/field-groups.php:641 admin/field-groups.php:656
 msgid "Sync"
-msgstr ""
+msgstr "Synchronizácia"
 
 #: admin/settings-addons.php:51 admin/views/settings-addons.php:9
-#, fuzzy
 msgid "Add-ons"
-msgstr "Doplnky"
+msgstr "Doplnky "
 
 #: admin/settings-addons.php:87
 msgid "<b>Error</b>. Could not load add-ons list"
@@ -530,23 +456,20 @@ msgid "Import / Export"
 msgstr "Import / Export"
 
 #: admin/settings-export.php:147 admin/settings-export.php:361
-#, fuzzy
 msgid "No field groups selected"
-msgstr "Nezvolili ste skupiny poľa"
+msgstr "Nezvolili ste skupiny poľa "
 
 #: admin/settings-export.php:184
-#, fuzzy
 msgid "No file selected"
-msgstr "Nevybrali ste súbor"
+msgstr "Nevybrali ste súbor "
 
 #: admin/settings-export.php:197
 msgid "Error uploading file. Please try again"
 msgstr "Chyba pri nahrávaní súbora. Prosím skúste to znova"
 
 #: admin/settings-export.php:206
-#, fuzzy
 msgid "Incorrect file type"
-msgstr "Typ nahraného súboru nie je povolený"
+msgstr "Typ nahraného súboru nie je povolený "
 
 #: admin/settings-export.php:223
 msgid "Import file empty"
@@ -571,19 +494,16 @@ msgid "Info"
 msgstr "Info"
 
 #: admin/settings-info.php:75
-#, fuzzy
 msgid "What's New"
-msgstr "Čo je nové"
+msgstr "Čo je nové "
 
 #: admin/update.php:131
-#, fuzzy
 msgid "Upgrade"
-msgstr "Aktualizovať"
+msgstr "Aktualizovať "
 
 #: admin/views/field-group-field-conditional-logic.php:29
-#, fuzzy
 msgid "Conditional Logic"
-msgstr "Podmienená logika"
+msgstr "Podmienená logika "
 
 #: admin/views/field-group-field-conditional-logic.php:65
 msgid "Show this field if"
@@ -591,9 +511,8 @@ msgstr "Zobraziť toto pole ak"
 
 #: admin/views/field-group-field-conditional-logic.php:111
 #: admin/views/field-group-locations.php:88
-#, fuzzy
 msgid "is equal to"
-msgstr "sa rovná"
+msgstr "sa rovná "
 
 #: admin/views/field-group-field-conditional-logic.php:112
 #: admin/views/field-group-locations.php:89
@@ -607,263 +526,218 @@ msgstr "a"
 
 #: admin/views/field-group-field-conditional-logic.php:164
 #: admin/views/field-group-locations.php:133
-#, fuzzy
 msgid "Add rule group"
-msgstr "Pridať skupinu pravidiel"
+msgstr "Pridať skupinu pravidiel "
 
 #: admin/views/field-group-field.php:51 admin/views/field-group-field.php:54
-#, fuzzy
 msgid "Edit field"
-msgstr "Upraviť skupinu polí"
+msgstr "Upraviť pole"
 
 #: admin/views/field-group-field.php:54 pro/fields/gallery.php:356
-#, fuzzy
 msgid "Edit"
-msgstr "Edituj"
+msgstr "Upraviť"
 
 #: admin/views/field-group-field.php:55
-#, fuzzy
 msgid "Duplicate field"
-msgstr "Duplikovať toto pole"
+msgstr "Duplikovať pole"
 
 #: admin/views/field-group-field.php:56
 msgid "Move field to another group"
 msgstr "Presunúť pole do inej skupiny"
 
 #: admin/views/field-group-field.php:56
-#, fuzzy
 msgid "Move"
-msgstr "Presunúť pole do inej skupiny"
+msgstr "Presunúť"
 
 #: admin/views/field-group-field.php:57
-#, fuzzy
 msgid "Delete field"
-msgstr "Vymazať toto pole"
+msgstr "Vymazať pole"
 
 #: admin/views/field-group-field.php:57 pro/fields/flexible-content.php:519
-#, fuzzy
 msgid "Delete"
 msgstr "Vymazať"
 
 #: admin/views/field-group-field.php:65 fields/oembed.php:214
-#, fuzzy
 msgid "Error"
-msgstr "Chyba"
+msgstr "Chyba "
 
 #: admin/views/field-group-field.php:65
-#, fuzzy
 msgid "Field type does not exist"
-msgstr "Typ poľa neexistuje"
+msgstr "Typ poľa neexistuje "
 
 #: admin/views/field-group-field.php:78
-#, fuzzy
 msgid "Field Label"
-msgstr "Označenie poľa"
+msgstr "Označenie poľa "
 
 #: admin/views/field-group-field.php:79
-#, fuzzy
 msgid "This is the name which will appear on the EDIT page"
-msgstr "Toto je meno ktoré sa zobrazí na stránke úprav"
+msgstr "Toto je meno, ktoré sa zobrazí na stránke úprav "
 
 #: admin/views/field-group-field.php:90
-#, fuzzy
 msgid "Field Name"
-msgstr "Meno poľa"
+msgstr "Meno poľa "
 
 #: admin/views/field-group-field.php:91
-#, fuzzy
 msgid "Single word, no spaces. Underscores and dashes allowed"
-msgstr "Jedno slovo, žiadne medzery. Podčiarknutie a pomlčky sú povolené"
+msgstr "Jedno slovo, žiadne medzery. Podčiarknutie a pomlčky sú povolené "
 
 #: admin/views/field-group-field.php:102 fields/taxonomy.php:726
-#, fuzzy
 msgid "Field Type"
-msgstr "Typ pola"
+msgstr "Typ poľa"
 
 #: admin/views/field-group-field.php:115 fields/tab.php:109
-#, fuzzy
 msgid "Instructions"
-msgstr "Pokyny"
+msgstr "Pokyny "
 
 #: admin/views/field-group-field.php:116
-#, fuzzy
 msgid "Instructions for authors. Shown when submitting data"
-msgstr "Pokyny pre autorov. Zobrazia sa pri zadávaní dát"
+msgstr "Pokyny pre autorov. Zobrazia sa pri zadávaní dát "
 
 #: admin/views/field-group-field.php:127
-#, fuzzy
 msgid "Required?"
-msgstr "Povinné?"
+msgstr "Povinné? "
 
 #: admin/views/field-group-field.php:151
-#, fuzzy
 msgid "Wrapper Attributes"
-msgstr "Stránka"
+msgstr "Hodnoty bloku polí v administrácii"
 
 #: admin/views/field-group-field.php:157
 msgid "width"
-msgstr ""
+msgstr "Šírka"
 
 #: admin/views/field-group-field.php:171
 msgid "class"
-msgstr ""
+msgstr "trieda"
 
 #: admin/views/field-group-field.php:184
-#, fuzzy
 msgid "id"
-msgstr "Strana"
+msgstr "id "
 
 #: admin/views/field-group-field.php:196
-#, fuzzy
 msgid "Close Field"
-msgstr "Zavrieť pole"
+msgstr "Zavrieť pole "
 
 #: admin/views/field-group-fields.php:29
-#, fuzzy
 msgid "Order"
-msgstr "Objednávka číslo:"
+msgstr "Poradie"
 
 #: admin/views/field-group-fields.php:30 pro/fields/flexible-content.php:545
-#, fuzzy
 msgid "Label"
-msgstr "Označenie"
+msgstr "Označenie "
 
 #: admin/views/field-group-fields.php:31 pro/fields/flexible-content.php:558
-#, fuzzy
 msgid "Name"
-msgstr "Podľa mena"
+msgstr "Meno"
 
 #: admin/views/field-group-fields.php:32
 msgid "Type"
 msgstr "Typ"
 
 #: admin/views/field-group-fields.php:44
-#, fuzzy
 msgid ""
 "No fields. Click the <strong>+ Add Field</strong> button to create your "
 "first field."
 msgstr ""
 "Žiadne polia. Kliknite na tlačidlo <strong>+ Pridať pole</strong> pre "
-"vytvorenie prvého poľa."
+"vytvorenie prvého poľa. "
 
 #: admin/views/field-group-fields.php:51
-#, fuzzy
 msgid "Drag and drop to reorder"
-msgstr "Zmente poradie pomocou funkcie ťahaj a pusť"
+msgstr "Zmeňte poradie pomocou funkcie ťahaj a pusť"
 
 #: admin/views/field-group-fields.php:54
-#, fuzzy
 msgid "+ Add Field"
-msgstr "+ Pridať pole"
+msgstr "+ Pridať pole "
 
 #: admin/views/field-group-locations.php:5
-#, fuzzy
 msgid "Rules"
-msgstr "Pravidlá"
+msgstr "Pravidlá "
 
 #: admin/views/field-group-locations.php:6
-#, fuzzy
 msgid ""
 "Create a set of rules to determine which edit screens will use these "
 "advanced custom fields"
 msgstr ""
-"Vytvorte súbor pravidiel, ktoré určia ktoré obrazovky úprav budú používať "
-"advanced custom fields"
+"Vytvorte súbor pravidiel určujúcich, ktoré obrazovky úprav budú používať "
+"Vlastné polia"
 
 #: admin/views/field-group-locations.php:21
-#, fuzzy
 msgid "Show this field group if"
-msgstr "Zobraziť túto skupinu poľa ak"
+msgstr "Zobraziť túto skupinu poľa ak "
 
 #: admin/views/field-group-locations.php:41
 #: admin/views/field-group-locations.php:47
-#, fuzzy
 msgid "Post"
-msgstr "Príspevok"
+msgstr "Príspevok "
 
 #: admin/views/field-group-locations.php:42 fields/relationship.php:725
-#, fuzzy
 msgid "Post Type"
-msgstr "Typ príspevku"
+msgstr "Typ príspevku "
 
 #: admin/views/field-group-locations.php:43
-#, fuzzy
 msgid "Post Status"
-msgstr "Stav príspevku"
+msgstr "Stav príspevku "
 
 #: admin/views/field-group-locations.php:44
-#, fuzzy
 msgid "Post Format"
-msgstr "Formát príspevku"
+msgstr "Formát príspevku "
 
 #: admin/views/field-group-locations.php:45
-#, fuzzy
 msgid "Post Category"
-msgstr "Kategória príspevku"
+msgstr "Kategória príspevku "
 
 #: admin/views/field-group-locations.php:46
-#, fuzzy
 msgid "Post Taxonomy"
-msgstr "Taxonómia príspevku"
+msgstr "Taxonómia príspevku "
 
 #: admin/views/field-group-locations.php:49
 #: admin/views/field-group-locations.php:53
-#, fuzzy
 msgid "Page"
-msgstr "Stránka"
+msgstr "Stránka "
 
 #: admin/views/field-group-locations.php:50
-#, fuzzy
 msgid "Page Template"
-msgstr "Šablóna stránky"
+msgstr "Šablóna stránky "
 
 #: admin/views/field-group-locations.php:51
-#, fuzzy
 msgid "Page Type"
-msgstr "Typ stránky"
+msgstr "Typ stránky "
 
 #: admin/views/field-group-locations.php:52
-#, fuzzy
 msgid "Page Parent"
-msgstr "Nadradená stránka"
+msgstr "Nadradená stránka "
 
 #: admin/views/field-group-locations.php:55 fields/user.php:36
-#, fuzzy
 msgid "User"
-msgstr "Používateľ"
+msgstr "Používateľ "
 
 #: admin/views/field-group-locations.php:56
-#, fuzzy
 msgid "Current User"
-msgstr "Aktuálna verzia"
+msgstr "Aktuálny používateľ"
 
 #: admin/views/field-group-locations.php:57
-#, fuzzy
 msgid "Current User Role"
-msgstr "Oprávnenia"
+msgstr "Aktuálne oprávnenia"
 
 #: admin/views/field-group-locations.php:58
 msgid "User Form"
 msgstr "Formulár používatela"
 
 #: admin/views/field-group-locations.php:59
-#, fuzzy
 msgid "User Role"
-msgstr "Oprávnenia"
+msgstr "Oprávnenia "
 
 #: admin/views/field-group-locations.php:61 pro/admin/options-page.php:55
 msgid "Forms"
-msgstr "Formuláre."
+msgstr "Formuláre"
 
 #: admin/views/field-group-locations.php:62
-#, fuzzy
 msgid "Attachment"
-msgstr "Príloha"
+msgstr "Príloha "
 
 #: admin/views/field-group-locations.php:63
-#, fuzzy
 msgid "Taxonomy Term"
-msgstr "Výraz taxonómie"
+msgstr "Výraz taxonómie "
 
 #: admin/views/field-group-locations.php:64
 msgid "Comment"
@@ -874,54 +748,44 @@ msgid "Widget"
 msgstr "Widget"
 
 #: admin/views/field-group-options.php:10
-#, fuzzy
 msgid "Order No."
-msgstr "Objednávka číslo:"
+msgstr "Poradové číslo"
 
 #: admin/views/field-group-options.php:11
-#, fuzzy
 msgid "Field groups are created in order from lowest to highest"
-msgstr "Skupiny polí sú vytvorené v poradí <br /> od najnižšej po najvyššiu"
+msgstr "Skupiny polí sú vytvorené v poradí <br /> od najnižšej po najvyššiu "
 
 #: admin/views/field-group-options.php:21
-#, fuzzy
 msgid "Position"
-msgstr "Pozícia"
+msgstr "Pozícia "
 
 #: admin/views/field-group-options.php:28
-#, fuzzy
 msgid "High (after title)"
-msgstr "Hore (pod nadpisom)"
+msgstr "Hore (pod nadpisom) "
 
 #: admin/views/field-group-options.php:29
-#, fuzzy
 msgid "Normal (after content)"
-msgstr "Normálne (po obsahu)"
+msgstr "Normálne (po obsahu) "
 
 #: admin/views/field-group-options.php:30
-#, fuzzy
 msgid "Side"
-msgstr "Strana"
+msgstr "Strana "
 
 #: admin/views/field-group-options.php:38
-#, fuzzy
 msgid "Style"
-msgstr "Štýl"
+msgstr "Štýl "
 
 #: admin/views/field-group-options.php:45
-#, fuzzy
 msgid "Standard (WP metabox)"
-msgstr "Štandardný metabox"
+msgstr "Štandardný metabox "
 
 #: admin/views/field-group-options.php:46
-#, fuzzy
 msgid "Seamless (no metabox)"
-msgstr "Žiadny metabox"
+msgstr "Žiadny metabox "
 
 #: admin/views/field-group-options.php:53
-#, fuzzy
 msgid "Label placement"
-msgstr "Umiestnenie inštrukcií"
+msgstr "Umiestnenie inštrukcií "
 
 #: admin/views/field-group-options.php:60 fields/tab.php:125
 msgid "Top aligned"
@@ -944,107 +808,88 @@ msgid "Below fields"
 msgstr "Pod poliami"
 
 #: admin/views/field-group-options.php:83
-#, fuzzy
 msgid "Hide on screen"
-msgstr "Schovať na obrazovke"
+msgstr "Schovať na obrazovke "
 
 #: admin/views/field-group-options.php:84
-#, fuzzy
 msgid "<b>Select</b> items to <b>hide</b> them from the edit screen."
-msgstr "<b>Vybrať</b> položky pre ich <b>skrytie</b> pred obrazovkou úprav"
+msgstr "<b>Vybrať</b> položky pre ich <b>skrytie</b> pred obrazovkou úprav."
 
 #: admin/views/field-group-options.php:84
-#, fuzzy
 msgid ""
 "If multiple field groups appear on an edit screen, the first field group's "
 "options will be used (the one with the lowest order number)"
 msgstr ""
 "Ak viaceré skupiny polí sa zobrazia na obrazovke úprav, nastavenia prvej "
-"skupiny budú použité. (tá s najnižším poradovým číslom)"
+"skupiny budú použité (tá s najnižším poradovým číslom)"
 
 #: admin/views/field-group-options.php:90
 msgid "Permalink"
 msgstr "Trvalý odkaz"
 
 #: admin/views/field-group-options.php:91
-#, fuzzy
 msgid "Content Editor"
-msgstr "Editor obsahu"
+msgstr "Úpravca obsahu"
 
 #: admin/views/field-group-options.php:92
-#, fuzzy
 msgid "Excerpt"
-msgstr "Zhrnutie"
+msgstr "Zhrnutie "
 
 #: admin/views/field-group-options.php:94
-#, fuzzy
 msgid "Discussion"
-msgstr "Diskusia"
+msgstr "Diskusia "
 
 #: admin/views/field-group-options.php:95
-#, fuzzy
 msgid "Comments"
-msgstr "Komentáre"
+msgstr "Komentáre "
 
 #: admin/views/field-group-options.php:96
-#, fuzzy
 msgid "Revisions"
-msgstr "Revízie"
+msgstr "Revízie "
 
 #: admin/views/field-group-options.php:97
-#, fuzzy
 msgid "Slug"
-msgstr "Slug"
+msgstr "Slug "
 
 #: admin/views/field-group-options.php:98
-#, fuzzy
 msgid "Author"
-msgstr "Autor"
+msgstr "Autor "
 
 #: admin/views/field-group-options.php:99
-#, fuzzy
 msgid "Format"
-msgstr "Formát"
+msgstr "Formát "
 
 #: admin/views/field-group-options.php:100
-#, fuzzy
 msgid "Page Attributes"
-msgstr "Stránka"
+msgstr "Vlastnosti stránky"
 
 #: admin/views/field-group-options.php:101 fields/relationship.php:738
-#, fuzzy
 msgid "Featured Image"
-msgstr "Prezentačný obrázok"
+msgstr "Prezentačný obrázok "
 
 #: admin/views/field-group-options.php:102
-#, fuzzy
 msgid "Categories"
-msgstr "Kategórie"
+msgstr "Kategórie "
 
 #: admin/views/field-group-options.php:103
-#, fuzzy
 msgid "Tags"
-msgstr "Značky"
+msgstr "Značky "
 
 #: admin/views/field-group-options.php:104
-#, fuzzy
 msgid "Send Trackbacks"
-msgstr "Odoslať spätné odkazy"
+msgstr "Odoslať spätné odkazy "
 
 #: admin/views/settings-addons.php:23
-#, fuzzy
 msgid "Download & Install"
-msgstr "Stiahnuť"
+msgstr "Stiahnuť a nainštalovať"
 
 #: admin/views/settings-addons.php:42
-#, fuzzy
 msgid "Installed"
-msgstr "Nainštalované"
+msgstr "Nainštalované "
 
 #: admin/views/settings-export-generate.php:13
-#, fuzzy
 msgid "Export Field Groups to PHP"
-msgstr "Export skupiny poľa do PHP"
+msgstr "Export skupiny poľa do PHP "
 
 #: admin/views/settings-export-generate.php:17
 msgid ""
@@ -1060,9 +905,8 @@ msgstr ""
 "súboru funkcií vašej témy functions.php alebo ich zahrňte v externom súbore."
 
 #: admin/views/settings-export.php:7
-#, fuzzy
 msgid "Export Field Groups"
-msgstr "Export skupín polí"
+msgstr "Export skupín polí "
 
 #: admin/views/settings-export.php:10
 msgid ""
@@ -1077,9 +921,8 @@ msgstr ""
 "ktorý použijete vo vašej téme."
 
 #: admin/views/settings-export.php:20
-#, fuzzy
 msgid "Select Field Groups"
-msgstr "Vyberte skupiny poľa na export"
+msgstr "Vyberte skupiny poľa na export "
 
 #: admin/views/settings-export.php:55
 msgid "Download export file"
@@ -1103,22 +946,19 @@ msgid ""
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Vyberte JSON súbor ACF na import. Po kliknutí na tlačidlo import sa nahrajú "
-"všetky skupiný polí ACF."
+"všetky skupiny polí ACF."
 
 #: admin/views/settings-export.php:106 fields/file.php:46
-#, fuzzy
 msgid "Select File"
-msgstr "Vybrať subor"
+msgstr "Vybrať subor "
 
 #: admin/views/settings-export.php:115
-#, fuzzy
 msgid "Import"
-msgstr "Import"
+msgstr "Import "
 
 #: admin/views/settings-info.php:9
-#, fuzzy
 msgid "Welcome to Advanced Custom Fields"
-msgstr "Víta vás Advanced Custom Fields"
+msgstr "Víta vás Advanced Custom Fields "
 
 #: admin/views/settings-info.php:10
 #, php-format
@@ -1177,16 +1017,14 @@ msgid "Goodbye Add-ons. Hello PRO"
 msgstr "Dovidenia doplnky. Vitaj PRO"
 
 #: admin/views/settings-info.php:52
-#, fuzzy
 msgid "Introducing ACF PRO"
-msgstr "Pro verzia"
+msgstr "Pro verzia "
 
 #: admin/views/settings-info.php:53
-#, fuzzy
 msgid ""
 "We're changing the way premium functionality is delivered in an exciting way!"
 msgstr ""
-"Prémiové funkcie modulu sme sa rozhodli poskyntúť vyrušujúcejším spôsobom!"
+"Prémiové funkcie modulu sme sa rozhodli poskytnúť vzrušujúcejším spôsobom!"
 
 #: admin/views/settings-info.php:54
 #, php-format
@@ -1358,9 +1196,8 @@ msgstr ""
 "nadradenými poliami"
 
 #: admin/views/settings-info.php:144 fields/page_link.php:36
-#, fuzzy
 msgid "Page Link"
-msgstr "Odkaz stránky"
+msgstr "Odkaz stránky "
 
 #: admin/views/settings-info.php:145
 msgid "New archives group in page_link field selection"
@@ -1430,9 +1267,8 @@ msgstr ""
 "na najnovšiu verziu."
 
 #: admin/views/update-notice.php:38
-#, fuzzy
 msgid "Update Database"
-msgstr "Aktualizácia databázy"
+msgstr "Aktualizácia databázy "
 
 #: admin/views/update-notice.php:45
 msgid ""
@@ -1460,93 +1296,77 @@ msgid "Data upgraded successfully."
 msgstr "Úspešne aktualizované data."
 
 #: admin/views/update.php:27
-#, fuzzy
 msgid "See what's new"
-msgstr "Pozrite sa čo je nové"
+msgstr "Pozrite sa, čo je nové"
 
 #: admin/views/update.php:31
 msgid "Data is at the latest version."
 msgstr "Dáta sú aktuálne."
 
 #: api/api-helpers.php:816
-#, fuzzy
 msgid "Thumbnail"
-msgstr "Náhľad"
+msgstr "Náhľad "
 
 #: api/api-helpers.php:817
-#, fuzzy
 msgid "Medium"
-msgstr "Stredný"
+msgstr "Stredný "
 
 #: api/api-helpers.php:818
-#, fuzzy
 msgid "Large"
-msgstr "Veľký"
+msgstr "Veľký "
 
 #: api/api-helpers.php:866
-#, fuzzy
 msgid "Full Size"
-msgstr "Úplný"
+msgstr "Úplný "
 
 #: api/api-helpers.php:1552
 msgid "(no title)"
 msgstr "(bez názvu)"
 
 #: api/api-template.php:1268 pro/fields/gallery.php:567
-#, fuzzy
 msgid "Update"
-msgstr "Aktualizovať"
+msgstr "Aktualizovať "
 
 #: api/api-template.php:1269
-#, fuzzy
 msgid "Post updated"
-msgstr "Príspevok akutalizovaný"
+msgstr "Príspevok akutalizovaný "
 
 #: core/field.php:130
-#, fuzzy
 msgid "Basic"
-msgstr "Základné"
+msgstr "Základné "
 
 #: core/field.php:131
-#, fuzzy
 msgid "Content"
-msgstr "Obsah"
+msgstr "Obsah "
 
 #: core/field.php:132
-#, fuzzy
 msgid "Choice"
-msgstr "Voľba"
+msgstr "Voľba "
 
 #: core/field.php:133
-#, fuzzy
 msgid "Relational"
-msgstr "Relačný"
+msgstr "Relačný "
 
 #: core/field.php:134
-#, fuzzy
 msgid "jQuery"
-msgstr "jQuery"
+msgstr "jQuery "
 
 #: core/field.php:135 fields/checkbox.php:187 fields/radio.php:231
 #: pro/fields/flexible-content.php:516 pro/fields/repeater.php:392
-#, fuzzy
 msgid "Layout"
-msgstr "Rozdelenie"
+msgstr "Rozmiestnenie"
 
 #: core/input.php:129
-#, fuzzy
 msgid "Expand Details"
-msgstr "Zväčšiť detaily"
+msgstr "Zväčšiť detaily "
 
 #: core/input.php:130
-#, fuzzy
 msgid "Collapse Details"
-msgstr "Zmenšiť detaily"
+msgstr "Zmenšiť detaily "
 
 #: core/input.php:180
-#, fuzzy
 msgid "Validation successful"
-msgstr "Nastala chyba pri validácii formulára"
+msgstr "Overenie bolo úspešné"
 
 #: core/input.php:192
 msgid "Validation failed"
@@ -1568,215 +1388,184 @@ msgstr "vyžaduje sa hodnota %s"
 #: core/media.php:84
 #, php-format
 msgid "Image width must be at least %dpx."
-msgstr ""
+msgstr "Šírka obrázku musí byť aspoň %dpx."
 
 #: core/media.php:89
 #, php-format
 msgid "Image width must not exceed %dpx."
-msgstr ""
+msgstr "Šírka obrázku nesmie prekročiť %dpx."
 
 #: core/media.php:104
 #, php-format
 msgid "Image height must be at least %dpx."
-msgstr ""
+msgstr "Výška obrázku musí byť aspoň %dpx."
 
 #: core/media.php:109
 #, php-format
 msgid "Image height must not exceed %dpx."
-msgstr ""
+msgstr "Výška obrázku nesmie prekročiť %dpx."
 
 #: core/media.php:125
 #, php-format
 msgid "File size must be at least %s."
-msgstr ""
+msgstr "Veľkosť súboru musí byť aspoň %s."
 
 #: core/media.php:130
 #, php-format
 msgid "File size must must not exceed %s."
-msgstr ""
+msgstr "Veľkosť súboru nesmie prekročiť %s."
 
 #: core/media.php:154
-#, fuzzy, php-format
+#, php-format
 msgid "File type must be %s."
-msgstr "Typ poľa neexistuje"
+msgstr "Typ súboru musí byť %s."
 
 #: fields/checkbox.php:36 fields/taxonomy.php:733
-#, fuzzy
 msgid "Checkbox"
-msgstr "Zaškrtávacie políčko"
+msgstr "Zaškrtávacie políčko "
 
 #: fields/checkbox.php:169 fields/radio.php:193 fields/select.php:374
-#, fuzzy
 msgid "Choices"
-msgstr "Voľby"
+msgstr "Voľby "
 
 #: fields/checkbox.php:170 fields/radio.php:194 fields/select.php:375
-#, fuzzy
 msgid "Enter each choice on a new line."
-msgstr "Zadajte každú voľbu do nového riadku."
+msgstr "Zadajte každú voľbu do nového riadku. "
 
 #: fields/checkbox.php:170 fields/radio.php:194 fields/select.php:375
 msgid "For more control, you may specify both a value and label like this:"
 msgstr "Pre lepšiu kontrolu, môžete určiť hodnotu a popis takto:"
 
 #: fields/checkbox.php:170 fields/radio.php:194 fields/select.php:375
-#, fuzzy
 msgid "red : Red"
-msgstr "červená : Červená"
+msgstr "červená : Červená "
 
 #: fields/checkbox.php:178 fields/color_picker.php:158 fields/email.php:124
 #: fields/number.php:150 fields/radio.php:222 fields/select.php:383
 #: fields/text.php:148 fields/textarea.php:145 fields/true_false.php:115
 #: fields/url.php:117 fields/wysiwyg.php:345
-#, fuzzy
 msgid "Default Value"
-msgstr "Základná hodnota"
+msgstr "Základná hodnota "
 
 #: fields/checkbox.php:179 fields/select.php:384
-#, fuzzy
 msgid "Enter each default value on a new line"
-msgstr "Zadajte každú základnú hodnotu na nový riadok"
+msgstr "Zadajte každú základnú hodnotu na nový riadok "
 
 #: fields/checkbox.php:193 fields/radio.php:237
-#, fuzzy
 msgid "Vertical"
-msgstr "Vertikálne"
+msgstr "Vertikálne "
 
 #: fields/checkbox.php:194 fields/radio.php:238
-#, fuzzy
 msgid "Horizontal"
-msgstr "Horizontálne"
+msgstr "Horizontálne "
 
 #: fields/color_picker.php:36
-#, fuzzy
 msgid "Color Picker"
-msgstr "Výber farby"
+msgstr "Výber farby "
 
 #: fields/color_picker.php:94
-#, fuzzy
 msgid "Clear"
-msgstr "Vymazať"
+msgstr "Vyčistiť"
 
 #: fields/color_picker.php:95
-#, fuzzy
 msgid "Default"
-msgstr "Predvolené"
+msgstr "Predvolené "
 
 #: fields/color_picker.php:96
-#, fuzzy
 msgid "Select Color"
 msgstr "Farba"
 
 #: fields/date_picker.php:36
-#, fuzzy
 msgid "Date Picker"
-msgstr "Výber dátumu"
+msgstr "Výber dátumu "
 
 #: fields/date_picker.php:72
-#, fuzzy
 msgid "Done"
-msgstr "Hotovo"
+msgstr "Hotovo "
 
 #: fields/date_picker.php:73
-#, fuzzy
 msgid "Today"
-msgstr "Dnes"
+msgstr "Dnes "
 
 #: fields/date_picker.php:76
-#, fuzzy
 msgid "Show a different month"
-msgstr "Zobraziť iný mesiac"
+msgstr "Zobraziť iný mesiac "
 
 #: fields/date_picker.php:149
-#, fuzzy
 msgid "Display format"
-msgstr "Formát zobrazenia"
+msgstr "Formát zobrazenia "
 
 #: fields/date_picker.php:150
 msgid "The format displayed when editing a post"
 msgstr "Formát zobrazený pri úprave článku"
 
 #: fields/date_picker.php:164
-#, fuzzy
 msgid "Return format"
-msgstr "Formát odpoveďe"
+msgstr "Formát odpoveďe "
 
 #: fields/date_picker.php:165
 msgid "The format returned via template functions"
 msgstr "Formát vrátený pomocou funkcii šablóny"
 
 #: fields/date_picker.php:180
-#, fuzzy
 msgid "Week Starts On"
-msgstr "Týždeň začína"
+msgstr "Týždeň začína "
 
 #: fields/email.php:36
-#, fuzzy
 msgid "Email"
-msgstr "E-Mail"
+msgstr "E-Mail "
 
 #: fields/email.php:125 fields/number.php:151 fields/radio.php:223
 #: fields/text.php:149 fields/textarea.php:146 fields/url.php:118
 #: fields/wysiwyg.php:346
-#, fuzzy
 msgid "Appears when creating a new post"
-msgstr "Zobrazí sa pri vytvorení nového príspevku"
+msgstr "Zobrazí sa pri vytvorení nového príspevku "
 
 #: fields/email.php:133 fields/number.php:159 fields/password.php:137
 #: fields/text.php:157 fields/textarea.php:154 fields/url.php:126
-#, fuzzy
 msgid "Placeholder Text"
-msgstr "Zástupný text"
+msgstr "Zástupný text "
 
 #: fields/email.php:134 fields/number.php:160 fields/password.php:138
 #: fields/text.php:158 fields/textarea.php:155 fields/url.php:127
-#, fuzzy
 msgid "Appears within the input"
-msgstr "Zobrazí sa v inpute"
+msgstr "Zobrazí sa vo vstupe"
 
 #: fields/email.php:142 fields/number.php:168 fields/password.php:146
 #: fields/text.php:166
-#, fuzzy
 msgid "Prepend"
-msgstr "Určený"
+msgstr "Predpona"
 
 #: fields/email.php:143 fields/number.php:169 fields/password.php:147
 #: fields/text.php:167
-#, fuzzy
 msgid "Appears before the input"
-msgstr "Zobrazí sa pred inputom"
+msgstr "Zobrazí sa pred vstupom"
 
 #: fields/email.php:151 fields/number.php:177 fields/password.php:155
 #: fields/text.php:175
-#, fuzzy
 msgid "Append"
-msgstr "Prepojenie"
+msgstr "Prípona"
 
 #: fields/email.php:152 fields/number.php:178 fields/password.php:156
 #: fields/text.php:176
-#, fuzzy
 msgid "Appears after the input"
-msgstr "Zobrazí sa po inpute"
+msgstr "Zobrazí sa po vstupe"
 
 #: fields/file.php:36
-#, fuzzy
 msgid "File"
-msgstr "Súbor"
+msgstr "Súbor "
 
 #: fields/file.php:47
-#, fuzzy
 msgid "Edit File"
-msgstr "Upraviť súbor"
+msgstr "Upraviť súbor "
 
 #: fields/file.php:48
-#, fuzzy
 msgid "Update File"
-msgstr "Aktualizovať súbor"
+msgstr "Aktualizovať súbor "
 
 #: fields/file.php:49 pro/fields/gallery.php:55
-#, fuzzy
 msgid "uploaded to this post"
-msgstr "Nahrané do príspevku"
+msgstr "Nahrané do príspevku "
 
 #: fields/file.php:141
 msgid "File Name"
@@ -1787,123 +1576,101 @@ msgid "File Size"
 msgstr "Veľkosť súboru"
 
 #: fields/file.php:168
-#, fuzzy
 msgid "No File selected"
-msgstr "Nevybrali ste súbor"
+msgstr "Nevybrali ste súbor "
 
 #: fields/file.php:168
-#, fuzzy
 msgid "Add File"
-msgstr "Pridať súbor"
+msgstr "Pridať súbor "
 
 #: fields/file.php:213 fields/image.php:192 fields/taxonomy.php:770
-#, fuzzy
 msgid "Return Value"
-msgstr "Vrátiť hodnotu"
+msgstr "Vrátiť hodnotu "
 
 #: fields/file.php:214 fields/image.php:193
-#, fuzzy
 msgid "Specify the returned value on front end"
-msgstr "Zadajte hodnotu ktorá sa objaví na stránke"
+msgstr "Zadajte hodnotu, ktorá sa objaví na stránke"
 
 #: fields/file.php:219
-#, fuzzy
 msgid "File Array"
-msgstr "Súbor"
+msgstr "Súbor "
 
 #: fields/file.php:220
-#, fuzzy
 msgid "File URL"
-msgstr "URL adresa súboru"
+msgstr "URL adresa súboru "
 
 #: fields/file.php:221
-#, fuzzy
 msgid "File ID"
-msgstr "ID súboru"
+msgstr "ID súboru "
 
 #: fields/file.php:228 fields/image.php:217 pro/fields/gallery.php:650
-#, fuzzy
 msgid "Library"
-msgstr "Knižnica"
+msgstr "Knižnica "
 
 #: fields/file.php:229 fields/image.php:218 pro/fields/gallery.php:651
-#, fuzzy
 msgid "Limit the media library choice"
-msgstr "Obmedziť výber knižnice médií"
+msgstr "Obmedziť výber knižnice médií "
 
 #: fields/file.php:235 fields/image.php:224 pro/fields/gallery.php:657
-#, fuzzy
 msgid "Uploaded to post"
-msgstr "Nahrané do príspevku"
+msgstr "Nahrané do príspevku "
 
 #: fields/file.php:242 fields/image.php:231 pro/fields/gallery.php:664
-#, fuzzy
 msgid "Minimum"
-msgstr "Minimálny počet riadkov"
+msgstr "Minimálny počet"
 
 #: fields/file.php:243 fields/file.php:254
 msgid "Restrict which files can be uploaded"
-msgstr ""
+msgstr "Vymedzte, ktoré súbory je možné nahrať"
 
 #: fields/file.php:246 fields/file.php:257 fields/image.php:254
 #: fields/image.php:287 pro/fields/gallery.php:687 pro/fields/gallery.php:720
-#, fuzzy
 msgid "File size"
-msgstr "Veľkosť súboru"
+msgstr "Veľkosť súboru "
 
 #: fields/file.php:253 fields/image.php:264 pro/fields/gallery.php:697
-#, fuzzy
 msgid "Maximum"
-msgstr "Maximálny počet riadkov"
+msgstr "Maximálny počet"
 
 #: fields/file.php:264 fields/image.php:297 pro/fields/gallery.php:730
-#, fuzzy
 msgid "Allowed file types"
-msgstr "Typ nahraného súboru nie je povolený"
+msgstr "Povolené typy súborov"
 
 #: fields/file.php:265 fields/image.php:298 pro/fields/gallery.php:731
 msgid "Comma separated list. Leave blank for all types"
-msgstr ""
+msgstr "Zoznam, oddelený čiarkou. Nechajte prázdne pre všetky typy"
 
 #: fields/google-map.php:36
-#, fuzzy
 msgid "Google Map"
-msgstr "Google Mapa"
+msgstr "Google Mapa "
 
 #: fields/google-map.php:51
-#, fuzzy
 msgid "Locating"
-msgstr "Zisťovanie polohy"
+msgstr "Poloha"
 
 #: fields/google-map.php:52
-#, fuzzy
 msgid "Sorry, this browser does not support geolocation"
-msgstr "Ľutujeme, tento prehliadač nepodporuje geo hľadanie polohy"
+msgstr "Ľutujeme, tento prehliadač nepodporuje geo hľadanie polohy "
 
 #: fields/google-map.php:135
-#, fuzzy
 msgid "Clear location"
-msgstr "Vymazať polohu"
+msgstr "Vymazať polohu "
 
 #: fields/google-map.php:142
-#, fuzzy
 msgid "Find current location"
-msgstr "Nájsť aktuálnu polohu"
+msgstr "Nájsť aktuálnu polohu "
 
 #: fields/google-map.php:145
-#, fuzzy
 msgid "Search for address..."
-msgstr "Hľadať adresu..."
+msgstr "Hľadať adresu... "
 
 #: fields/google-map.php:177 fields/google-map.php:188
-#, fuzzy
 msgid "Center"
-msgstr "Stred"
+msgstr "Stred "
 
 #: fields/google-map.php:178 fields/google-map.php:189
-#, fuzzy
 msgid "Center the initial map"
-msgstr "Vycentrovať úvodnú mapu"
+msgstr "Vycentrovať úvodnú mapu "
 
 #: fields/google-map.php:202
 msgid "Zoom"
@@ -1915,132 +1682,112 @@ msgstr "Nastavte základnú úroveň priblíženia"
 
 #: fields/google-map.php:212 fields/image.php:243 fields/image.php:276
 #: fields/oembed.php:264 pro/fields/gallery.php:676 pro/fields/gallery.php:709
-#, fuzzy
 msgid "Height"
-msgstr "Výška"
+msgstr "Výška "
 
 #: fields/google-map.php:213
-#, fuzzy
 msgid "Customise the map height"
-msgstr "Upraviť výšku mapy"
+msgstr "Upraviť výšku mapy "
 
 #: fields/image.php:36
-#, fuzzy
 msgid "Image"
-msgstr "Obrázok"
+msgstr "Obrázok "
 
 #: fields/image.php:51
-#, fuzzy
 msgid "Select Image"
-msgstr "Vybrať obrázok"
+msgstr "Vybrať obrázok "
 
 #: fields/image.php:52 pro/fields/gallery.php:53
-#, fuzzy
 msgid "Edit Image"
-msgstr "Upraviť obrázok"
+msgstr "Upraviť obrázok "
 
 #: fields/image.php:53 pro/fields/gallery.php:54
-#, fuzzy
 msgid "Update Image"
-msgstr "Aktualizovať obrázok"
+msgstr "Aktualizovať obrázok "
 
 #: fields/image.php:54
-#, fuzzy
 msgid "Uploaded to this post"
-msgstr "Nahrané do príspevku"
+msgstr "Nahrané do príspevku "
 
 #: fields/image.php:55
-#, fuzzy
 msgid "All images"
-msgstr "Pridať obrázok"
+msgstr "Všetky obrázky"
 
 #: fields/image.php:144
-#, fuzzy
 msgid "No image selected"
-msgstr "Nevybrali ste obrázok"
+msgstr "Nevybrali ste obrázok "
 
 #: fields/image.php:144
-#, fuzzy
 msgid "Add Image"
-msgstr "Pridať obrázok"
+msgstr "Pridať obrázok "
 
 #: fields/image.php:198
-#, fuzzy
 msgid "Image Array"
-msgstr "Obrázok"
+msgstr "Obrázok "
 
 #: fields/image.php:199
-#, fuzzy
 msgid "Image URL"
-msgstr "URL adresa obrázka"
+msgstr "URL adresa obrázka "
 
 #: fields/image.php:200
-#, fuzzy
 msgid "Image ID"
-msgstr "ID obrázka"
+msgstr "ID obrázka "
 
 #: fields/image.php:207 pro/fields/gallery.php:640
-#, fuzzy
 msgid "Preview Size"
-msgstr "Veľkosť náhľadu"
+msgstr "Veľkosť náhľadu "
 
 #: fields/image.php:208 pro/fields/gallery.php:641
-#, fuzzy
 msgid "Shown when entering data"
-msgstr "Zobrazené pri zadávaní dát"
+msgstr "Zobrazené pri zadávaní dát "
 
 #: fields/image.php:232 fields/image.php:265 pro/fields/gallery.php:665
 #: pro/fields/gallery.php:698
 msgid "Restrict which images can be uploaded"
-msgstr ""
+msgstr "Určite, ktoré typy obrázkov môžu byť nahraté"
 
 #: fields/image.php:235 fields/image.php:268 fields/oembed.php:253
 #: pro/fields/gallery.php:668 pro/fields/gallery.php:701
 msgid "Width"
-msgstr ""
+msgstr "Šírka"
 
 #: fields/message.php:36 fields/message.php:102 fields/true_false.php:106
-#, fuzzy
 msgid "Message"
-msgstr "Správa"
+msgstr "Správa "
 
 #: fields/message.php:103
-#, fuzzy
 msgid "Please note that all text will first be passed through the wp function "
-msgstr "Všetky texty najprv prejdú cez funkciu wp"
+msgstr "Všetky texty najprv prejdú cez funkciu wp "
 
 #: fields/message.php:111
 msgid "Escape HTML"
-msgstr ""
+msgstr "Eskapovať HTML (€ za &euro;)"
 
 #: fields/message.php:112
 msgid "Allow HTML markup to display as visible text instead of rendering"
 msgstr ""
+"Povoliť zobrazenie HTML značiek vo forme viditeľného textu namiesto ich "
+"vykreslenia"
 
 #: fields/number.php:36
-#, fuzzy
 msgid "Number"
-msgstr "Číslo"
+msgstr "Číslo "
 
 #: fields/number.php:186
-#, fuzzy
 msgid "Minimum Value"
-msgstr "Minimálna hodnota"
+msgstr "Minimálna hodnota "
 
 #: fields/number.php:195
-#, fuzzy
 msgid "Maximum Value"
-msgstr "Maximálna hodnota"
+msgstr "Maximálna hodnota "
 
 #: fields/number.php:204
-#, fuzzy
 msgid "Step Size"
-msgstr "Veľkosť kroku"
+msgstr "Veľkosť kroku "
 
 #: fields/number.php:242
-#, fuzzy
 msgid "Value must be a number"
-msgstr "Číslo"
+msgstr "Hodnota musí byť číslo"
 
 #: fields/number.php:260
 #, php-format
@@ -2057,9 +1804,8 @@ msgid "oEmbed"
 msgstr "oEmbed"
 
 #: fields/oembed.php:199
-#, fuzzy
 msgid "Enter URL"
-msgstr "URL"
+msgstr "Vložiť URL"
 
 #: fields/oembed.php:214
 msgid "No embed found for the given URL"
@@ -2070,99 +1816,83 @@ msgid "Embed Size"
 msgstr "Veľkosť vloženého obsahu"
 
 #: fields/page_link.php:206
-#, fuzzy
 msgid "Archives"
-msgstr "Archívy"
+msgstr "Archívy "
 
 #: fields/page_link.php:534 fields/post_object.php:403
 #: fields/relationship.php:691
-#, fuzzy
 msgid "Filter by Post Type"
-msgstr "Filtrovať podľa typu príspevku"
+msgstr "Filtrovať podľa typu príspevku "
 
 #: fields/page_link.php:542 fields/post_object.php:411
 #: fields/relationship.php:699
-#, fuzzy
 msgid "All post types"
-msgstr "Všetky typy príspevkov"
+msgstr "Všetky typy príspevkov "
 
 #: fields/page_link.php:548 fields/post_object.php:417
 #: fields/relationship.php:705
-#, fuzzy
 msgid "Filter by Taxonomy"
-msgstr "Filter z taxonómie"
+msgstr "Filter z taxonómie "
 
 #: fields/page_link.php:556 fields/post_object.php:425
 #: fields/relationship.php:713
-#, fuzzy
 msgid "All taxonomies"
-msgstr "Žiadny filter taxonómie"
+msgstr "Žiadny filter taxonómie "
 
 #: fields/page_link.php:562 fields/post_object.php:431 fields/select.php:392
 #: fields/taxonomy.php:746 fields/user.php:372
-#, fuzzy
 msgid "Allow Null?"
-msgstr "Povoliť nulovú hodnotu?"
+msgstr "Povoliť nulovú hodnotu? "
 
 #: fields/page_link.php:576 fields/post_object.php:445 fields/select.php:406
 #: fields/user.php:386
-#, fuzzy
 msgid "Select multiple values?"
-msgstr "Vybrať viac hodnôt?"
+msgstr "Vybrať viac hodnôt? "
 
 #: fields/password.php:36
-#, fuzzy
 msgid "Password"
-msgstr "Heslo"
+msgstr "Heslo "
 
 #: fields/post_object.php:36 fields/post_object.php:464
 #: fields/relationship.php:766
-#, fuzzy
 msgid "Post Object"
-msgstr "Objekt príspevku"
+msgstr "Objekt príspevku "
 
 #: fields/post_object.php:459 fields/relationship.php:761
-#, fuzzy
 msgid "Return Format"
-msgstr "Formát odpoveďe"
+msgstr "Formát odpovede"
 
 #: fields/post_object.php:465 fields/relationship.php:767
 msgid "Post ID"
 msgstr "ID príspevku"
 
 #: fields/radio.php:36
-#, fuzzy
 msgid "Radio Button"
-msgstr "Prepínač"
+msgstr "Prepínač "
 
 #: fields/radio.php:202
-#, fuzzy
 msgid "Other"
-msgstr "Iné"
+msgstr "Iné "
 
 #: fields/radio.php:206
-#, fuzzy
 msgid "Add 'other' choice to allow for custom values"
-msgstr "Pridať možnosť \"iné\" pre povolenie vlastných hodnôt"
+msgstr "Pridať možnosť 'iné' pre povolenie vlastných hodnôt"
 
 #: fields/radio.php:212
 msgid "Save Other"
 msgstr "Uložiť hodnoty iné"
 
 #: fields/radio.php:216
-#, fuzzy
 msgid "Save 'other' values to the field's choices"
-msgstr "Uložiť hodnoty \"iné\" do výberu poľa"
+msgstr "Uložiť hodnoty 'iné' do výberu poľa"
 
 #: fields/relationship.php:36
-#, fuzzy
 msgid "Relationship"
-msgstr "Vzťah"
+msgstr "Vzťah "
 
 #: fields/relationship.php:47
-#, fuzzy
 msgid "Maximum values reached ( {max} values )"
-msgstr "Maximálne dosiahnuté hodnoty ( {max} values )"
+msgstr "Maximálne dosiahnuté hodnoty ( {max} values ) "
 
 #: fields/relationship.php:48
 msgid "Loading"
@@ -2173,47 +1903,40 @@ msgid "No matches found"
 msgstr "Nebola nenájdená zhoda"
 
 #: fields/relationship.php:580
-#, fuzzy
 msgid "Search..."
-msgstr "Hľadanie..."
+msgstr "Hľadanie... "
 
 #: fields/relationship.php:589
-#, fuzzy
 msgid "Select post type"
-msgstr "Vybrať typ príspevku"
+msgstr "Vybrať typ príspevku "
 
 #: fields/relationship.php:602
 msgid "Select taxonomy"
 msgstr "Vyberte ktorá taxonómiu"
 
 #: fields/relationship.php:724
-#, fuzzy
 msgid "Search"
-msgstr "Hľadanie..."
+msgstr "Hľadanie"
 
 #: fields/relationship.php:726 fields/taxonomy.php:36 fields/taxonomy.php:717
 msgid "Taxonomy"
 msgstr "Taxonómia"
 
 #: fields/relationship.php:733
-#, fuzzy
 msgid "Elements"
-msgstr "Prvky"
+msgstr "Prvky "
 
 #: fields/relationship.php:734
-#, fuzzy
 msgid "Selected elements will be displayed in each result"
-msgstr "Vybraté prvky budú zobrazené v každom výsledku"
+msgstr "Vybraté prvky budú zobrazené v každom výsledku "
 
 #: fields/relationship.php:752
-#, fuzzy
 msgid "Maximum posts"
-msgstr "Maximálny počet príspevkov"
+msgstr "Maximálny počet príspevkov "
 
 #: fields/select.php:36 fields/select.php:160 fields/taxonomy.php:738
-#, fuzzy
 msgid "Select"
-msgstr "Vybrať"
+msgstr "Vybrať "
 
 #: fields/select.php:420
 msgid "Stylised UI"
@@ -2224,9 +1947,8 @@ msgid "Use AJAX to lazy load choices?"
 msgstr "Použiť AJAX pre výber pomalšieho načítania?"
 
 #: fields/tab.php:36
-#, fuzzy
 msgid "Tab"
-msgstr "Záložka"
+msgstr "Záložka "
 
 #: fields/tab.php:94
 msgid "Warning"
@@ -2257,76 +1979,63 @@ msgstr ""
 "\"pole záložky\") budú zoskupené a pod jedným nadpisom a označením."
 
 #: fields/tab.php:121
-#, fuzzy
 msgid "Placement"
-msgstr "Prvky"
+msgstr "Umiestnenie"
 
 #: fields/taxonomy.php:686
-#, fuzzy
 msgid "None"
-msgstr "Žiadna"
+msgstr "Žiadna "
 
 #: fields/taxonomy.php:732
 msgid "Multiple Values"
 msgstr "Viaceré hodnoty"
 
 #: fields/taxonomy.php:734
-#, fuzzy
 msgid "Multi Select"
-msgstr "Viacnásobný výber"
+msgstr "Viacnásobný výber "
 
 #: fields/taxonomy.php:736
-#, fuzzy
 msgid "Single Value"
-msgstr "Jedna hodnota"
+msgstr "Jedna hodnota "
 
 #: fields/taxonomy.php:737
-#, fuzzy
 msgid "Radio Buttons"
-msgstr "Prepínače"
+msgstr "Prepínače "
 
 #: fields/taxonomy.php:760
-#, fuzzy
 msgid "Load & Save Terms to Post"
-msgstr "Nahrať & uložiť podmienky k prispievaniu"
+msgstr "Nahrať & uložiť podmienky k prispievaniu "
 
 #: fields/taxonomy.php:764
-#, fuzzy
 msgid ""
 "Load value based on the post's terms and update the post's terms on save"
 msgstr ""
 "Nahrať hodnoty založené na podmienkach prispievania, aktualizovať akrutálne "
-"podmienky a uložiť"
+"podmienky a uložiť "
 
 #: fields/taxonomy.php:775
-#, fuzzy
 msgid "Term Object"
-msgstr "Objekt výrazu"
+msgstr "Objekt výrazu "
 
 #: fields/taxonomy.php:776
-#, fuzzy
 msgid "Term ID"
-msgstr "ID výrazu"
+msgstr "ID výrazu "
 
 #: fields/text.php:36
-#, fuzzy
 msgid "Text"
-msgstr "Text"
+msgstr "Text "
 
 #: fields/text.php:184 fields/textarea.php:163
-#, fuzzy
 msgid "Character Limit"
-msgstr "Limit znakov"
+msgstr "Limit znakov "
 
 #: fields/text.php:185 fields/textarea.php:164
-#, fuzzy
 msgid "Leave blank for no limit"
-msgstr "Nechajte prázdne pre neobmedzene"
+msgstr "Nechajte prázdne pre neobmedzený počet"
 
 #: fields/textarea.php:36
-#, fuzzy
 msgid "Text Area"
-msgstr "Textové pole"
+msgstr "Textové pole "
 
 #: fields/textarea.php:172
 msgid "Rows"
@@ -2357,14 +2066,12 @@ msgid "No Formatting"
 msgstr "Žiadne formátovanie"
 
 #: fields/true_false.php:36
-#, fuzzy
 msgid "True / False"
-msgstr "Správne / nesprávne"
+msgstr "Správne / nesprávne "
 
 #: fields/true_false.php:107
-#, fuzzy
 msgid "eg. Show extra content"
-msgstr "napr. zobraziť extra obsah"
+msgstr "napr. zobraziť extra obsah "
 
 #: fields/url.php:36
 msgid "Url"
@@ -2375,9 +2082,8 @@ msgid "Value must be a valid URL"
 msgstr "Hodnota musí obsahovať platnú URL adresu"
 
 #: fields/user.php:357
-#, fuzzy
 msgid "Filter by role"
-msgstr "Filtrovať podla role"
+msgstr "Filtrovať podla role "
 
 #: fields/user.php:365
 msgid "All user roles"
@@ -2392,10 +2098,9 @@ msgid "Visual"
 msgstr "Vizuálny"
 
 #: fields/wysiwyg.php:298
-#, fuzzy
 msgctxt "Name for the Text editor tab (formerly HTML)"
 msgid "Text"
-msgstr "Text"
+msgstr "Text "
 
 #: fields/wysiwyg.php:354
 msgid "Tabs"
@@ -2414,19 +2119,16 @@ msgid "Text Only"
 msgstr "Iba textový"
 
 #: fields/wysiwyg.php:368
-#, fuzzy
 msgid "Toolbar"
-msgstr "Panel nástrojov"
+msgstr "Panel nástrojov "
 
 #: fields/wysiwyg.php:378
-#, fuzzy
 msgid "Show Media Upload Buttons?"
-msgstr "Zobraziť tlačidlá nahrávania médií?"
+msgstr "Zobraziť tlačidlá nahrávania médií? "
 
 #: forms/post.php:341
-#, fuzzy
 msgid "Edit field group"
-msgstr "Upraviť skupinu polí"
+msgstr "Upraviť skupinu polí "
 
 #: pro/acf-pro.php:24
 msgid "Advanced Custom Fields PRO"
@@ -2448,9 +2150,8 @@ msgstr ""
 "\">podrobnosti a ceny</a>."
 
 #: pro/admin/options-page.php:55
-#, fuzzy
 msgid "Options Page"
-msgstr "Stránka nastavení"
+msgstr "Stránka nastavení "
 
 #: pro/admin/options-page.php:90
 msgid "No options pages exist"
@@ -2541,9 +2242,8 @@ msgid "Upgrade Notice"
 msgstr "Oznam o aktualizácii"
 
 #: pro/fields/flexible-content.php:36
-#, fuzzy
 msgid "Flexible Content"
-msgstr "Flexibilný obsah"
+msgstr "Flexibilný obsah "
 
 #: pro/fields/flexible-content.php:42 pro/fields/repeater.php:43
 msgid "Add Row"
@@ -2631,9 +2331,8 @@ msgid "Block"
 msgstr "Blok"
 
 #: pro/fields/flexible-content.php:578 pro/fields/repeater.php:401
-#, fuzzy
 msgid "Row"
-msgstr "Riadky"
+msgstr "Riadok"
 
 #: pro/fields/flexible-content.php:593
 msgid "Min"
@@ -2669,12 +2368,11 @@ msgstr "Maximálne dosiahnuté hodnoty"
 
 #: pro/fields/gallery.php:336
 msgid "Length"
-msgstr ""
+msgstr "Dĺžka"
 
 #: pro/fields/gallery.php:356
-#, fuzzy
 msgid "Remove"
-msgstr "Odstrániť riadok"
+msgstr "Odstrániť"
 
 #: pro/fields/gallery.php:538
 msgid "Add to gallery"
@@ -2701,9 +2399,8 @@ msgid "Reverse current order"
 msgstr "Zvrátiť aktuálnu objednávku"
 
 #: pro/fields/gallery.php:564
-#, fuzzy
 msgid "Close"
-msgstr "Zatvoriť"
+msgstr "Zatvoriť "
 
 #: pro/fields/gallery.php:622
 msgid "Minimum Selection"
@@ -2734,9 +2431,8 @@ msgid "Maximum rows reached ({max} rows)"
 msgstr "Maximálny počet riadkov ({max} rows)"
 
 #: pro/fields/repeater.php:259
-#, fuzzy
 msgid "Drag to reorder"
-msgstr "Zmente poradie pomocou funkcie ťahaj a pusť"
+msgstr "Zmeňte poradie pomocou funkcie ťahaj a pusť"
 
 #: pro/fields/repeater.php:301
 msgid "Add row"
@@ -2758,132 +2454,53 @@ msgstr "Minimálny počet riadkov"
 msgid "Maximum Rows"
 msgstr "Maximálny počet riadkov"
 
-#: assets/_build/js/acf-file.js:55 assets/_build/js/acf-file.js:190
-#: assets/_build/js/acf-file.js:191 assets/js/acf-input.js:3291
-#: assets/js/acf-input.js:3426 assets/js/acf-input.js:3427
-#: assets/js/acf-input.min.js:1
-msgid "file"
-msgstr ""
+#~ msgid "file"
+#~ msgstr "subor"
 
-#: assets/_build/js/acf-image.js:55 assets/_build/js/acf-image.js:189
-#: assets/_build/js/acf-image.js:190 assets/_build/js/acf-media.js:183
-#: assets/_build/js/acf-media.js:259 assets/js/acf-input.js:4077
-#: assets/js/acf-input.js:4211 assets/js/acf-input.js:4212
-#: assets/js/acf-input.js:4437 assets/js/acf-input.js:4513
-#: assets/js/acf-input.min.js:1 pro/assets/_build/js/acf-gallery.js:515
-#: pro/assets/_build/js/acf-gallery.js:516 pro/assets/js/acf-pro-input.js:1514
-#: pro/assets/js/acf-pro-input.js:1515 pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "image"
-msgstr "Obrázok"
+#~ msgid "image"
+#~ msgstr "obrazok"
 
-#: assets/_build/js/acf-media.js:530 assets/js/acf-input.js:4784
-#: assets/js/acf-input.min.js:2
-#, fuzzy
-msgid "expand_details"
-msgstr "Zväčšiť detaily"
+#~ msgid "expand_details"
+#~ msgstr "zvacsit_detaily"
 
-#: assets/_build/js/acf-media.js:531 assets/js/acf-input.js:4785
-#: assets/js/acf-input.min.js:2
-#, fuzzy
-msgid "collapse_details"
-msgstr "Zmenšiť detaily"
+#~ msgid "collapse_details"
+#~ msgstr "zmensit_detaily"
 
-#: assets/_build/js/acf-relationship.js:175
-#: assets/_build/js/acf-relationship.js:222
-#: assets/_build/js/acf-relationship.js:378 assets/js/acf-input.js:5321
-#: assets/js/acf-input.js:5368 assets/js/acf-input.js:5524
-#: assets/js/acf-input.min.js:2
-#, fuzzy
-msgid "relationship"
-msgstr "Vzťah"
+#~ msgid "relationship"
+#~ msgstr "vztah"
 
-#: assets/_build/js/acf.js:1873 assets/js/acf-input.js:2120
-#: assets/js/acf-input.min.js:1
-msgid "unload"
-msgstr ""
+#~ msgid "unload"
+#~ msgstr "unload"
 
-#: assets/_build/js/field-group.js:476 assets/js/acf-field-group.js:476
-#: assets/js/acf-field-group.min.js:1
-#, fuzzy
-msgid "title_is_required"
-msgstr "Nadpis skupiny poľa je povinný"
+#~ msgid "title_is_required"
+#~ msgstr "nadpis_je_povinny"
 
-#: assets/_build/js/field-group.js:552 assets/js/acf-field-group.js:552
-#: assets/js/acf-field-group.min.js:1
-msgid "move_to_trash"
-msgstr ""
+#~ msgid "move_to_trash"
+#~ msgstr "move_to_trash"
 
-#: assets/_build/js/field-group.js:1003 assets/js/acf-field-group.js:1003
-#: assets/js/acf-field-group.min.js:1
-msgid "move_field_warning"
-msgstr ""
+#~ msgid "move_field_warning"
+#~ msgstr "move_field_warning"
 
-#: assets/_build/js/field-group.js:1011 assets/js/acf-field-group.js:1011
-#: assets/js/acf-field-group.min.js:1
-#, fuzzy
-msgid "move_field"
-msgstr "Presunúť pole"
+#~ msgid "move_field"
+#~ msgstr "presunut_pole"
 
-#: assets/_build/js/field-group.js:1543 assets/js/acf-field-group.js:1543
-#: assets/js/acf-field-group.min.js:1
-msgid "field_name_start"
-msgstr ""
+#~ msgid "field_name_start"
+#~ msgstr "field_name_start"
 
-#: assets/_build/js/field-group.js:1910 assets/js/acf-field-group.js:1910
-#: assets/js/acf-field-group.min.js:1
-msgid "null"
-msgstr ""
+#~ msgid "null"
+#~ msgstr "null"
 
-#: assets/_build/js/field-group.js:2374 assets/js/acf-field-group.js:2374
-#: assets/js/acf-field-group.min.js:1
-msgid "hide_show_all"
-msgstr ""
+#~ msgid "hide_show_all"
+#~ msgstr "skryt_zobrazit_vsetko"
 
-#: pro/assets/_build/js/acf-flexible-content.js:165
-#: pro/assets/_build/js/acf-flexible-content.js:170
-#: pro/assets/_build/js/acf-flexible-content.js:193
-#: pro/assets/_build/js/acf-flexible-content.js:199
-#: pro/assets/_build/js/acf-flexible-content.js:223
-#: pro/assets/_build/js/acf-flexible-content.js:228
-#: pro/assets/_build/js/acf-flexible-content.js:229
-#: pro/assets/_build/js/acf-flexible-content.js:249
-#: pro/assets/_build/js/acf-flexible-content.js:255
-#: pro/assets/_build/js/acf-flexible-content.js:256
-#: pro/assets/_build/js/acf-flexible-content.js:295
-#: pro/assets/_build/js/acf-flexible-content.js:303
-#: pro/assets/_build/js/acf-flexible-content.js:324
-#: pro/assets/_build/js/acf-flexible-content.js:332
-#: pro/assets/_build/js/field-group.js:621
-#: pro/assets/js/acf-pro-field-group.js:621
-#: pro/assets/js/acf-pro-field-group.min.js:1
-#: pro/assets/js/acf-pro-input.js:604 pro/assets/js/acf-pro-input.js:609
-#: pro/assets/js/acf-pro-input.js:632 pro/assets/js/acf-pro-input.js:638
-#: pro/assets/js/acf-pro-input.js:662 pro/assets/js/acf-pro-input.js:667
-#: pro/assets/js/acf-pro-input.js:668 pro/assets/js/acf-pro-input.js:688
-#: pro/assets/js/acf-pro-input.js:694 pro/assets/js/acf-pro-input.js:695
-#: pro/assets/js/acf-pro-input.js:734 pro/assets/js/acf-pro-input.js:742
-#: pro/assets/js/acf-pro-input.js:763 pro/assets/js/acf-pro-input.js:771
-#: pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "flexible_content"
-msgstr "Flexibilný obsah"
+#~ msgid "flexible_content"
+#~ msgstr "flexibilny_obsah"
 
-#: pro/assets/_build/js/acf-gallery.js:444
-#: pro/assets/_build/js/acf-gallery.js:620
-#: pro/assets/_build/js/acf-gallery.js:638 pro/assets/js/acf-pro-input.js:1443
-#: pro/assets/js/acf-pro-input.js:1619 pro/assets/js/acf-pro-input.js:1637
-#: pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "gallery"
-msgstr "Galéria"
+#~ msgid "gallery"
+#~ msgstr "galeria"
 
-#: pro/assets/_build/js/acf-repeater.js:184
-#: pro/assets/_build/js/acf-repeater.js:247 pro/assets/js/acf-pro-input.js:340
-#: pro/assets/js/acf-pro-input.js:403 pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "repeater"
-msgstr "Opakovač"
+#~ msgid "repeater"
+#~ msgstr "opakovac"
 
 #, fuzzy
 #~ msgid "Custom field updated."

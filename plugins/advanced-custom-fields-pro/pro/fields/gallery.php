@@ -144,7 +144,6 @@ class acf_field_gallery extends acf_field {
 	
 	function ajax_update_attachment() {
 		
-		
 		// validate
 		if( ! wp_verify_nonce($_REQUEST['nonce'], 'acf_nonce') ) {
 		

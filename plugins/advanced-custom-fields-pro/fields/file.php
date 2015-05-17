@@ -115,10 +115,10 @@ class acf_field_file extends acf_field {
 		}
 		
 		
-		// basic?
-		$basic = !current_user_can( 'upload_files' );
+		// uploader
+		$uploader = acf_get_setting('uploader');
 		
-		if( $basic ) {
+		if( $uploader == 'basic' ) {
 			
 			$div['class'] .= ' basic';
 			
@@ -147,7 +147,7 @@ class acf_field_file extends acf_field {
 			</p>
 			
 			<ul class="acf-hl acf-soh-target">
-				<?php if( !$basic ): ?>
+				<?php if( $uploader != 'basic' ): ?>
 					<li><a class="acf-icon dark" data-name="edit" href="#"><i class="acf-sprite-edit"></i></a></li>
 				<?php endif; ?>
 				<li><a class="acf-icon dark" data-name="remove" href="#"><i class="acf-sprite-delete"></i></a></li>
@@ -155,7 +155,7 @@ class acf_field_file extends acf_field {
 		</div>
 	</div>
 	<div class="hide-if-value">
-		<?php if( $basic ): ?>
+		<?php if( $uploader == 'basic' ): ?>
 			
 			<?php if( $field['value'] && !is_numeric($field['value']) ): ?>
 				<div class="acf-error-message"><p><?php echo $field['value']; ?></p></div>

@@ -58,7 +58,7 @@ class acf_field_wysiwyg extends acf_field {
 		add_filter( 'acf_the_content', 'convert_chars' );
 		add_filter( 'acf_the_content', 'wpautop' );
 		add_filter( 'acf_the_content', 'shortcode_unautop' );
-		add_filter( 'acf_the_content', 'prepend_attachment' );
+		//add_filter( 'acf_the_content', 'prepend_attachment' ); *should only be for the_content (causes double image on attachment page)
 		add_filter( 'acf_the_content', 'do_shortcode', 11);
 		
 
@@ -289,7 +289,7 @@ class acf_field_wysiwyg extends acf_field {
 			<div id="wp-<?php echo $id; ?>-editor-tools" class="wp-editor-tools hide-if-no-js">
 				<?php if( $field['media_upload'] ): ?>
 				<div id="wp-<?php echo $id; ?>-media-buttons" class="wp-media-buttons">
-					<?php do_action( 'media_buttons' ); ?>
+					<?php do_action( 'media_buttons', $id ); ?>
 				</div>
 				<?php endif; ?>
 				<?php if( user_can_richedit() && $show_tabs ): ?>

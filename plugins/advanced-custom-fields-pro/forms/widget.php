@@ -208,58 +208,56 @@ class acf_form_widget {
 	 	return $fields.not('#available-widgets .acf-field');
 
     });
-		
-	acf.add_action('ready', function(){
-		
-		$('#widgets-right').on('click', '.widget-control-save', function( e ){
-		
-			// vars
-			var $form = $(this).closest('form');
-			
-			
-			// bail early if this form does not contain ACF data
-			if( ! $form.find('#acf-form-data').exists() ) {
-			
-				return true;
-			
-			}
-			
-			
-			// ignore this submit?
-			if( acf.validation.ignore == 1 ) {
-			
-				acf.validation.ignore = 0;
-				return true;
-			
-			}
-			
 	
-			// bail early if disabled
-			if( acf.validation.active == 0 ) {
-			
-				return true;
-			
-			}
 	
+	$('#widgets-right').on('click', '.widget-control-save', function( e ){
+		
+		// vars
+		var $form = $(this).closest('form');
+		
+		
+		// bail early if not active
+		if( !acf.validation.active ) {
+		
+			return true;
 			
-			// stop WP JS validation
-			e.stopImmediatePropagation();
+		}
+		
+		
+		// ignore validation (only ignore once)
+		if( acf.validation.ignore ) {
+		
+			acf.validation.ignore = 0;
+			return true;
 			
-			
-			// store submit trigger so it will be clicked if validation is passed
-			acf.validation.$trigger = $(this);
-			
-			
-			// run validation
-			acf.validation.fetch( $form );
-			
-			
-			// stop all other click events on this input
-			return false;
-			
-		});
+		}
+		
+		
+		// bail early if this form does not contain ACF data
+		if( !$form.find('#acf-form-data').exists() ) {
+		
+			return true;
+		
+		}
+
+		
+		// stop WP JS validation
+		e.stopImmediatePropagation();
+		
+		
+		// store submit trigger so it will be clicked if validation is passed
+		acf.validation.$trigger = $(this);
+		
+		
+		// run validation
+		acf.validation.fetch( $form );
+		
+		
+		// stop all other click events on this input
+		return false;
 		
 	});
+	
 	
 	$(document).on('click', '.widget-top', function(){
 		
@@ -274,7 +272,6 @@ class acf_form_widget {
 			});
 			
 		}, 250);
-		
 				
 	});
 	
@@ -284,8 +281,13 @@ class acf_form_widget {
 		
 	});
 	
-	$(document).on('widget-saved', function( e, $widget ){
+	$(document).on('widget-saved widget-updated', function( e, $widget ){
 		
+		// unlock form
+		acf.validation.toggle( $widget, 'unlock' );
+		
+		
+		// submit
 		acf.do_action('submit', $widget );
 		
 	});

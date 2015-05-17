@@ -41,9 +41,18 @@ class acf_settings_updates {
 	function admin_menu() {
 		
 		// bail early if no show_admin
-		if( !acf_get_setting('show_admin') )
-		{
+		if( !acf_get_setting('show_admin') ) {
+			
 			return;
+			
+		}
+		
+		
+		// bail early if no show_updates
+		if( !acf_get_setting('show_updates') ) {
+			
+			return;
+			
 		}
 		
 		

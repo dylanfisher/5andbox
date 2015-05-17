@@ -29,15 +29,16 @@ class acf_pro {
 		acf_include('pro/api/api-options-page.php');
 		
 		
+		// updates
+		acf_include('pro/core/updates.php');
+			
+			
 		// admin
 		if( is_admin() ) {
 			
 			// options page
 			acf_include('pro/admin/options-page.php');
 			
-			// connect (update)
-			acf_include('pro/admin/connect.php');
-				
 			// settings
 			acf_include('pro/admin/settings-updates.php');
 			

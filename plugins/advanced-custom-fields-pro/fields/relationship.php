@@ -38,12 +38,14 @@ class acf_field_relationship extends acf_field {
 		$this->defaults = array(
 			'post_type'			=> array(),
 			'taxonomy'			=> array(),
+			'min' 				=> 0,
 			'max' 				=> 0,
 			'filters'			=> array('search', 'post_type', 'taxonomy'),
 			'elements' 			=> array(),
 			'return_format'		=> 'object'
 		);
 		$this->l10n = array(
+			'min'		=> __("Minimum values reached ( {min} values )",'acf'),
 			'max'		=> __("Maximum values reached ( {max} values )",'acf'),
 			'loading'	=> __('Loading','acf'),
 			'empty'		=> __('No matches found','acf'),
@@ -397,6 +399,7 @@ class acf_field_relationship extends acf_field {
 		$atts = array(
 			'id'				=> $field['id'],
 			'class'				=> "acf-relationship {$field['class']}",
+			'data-min'			=> $field['min'],
 			'data-max'			=> $field['max'],
 			'data-s'			=> '',
 			'data-post_type'	=> '',
@@ -686,6 +689,11 @@ class acf_field_relationship extends acf_field {
 	
 	function render_field_settings( $field ) {
 		
+		// vars
+		$field['min'] = empty($field['min']) ? '' : $field['min'];
+		$field['max'] = empty($field['max']) ? '' : $field['max'];
+		
+		
 		// post_type
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Filter by Post Type','acf'),
@@ -740,20 +748,24 @@ class acf_field_relationship extends acf_field {
 		));
 		
 		
+		// min
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Minimum posts','acf'),
+			'instructions'	=> '',
+			'type'			=> 'number',
+			'name'			=> 'min',
+		));
+		
+		
 		// max
-		if( $field['max'] < 1 ) {
-		
-			$field['max'] = '';
-			
-		}
-		
-		
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Maximum posts','acf'),
 			'instructions'	=> '',
 			'type'			=> 'number',
 			'name'			=> 'max',
 		));
+		
+		
 		
 		
 		// return_format

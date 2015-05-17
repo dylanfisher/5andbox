@@ -36,6 +36,7 @@ class acf_field_tab extends acf_field {
 		$this->label = __("Tab",'acf');
 		$this->category = 'layout';
 		$this->defaults = array(
+			'value'		=> false, // prevents acf_render_fields() from attempting to load value
 			'placement'	=> 'top'
 		);
 		

@@ -1,15 +1,18 @@
 <?php 
 
+// global
 global $post;
 
 
-// get vars ($field)
+// extract args
 extract( $args );
 
 
 // add prefix
 $field['prefix'] = "acf_fields[{$field['ID']}]";
 
+
+// vars
 $atts = array(
 	'class' => "acf-field-object acf-field-object-{$field['type']}",
 	'data-id'	=> $field['ID'],
@@ -138,11 +141,15 @@ $atts['class'] = str_replace('_', '-', $atts['class']);
 				), 'tr');
 				
 				
-				// custom field options
-				acf_render_field_settings( $field );
+				// type specific settings
+				do_action("acf/render_field_settings/type={$field['type']}", $field);
 				
 				
-				// load view
+				// 3rd party settings
+				do_action('acf/render_field_settings', $field);
+				
+				
+				// conditional logic
 				acf_get_view('field-group-field-conditional-logic', array( 'field' => $field ));
 				
 				

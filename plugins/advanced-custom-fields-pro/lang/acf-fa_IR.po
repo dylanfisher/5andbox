@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-custom-fields\n"
-"POT-Creation-Date: 2015-03-05 11:24+1000\n"
-"PO-Revision-Date: 2015-03-05 11:26+1000\n"
+"POT-Creation-Date: 2015-04-16 16:10+0330\n"
+"PO-Revision-Date: 2015-04-16 16:13+0330\n"
 "Last-Translator: Elliot Condon <e@elliotcondon.com>\n"
 "Language-Team:  <Kamel.Kimiaei.Fard@gmail.com>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_html__;"
@@ -154,9 +154,6 @@ msgid "Field group title is required"
 msgstr "عنوان گروه زمینه ضروری است"
 
 #: ../admin/field-group.php:176 ../api/api-field-group.php:609
-#: ../assets/_build/js/field-group.js:919
-#: ../assets/_build/js/field-group.js:920 ../assets/js/acf-field-group.js:919
-#: ../assets/js/acf-field-group.js:920 ../assets/js/acf-field-group.min.js:1
 msgid "copy"
 msgstr "کپی"
 
@@ -274,9 +271,8 @@ msgid "Posts Page"
 msgstr "برگه ی نوشته ها"
 
 #: ../admin/field-group.php:714
-#, fuzzy
 msgid "Top Level Page (no parent)"
-msgstr "بالاترین سطح برگه (parent of 0)"
+msgstr "بالاترین سطح برگه(بدون والد)"
 
 #: ../admin/field-group.php:715
 msgid "Parent Page (has children)"
@@ -291,17 +287,16 @@ msgid "Default Template"
 msgstr "پوسته پیش فرض"
 
 #: ../admin/field-group.php:754
-#, fuzzy
 msgid "Logged in"
-msgstr "نوع کاربر وارد شده"
+msgstr "وارده شده"
 
 #: ../admin/field-group.php:755
 msgid "Viewing front end"
-msgstr ""
+msgstr "درحال نمایش سمت کاربر"
 
 #: ../admin/field-group.php:756
 msgid "Viewing back end"
-msgstr ""
+msgstr "درحال نمایش سمت مدیریت"
 
 #: ../admin/field-group.php:775
 msgid "Super Admin"
@@ -728,14 +723,12 @@ msgid "User"
 msgstr "کاربر"
 
 #: ../admin/views/field-group-locations.php:56
-#, fuzzy
 msgid "Current User"
-msgstr "نسخه فعلی"
+msgstr "کاربر فعلی"
 
 #: ../admin/views/field-group-locations.php:57
-#, fuzzy
 msgid "Current User Role"
-msgstr "نقش کاربر"
+msgstr "نقش کاربرفعلی"
 
 #: ../admin/views/field-group-locations.php:58
 msgid "User Form"
@@ -771,8 +764,7 @@ msgid "Order No."
 msgstr "شماره ترتیب"
 
 #: ../admin/views/field-group-options.php:11
-#, fuzzy
-msgid "Field groups are created in order from lowest to highest"
+msgid "Field groups are created in order <br />from lowest to highest"
 msgstr ""
 "گروه های زمینه به ترتیب از کوچکترین شماره تا بزرگترین شماره نمایش داده می "
 "شوند."
@@ -834,15 +826,13 @@ msgid "Hide on screen"
 msgstr "مخفی کردن در صفحه"
 
 #: ../admin/views/field-group-options.php:84
-#, fuzzy
 msgid "<b>Select</b> items to <b>hide</b> them from the edit screen."
 msgstr "<b>انتخاب</b> آیتم ها برای <b>پنهان کردن</b> آن ها از صفحه ویرایش."
 
 #: ../admin/views/field-group-options.php:84
-#, fuzzy
 msgid ""
 "If multiple field groups appear on an edit screen, the first field group's "
-"options will be used (the one with the lowest order number)"
+"options will be used. (the one with the lowest order number)"
 msgstr ""
 "اگر چندین گروه زمینه در یک صفحه ویرایش نمایش داده شود، اولین تنظیمات گروه "
 "زمینه استفاده خواهد شد. (یکی با کمترین شماره)"
@@ -1009,8 +999,8 @@ msgid ""
 "and select."
 msgstr ""
 "استفاده از کتابخانه محبوب Select2 باعث سرعت در عملکرد و کاربری بهتر در انواع "
-"زمینه هاشامل آبجکت نوشته، پیوند(لینک) صفحه ، طبقه بندی و زمینه های "
-"انتخاب(Select) شده است"
+"زمینه هاشامل آبجکت نوشته، پیوند(لینک) صفحه ، طبقه بندی و زمینه های انتخاب"
+"(Select) شده است"
 
 #: ../admin/views/settings-info.php:35
 msgid "Improved Design"
@@ -1049,10 +1039,10 @@ msgid "Introducing ACF PRO"
 msgstr "معرفی نسخه حرفه ای"
 
 #: ../admin/views/settings-info.php:53
-#, fuzzy
 msgid ""
 "We're changing the way premium functionality is delivered in an exciting way!"
-msgstr "ما در حال تغییر راه عملکردهای پولی افزونه به شیوه ای هیجان انگیز هستیم"
+msgstr ""
+"ما در حال تغییر راه عملکردهای پولی افزونه به شیوه ای هیجان انگیز هستیم!"
 
 #: ../admin/views/settings-info.php:54
 #, php-format
@@ -1802,7 +1792,7 @@ msgstr "حذف HTML"
 
 #: ../fields/message.php:112
 msgid "Allow HTML markup to display as visible text instead of rendering"
-msgstr ""
+msgstr "اجازه نمایش کدهای HTML به عنوان متن به جای اعمال آنها"
 
 #: ../fields/number.php:36
 msgid "Number"
@@ -1871,9 +1861,8 @@ msgstr "فیلتر با طبقه بندی"
 
 #: ../fields/page_link.php:556 ../fields/post_object.php:425
 #: ../fields/relationship.php:713
-#, fuzzy
 msgid "All taxonomies"
-msgstr "بدون فیلتر طبقه بندی"
+msgstr "تمام طبقه بندی ها"
 
 #: ../fields/page_link.php:562 ../fields/post_object.php:431
 #: ../fields/select.php:392 ../fields/taxonomy.php:746 ../fields/user.php:372
@@ -2491,141 +2480,48 @@ msgstr "حداقل تعداد سطرها"
 msgid "Maximum Rows"
 msgstr "حداکثر تعداد سطرها"
 
-#: ../assets/_build/js/acf-file.js:55 ../assets/_build/js/acf-file.js:190
-#: ../assets/_build/js/acf-file.js:191 ../assets/js/acf-input.js:3291
-#: ../assets/js/acf-input.js:3426 ../assets/js/acf-input.js:3427
-#: ../assets/js/acf-input.min.js:1
-msgid "file"
-msgstr ""
-
-#: ../assets/_build/js/acf-image.js:55 ../assets/_build/js/acf-image.js:189
-#: ../assets/_build/js/acf-image.js:190 ../assets/_build/js/acf-media.js:183
-#: ../assets/_build/js/acf-media.js:259 ../assets/js/acf-input.js:4077
-#: ../assets/js/acf-input.js:4211 ../assets/js/acf-input.js:4212
-#: ../assets/js/acf-input.js:4437 ../assets/js/acf-input.js:4513
-#: ../assets/js/acf-input.min.js:1 ../pro/assets/_build/js/acf-gallery.js:515
-#: ../pro/assets/_build/js/acf-gallery.js:516
-#: ../pro/assets/js/acf-pro-input.js:1514
-#: ../pro/assets/js/acf-pro-input.js:1515
-#: ../pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "image"
-msgstr "تصویر"
-
-#: ../assets/_build/js/acf-media.js:530 ../assets/js/acf-input.js:4784
-#: ../assets/js/acf-input.min.js:2
-#, fuzzy
-msgid "expand_details"
-msgstr "نمایش جزئیات"
-
-#: ../assets/_build/js/acf-media.js:531 ../assets/js/acf-input.js:4785
-#: ../assets/js/acf-input.min.js:2
-#, fuzzy
-msgid "collapse_details"
-msgstr "عدم نمایش جزئیات"
-
-#: ../assets/_build/js/acf-relationship.js:175
-#: ../assets/_build/js/acf-relationship.js:222
-#: ../assets/_build/js/acf-relationship.js:378 ../assets/js/acf-input.js:5321
-#: ../assets/js/acf-input.js:5368 ../assets/js/acf-input.js:5524
-#: ../assets/js/acf-input.min.js:2
-#, fuzzy
-msgid "relationship"
-msgstr "ارتباط"
-
-#: ../assets/_build/js/acf.js:1873 ../assets/js/acf-input.js:2120
-#: ../assets/js/acf-input.min.js:1
-#, fuzzy
-msgid "unload"
-msgstr "دانلود"
-
-#: ../assets/_build/js/field-group.js:476 ../assets/js/acf-field-group.js:476
-#: ../assets/js/acf-field-group.min.js:1
-#, fuzzy
-msgid "title_is_required"
-msgstr "عنوان گروه زمینه ضروری است"
-
-#: ../assets/_build/js/field-group.js:552 ../assets/js/acf-field-group.js:552
-#: ../assets/js/acf-field-group.min.js:1
-msgid "move_to_trash"
-msgstr ""
-
-#: ../assets/_build/js/field-group.js:1003
-#: ../assets/js/acf-field-group.js:1003 ../assets/js/acf-field-group.min.js:1
-msgid "move_field_warning"
-msgstr ""
-
-#: ../assets/_build/js/field-group.js:1011
-#: ../assets/js/acf-field-group.js:1011 ../assets/js/acf-field-group.min.js:1
-#, fuzzy
-msgid "move_field"
-msgstr "جابجایی زمینه"
-
-#: ../assets/_build/js/field-group.js:1543
-#: ../assets/js/acf-field-group.js:1543 ../assets/js/acf-field-group.min.js:1
-msgid "field_name_start"
-msgstr ""
-
-#: ../assets/_build/js/field-group.js:1910
-#: ../assets/js/acf-field-group.js:1910 ../assets/js/acf-field-group.min.js:1
-msgid "null"
-msgstr ""
-
-#: ../assets/_build/js/field-group.js:2374
-#: ../assets/js/acf-field-group.js:2374 ../assets/js/acf-field-group.min.js:1
-msgid "hide_show_all"
-msgstr ""
-
-#: ../pro/assets/_build/js/acf-flexible-content.js:165
-#: ../pro/assets/_build/js/acf-flexible-content.js:170
-#: ../pro/assets/_build/js/acf-flexible-content.js:193
-#: ../pro/assets/_build/js/acf-flexible-content.js:199
-#: ../pro/assets/_build/js/acf-flexible-content.js:223
-#: ../pro/assets/_build/js/acf-flexible-content.js:228
-#: ../pro/assets/_build/js/acf-flexible-content.js:229
-#: ../pro/assets/_build/js/acf-flexible-content.js:249
-#: ../pro/assets/_build/js/acf-flexible-content.js:255
-#: ../pro/assets/_build/js/acf-flexible-content.js:256
-#: ../pro/assets/_build/js/acf-flexible-content.js:295
-#: ../pro/assets/_build/js/acf-flexible-content.js:303
-#: ../pro/assets/_build/js/acf-flexible-content.js:324
-#: ../pro/assets/_build/js/acf-flexible-content.js:332
-#: ../pro/assets/_build/js/field-group.js:621
-#: ../pro/assets/js/acf-pro-field-group.js:621
-#: ../pro/assets/js/acf-pro-field-group.min.js:1
-#: ../pro/assets/js/acf-pro-input.js:604 ../pro/assets/js/acf-pro-input.js:609
-#: ../pro/assets/js/acf-pro-input.js:632 ../pro/assets/js/acf-pro-input.js:638
-#: ../pro/assets/js/acf-pro-input.js:662 ../pro/assets/js/acf-pro-input.js:667
-#: ../pro/assets/js/acf-pro-input.js:668 ../pro/assets/js/acf-pro-input.js:688
-#: ../pro/assets/js/acf-pro-input.js:694 ../pro/assets/js/acf-pro-input.js:695
-#: ../pro/assets/js/acf-pro-input.js:734 ../pro/assets/js/acf-pro-input.js:742
-#: ../pro/assets/js/acf-pro-input.js:763 ../pro/assets/js/acf-pro-input.js:771
-#: ../pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "flexible_content"
-msgstr "محتوای انعطاف پذیر"
-
-#: ../pro/assets/_build/js/acf-gallery.js:444
-#: ../pro/assets/_build/js/acf-gallery.js:620
-#: ../pro/assets/_build/js/acf-gallery.js:638
-#: ../pro/assets/js/acf-pro-input.js:1443
-#: ../pro/assets/js/acf-pro-input.js:1619
-#: ../pro/assets/js/acf-pro-input.js:1637
-#: ../pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "gallery"
-msgstr "گالری"
-
-#: ../pro/assets/_build/js/acf-repeater.js:184
-#: ../pro/assets/_build/js/acf-repeater.js:247
-#: ../pro/assets/js/acf-pro-input.js:340 ../pro/assets/js/acf-pro-input.js:403
-#: ../pro/assets/js/acf-pro-input.min.js:1
-#, fuzzy
-msgid "repeater"
-msgstr "زمینه تکرار کننده"
-
 #~ msgid "Controls how HTML tags are rendered"
 #~ msgstr "کنترل چگونگی نمایش تگ های HTML"
+
+#, fuzzy
+#~ msgid "image"
+#~ msgstr "تصویر"
+
+#, fuzzy
+#~ msgid "expand_details"
+#~ msgstr "نمایش جزئیات"
+
+#, fuzzy
+#~ msgid "collapse_details"
+#~ msgstr "عدم نمایش جزئیات"
+
+#, fuzzy
+#~ msgid "relationship"
+#~ msgstr "ارتباط"
+
+#, fuzzy
+#~ msgid "unload"
+#~ msgstr "دانلود"
+
+#, fuzzy
+#~ msgid "title_is_required"
+#~ msgstr "عنوان گروه زمینه ضروری است"
+
+#, fuzzy
+#~ msgid "move_field"
+#~ msgstr "جابجایی زمینه"
+
+#, fuzzy
+#~ msgid "flexible_content"
+#~ msgstr "محتوای انعطاف پذیر"
+
+#, fuzzy
+#~ msgid "gallery"
+#~ msgstr "گالری"
+
+#, fuzzy
+#~ msgid "repeater"
+#~ msgstr "زمینه تکرار کننده"
 
 #~ msgid "Attachment Details"
 #~ msgstr "جزئیات پیوست"

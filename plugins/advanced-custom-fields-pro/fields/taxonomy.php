@@ -41,13 +41,15 @@ class acf_field_taxonomy extends acf_field {
 			'multiple'			=> 0,
 			'allow_null' 		=> 0,
 			'load_save_terms' 	=> 0,
-			'return_format'		=> 'id'
+			'return_format'		=> 'id',
+			'add_term'			=> 1				// 5.2.3
 		);
 		
 		
 		// extra
 		add_action('wp_ajax_acf/fields/taxonomy/query',			array($this, 'ajax_query'));
 		add_action('wp_ajax_nopriv_acf/fields/taxonomy/query',	array($this, 'ajax_query'));
+		add_action('wp_ajax_acf/fields/taxonomy/add_term',		array($this, 'ajax_add_term'));
 		
 		
 		// do not delete!
@@ -115,10 +117,15 @@ class acf_field_taxonomy extends acf_field {
 		// sort into hierachial order!
 		if( is_taxonomy_hierarchical( $field['taxonomy'] ) ) {
 			
+			// get parent
+			$parent = acf_maybe_get( $args, 'parent', 0 );
+			$parent = acf_maybe_get( $args, 'child_of', $parent );
+			
+			
 			// this will fail if a search has taken place because parents wont exist
 			if( empty($args['search']) ) {
 			
-				$terms = _get_term_children( 0, $terms, $field['taxonomy'] );
+				$terms = _get_term_children( $parent, $terms, $field['taxonomy'] );
 				
 			}
 			
@@ -468,6 +475,10 @@ class acf_field_taxonomy extends acf_field {
 			
 		}
 		
+		
+		// reset array ( WP saves twice )
+		$this->set_terms = array();
+		
 	}
 	
 	
@@ -541,7 +552,6 @@ class acf_field_taxonomy extends acf_field {
 	
 	function render_field( $field ) {
 		
-		
 		// force value to array
 		$field['value'] = acf_force_type_array( $field['value'] );
 		
@@ -549,9 +559,26 @@ class acf_field_taxonomy extends acf_field {
 		// convert values to int
 		$field['value'] = array_map('intval', $field['value']);
 		
+		
+		// vars
+		$div = array(
+			'class'				=> 'acf-taxonomy-field acf-soh',
+			'data-load_save'	=> $field['load_save_terms'],
+			'data-type'			=> $field['field_type'],
+			'data-taxonomy'		=> $field['taxonomy']
+		);
+		
+		
+		// get taxonomy
+		$taxonomy = get_taxonomy( $field['taxonomy'] );
+		
 		?>
-<div class="acf-taxonomy-field" data-load_save="<?php echo $field['load_save_terms']; ?>">
-	<?php
+<div <?php acf_esc_attr_e($div); ?>>
+	<?php if( $field['add_term'] && current_user_can( $taxonomy->cap->manage_terms) ): ?>
+	<a href="#" class="acf-js-tooltip acf-icon small acf-soh-target" data-name="add" title="<?php echo sprintf( __('Add new %s ', 'acf'), $taxonomy->labels->singular_name ); ?>">
+		<i class="acf-sprite-add"></i>
+	</a>
+	<?php endif;
 
 	if( $field['field_type'] == 'select' ) {
 	
@@ -577,7 +604,6 @@ class acf_field_taxonomy extends acf_field {
 
 	?>
 </div><?php
-	
 		
 	}
 	
@@ -631,7 +657,7 @@ class acf_field_taxonomy extends acf_field {
 		
 		// render select		
 		acf_render_field( $field );
-			
+		
 	}
 	
 	
@@ -674,7 +700,9 @@ class acf_field_taxonomy extends acf_field {
 		
 		
 		// filter for 3rd party customization
-		$args = apply_filters('acf/fields/taxonomy/wp_list_categories', $args, $field );
+		$args = apply_filters('acf/fields/taxonomy/wp_list_categories', $args, $field);
+		$args = apply_filters('acf/fields/taxonomy/wp_list_categories/name=' . $field['_name'], $args, $field);
+		$args = apply_filters('acf/fields/taxonomy/wp_list_categories/key=' . $field['key'], $args, $field);
 		
 		?><div class="categorychecklist-holder">
 		
@@ -715,6 +743,7 @@ class acf_field_taxonomy extends acf_field {
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Taxonomy','acf'),
+			'instructions'	=> __('Select the taxonomy to be displayed','acf'),
 			'type'			=> 'select',
 			'name'			=> 'taxonomy',
 			'choices'		=> acf_get_taxonomies(),
@@ -723,8 +752,8 @@ class acf_field_taxonomy extends acf_field {
 		
 		// field_type
 		acf_render_field_setting( $field, array(
-			'label'			=> __('Field Type','acf'),
-			'instructions'	=> '',
+			'label'			=> __('Appearance','acf'),
+			'instructions'	=> __('Select the appearance of this field','acf'),
 			'type'			=> 'select',
 			'name'			=> 'field_type',
 			'optgroup'		=> true,
@@ -755,13 +784,31 @@ class acf_field_taxonomy extends acf_field {
 		));
 		
 		
-		// allow_null
+		// add_term
 		acf_render_field_setting( $field, array(
-			'label'			=> __('Load & Save Terms to Post','acf'),
-			'instructions'	=> '',
-			'type'			=> 'true_false',
+			'label'			=> __('Create Terms','acf'),
+			'instructions'	=> __('Allow new terms to be created whilst editing','acf'),
+			'type'			=> 'radio',
+			'name'			=> 'add_term',
+			'choices'		=> array(
+				1				=> __("Yes",'acf'),
+				0				=> __("No",'acf'),
+			),
+			'layout'	=>	'horizontal',
+		));
+		
+		
+		// load_save_terms
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Sync Terms','acf'),
+			'instructions'	=> __('Connect selected terms to the post','acf'),
+			'type'			=> 'radio',
 			'name'			=> 'load_save_terms',
-			'message'		=> __("Load value based on the post's terms and update the post's terms on save",'acf')
+			'choices'		=> array(
+				1				=> __("Yes",'acf'),
+				0				=> __("No",'acf'),
+			),
+			'layout'	=>	'horizontal',
 		));
 		
 		
@@ -777,6 +824,165 @@ class acf_field_taxonomy extends acf_field {
 			),
 			'layout'	=>	'horizontal',
 		));
+		
+	}
+	
+	
+	/*
+	*  ajax_add_term
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	17/04/2015
+	*  @since	5.2.3
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function ajax_add_term() {
+		
+		// vars
+		$args = acf_parse_args($_POST, array(
+			'nonce'				=> '',
+			'field_key'			=> '',
+			'term_name'			=> '',
+			'term_parent'		=> ''
+		));
+		
+		
+		// verify nonce
+		if( ! wp_verify_nonce($args['nonce'], 'acf_nonce') ) {
+		
+			die();
+			
+		}
+		
+		
+		// load field
+		$field = acf_get_field( $args['field_key'] );
+		
+		if( !$field ) {
+		
+			die();
+			
+		}
+		
+		
+		// vars
+		$taxonomy_obj = get_taxonomy($field['taxonomy']);
+		$taxonomy_label = $taxonomy_obj->labels->singular_name;
+			
+			
+		// validate cap
+		// note: this situation should never occur due to condition of the add new button
+		if( !current_user_can( $taxonomy_obj->cap->manage_terms) ) {
+			
+			echo '<p><strong>' . __("Error", 'acf') . '.</strong> ' . sprintf( __('User unable to add new %s', 'acf'), $taxonomy_label ) . '</p>';
+			die;
+			
+		}
+	
+		
+		// save?
+		if( $args['term_name'] ) {
+			
+			// exists
+			if( term_exists($args['term_name'], $field['taxonomy']) ) {
+				
+				wp_send_json_error(array(
+					'error'	=> sprintf( __('%s already exists', 'acf'), $taxonomy_label )
+				));
+			
+			}
+			
+			
+			// insert
+			$extra = array();
+			
+			if( $args['term_parent'] ) {
+				
+				$extra['parent'] = $args['term_parent'];
+				
+			}
+			
+			$data = wp_insert_term( $args['term_name'], $field['taxonomy'], $extra );
+			
+			
+			// error?
+			if( is_wp_error($data) ) {
+				
+				wp_send_json_error(array(
+					'error'	=> $data->get_error_message()
+				));
+			
+			}
+			
+			
+			// ancestors
+			$prefix = '';
+			$ancestors = get_ancestors( $data['term_id'], $field['taxonomy'] );
+			
+			if( !empty($ancestors) ) {
+			
+				$prefix = str_repeat('- ', count($ancestors));
+				
+			}
+		
+		
+			// success
+			wp_send_json_success(array(
+				'message'		=> sprintf( __('%s added', 'acf'), $taxonomy_label ),
+				'term_id'		=> $data['term_id'],
+				'term_name'		=> $args['term_name'],
+				'term_label'	=> $prefix . $args['term_name'],
+				'term_parent'	=> $args['term_parent']
+			));
+				
+		}
+		
+		?><form method="post"><?php
+		
+		acf_render_field_wrap(array(
+			'label'			=> 'Name',
+			'name'			=> 'term_name',
+			'type'			=> 'text'
+		));
+		
+		
+		if( is_taxonomy_hierarchical( $field['taxonomy'] ) ) {
+			
+			$choices = array();
+			$choices2 = $this->get_choices(array( 'field_key' => $field['key'] ));
+			
+			if( $choices2 ) {
+				
+				foreach( $choices2 as $v) { 
+					
+					$choices[ $v['id'] ] = $v['text'];
+					
+				}
+				
+			}
+			
+			acf_render_field_wrap(array(
+				'label'			=> 'Parent',
+				'name'			=> 'term_parent',
+				'type'			=> 'select',
+				'allow_null'	=> 1,
+				'ui'			=> 0,
+				'choices'		=> $choices
+			));
+			
+		}
+		
+		
+		?><p class="acf-submit"><button class="acf-button blue" type="submit"><?php _e("Add", 'acf'); ?></button><i class="acf-spinner"></i><span></span></p></form><?php
+		
+		
+		// die
+		die;	
 		
 	}
 	
@@ -806,56 +1012,30 @@ class acf_taxonomy_field_walker extends Walker {
 		// vars
 		$selected = in_array( $term->term_id, $this->field['value'] );
 		
-		if( $this->field['field_type'] == 'checkbox' ) {
 		
-			$output .= '<li><label class="selectit"><input type="checkbox" name="' . $this->field['name'] . '" value="' . $term->term_id . '" ' . ($selected ? 'checked="checked"' : '') . ' /> ' . $term->name . '</label>';
-			
-		} elseif( $this->field['field_type'] == 'radio' ) {
-			
-			$output .= '<li><label class="selectit"><input type="radio" name="' . $this->field['name'] . '" value="' . $term->term_id . '" ' . ($selected ? 'checked="checkbox"' : '') . ' /> ' . $term->name . '</label>';
-		
-		}
+		// append
+		$output .= '<li data-id="' . $term->term_id . '"><label><input type="' . $this->field['field_type'] . '" name="' . $this->field['name'] . '" value="' . $term->term_id . '" ' . ($selected ? 'checked="checked"' : '') . ' /> <span>' . $term->name . '</span></label>';
 				
 	}
 	
 	function end_el( &$output, $term, $depth = 0, $args = array() ) {
 	
-		if( in_array($this->field['field_type'], array('checkbox', 'radio')) ) {
+		// append
+		$output .= '</li>' .  "\n";
 		
-			$output .= '</li>';
-			
-		}
-		
-		$output .= "\n";
 	}
 	
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
-	
-		// indent
-		//$output .= str_repeat( "\t", $depth);
 		
-		
-		// wrap element
-		if( in_array($this->field['field_type'], array('checkbox', 'radio')) ) {
-		
-			$output .= '<ul class="children acf-bl">' . "\n";
-			
-		}
+		// append
+		$output .= '<ul class="children acf-bl">' . "\n";
 		
 	}
 
 	function end_lvl( &$output, $depth = 0, $args = array() ) {
 	
-		// indent
-		//$output .= str_repeat( "\t", $depth);
-		
-		
-		// wrap element
-		if( in_array($this->field['field_type'], array('checkbox', 'radio')) ) {
-		
-			$output .= '</ul>' . "\n";
-			
-		}
+		// append
+		$output .= '</ul>' . "\n";
 		
 	}
 	

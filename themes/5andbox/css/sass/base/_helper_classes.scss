@@ -1,3 +1,87 @@
+// inline-block
+.ibfix  { @extend %ibfix; }
+.ib     { @extend %ib; }
+.block  { display: block; }
+
+// Spacing
+.margin-top-tiny   { margin-top: $space-tiny; }
+.margin-top-small  { margin-top: $space-small; }
+.margin-top-medium { margin-top: $space-medium; }
+.margin-top-large  { margin-top: $space-large; }
+.margin-top-huge   { margin-top: $space-huge; }
+
+.margin-bottom-tiny   { margin-bottom: $space-tiny; }
+.margin-bottom-small  { margin-bottom: $space-small; }
+.margin-bottom-medium { margin-bottom: $space-medium; }
+.margin-bottom-large  { margin-bottom: $space-large; }
+.margin-bottom-huge   { margin-bottom: $space-huge; }
+
+.padding-top-tiny   { padding-top: $space-tiny; }
+.padding-top-small  { padding-top: $space-small; }
+.padding-top-medium { padding-top: $space-medium; }
+.padding-top-large  { padding-top: $space-large; }
+.padding-top-huge   { padding-top: $space-huge; }
+
+.padding-bottom-tiny   { padding-bottom: $space-tiny; }
+.padding-bottom-small  { padding-bottom: $space-small; }
+.padding-bottom-medium { padding-bottom: $space-medium; }
+.padding-bottom-large  { padding-bottom: $space-large; }
+.padding-bottom-huge   { padding-bottom: $space-huge; }
+
+.fixed { position: fixed; }
+
+.hidden { display: none; }
+
+.right  { text-align: right; }
+.left   { text-align: left; }
+.center { text-align: center; }
+
+.uppercase   { text-transform: uppercase; }
+.regularcase { text-transform: lowercase; }
+
+.no-list {
+  &, ul, li {
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.overflow-hidden { overflow: hidden; }
+
+.default-link {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  color: #000;
+
+  &:hover {
+    border-bottom-style: dotted;
+  }
+}
+
+.blank-link { // Removes link styles and resets to default. Does not have hover effect.
+  text-decoration: none;
+  border: 0;
+  color: #000;
+}
+
+.clearfix { @extend %clearfix; }
+
+.pointer { cursor: pointer; }
+
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+.static   { position: static; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed    { position: fixed; }
+
 /*
  * Image replacement
  */

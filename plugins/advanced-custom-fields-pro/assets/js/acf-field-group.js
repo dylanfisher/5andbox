@@ -50,6 +50,10 @@
 			this.$options.addClass('acf-postbox');
 		
 			
+			// disable validation
+			acf.validation.active = 0;
+			
+			
 			// sortable
 			this.sort_fields( $('.acf-field-list:first') );
 			
@@ -1010,7 +1014,7 @@
 			acf.open_popup({
 				title	: acf._e('move_field'),
 				loading	: true,
-				height	: 220
+				height	: 145
 			});
 			
 			

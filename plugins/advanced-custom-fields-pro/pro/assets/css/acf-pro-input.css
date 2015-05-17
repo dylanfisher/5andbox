@@ -352,7 +352,7 @@ html[dir="rtl"] .acf-flexible-content .layout .acf-fc-layout-controlls {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 299px;
+  width: 0;
   background: #F9F9F9;
   border-left: #DFDFDF solid 1px;
   z-index: 1;

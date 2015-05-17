@@ -12,18 +12,35 @@
 //
 
 // Custom menus
-add_theme_support( 'menus' );
+add_theme_support('menus');
+
+// Enqueue scripts
+wp_enqueue_script('jquery');
+
+function sandbox_enqueue_scripts() {
+  $application = sandbox_is_local() ? 'application.js' : 'application.min.js';
+  wp_enqueue_script(
+    'application',
+    get_stylesheet_directory_uri() . '/js/build/' . $application,
+    array('jquery')
+  );
+}
+add_action( 'wp_enqueue_scripts', 'sandbox_enqueue_scripts' );
 
 // Custom Image Sizes (Name, Width, Height, Hard Crop boolean)
 // add_image_size( 'medium-crop', 600, 325, true );
-
-// Check for custom Single Post templates by category ID. Format for new template names is single-category[ID#].php (ommiting the brackets)
-// add_filter('single_template', create_function('$t', 'foreach( (array) get_the_category() as $cat ) { if ( file_exists(TEMPLATEPATH . "/single-{$cat->term_id}.php") ) return TEMPLATEPATH . "/single-{$cat->term_id}.php"; } return $t;' ));
 
 
 //
 // Disables
 //
+
+// Disable automatic updates for certain plugins
+function filter_plugin_updates( $value ) {
+    unset( $value->response['wp-pjax/wp-pjax.php'] );
+    return $value;
+}
+add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );
 
 // Disable Admin Bar
 add_filter('show_admin_bar', '__return_false');
@@ -74,9 +91,20 @@ add_action( 'admin_menu', 'sandbox_remove_menus' );
 // Custom functions
 //
 
+// Check if running on localhost
+function sandbox_is_local() {
+  $localhost_whitelist = array( '127.0.0.1', '::1' );
+  if( in_array($_SERVER['REMOTE_ADDR'], $localhost_whitelist) ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 // Get an <img> at size from an ACF image field
-function sandbox_image($acf_image_field_name, $image_size) {
+function sandbox_image($acf_image_field_name='image', $image_size='large') {
   $image = get_field($acf_image_field_name);
+  if(empty($image)) $image = get_sub_field($acf_image_field_name);
   $alt = $image['alt'];
   if(empty($alt)) $alt = $image['title'];
   $size = $image_size;

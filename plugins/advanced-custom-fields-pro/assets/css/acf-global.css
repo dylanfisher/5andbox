@@ -93,15 +93,28 @@ img.acf-fw {
   text-align: center;
 }
 /* loading */
-.acf-loading {
+.acf-loading,
+.acf-spinner {
   display: inline-block;
   height: 20px;
   width: 20px;
   vertical-align: text-top;
   background: transparent url(../images/spinner.gif) no-repeat 50% 50%;
 }
-.acf-loading + .acf-button {
+.acf-loading + .acf-button,
+.acf-spinner + .acf-button {
   margin-left: 3px;
+}
+/* spinner */
+.acf-spinner {
+  display: none;
+}
+.acf-spinner.is-active {
+  display: inline-block;
+}
+/* WP < 4.2 */
+.spinner.is-active {
+  display: inline-block;
 }
 /* required */
 .acf-required {
@@ -939,27 +952,6 @@ img.acf-fw {
 }
 /*--------------------------------------------------------------------------------------------
 *
-*	User
-*
-*--------------------------------------------------------------------------------------------*/
-.form-table .acf-label {
-  padding: 10px;
-  width: 200px;
-}
-.form-table th.acf-th {
-  width: auto;
-}
-/*--------------------------------------------------------------------------------------------
-*
-*	Comment
-*
-*--------------------------------------------------------------------------------------------*/
-.editcomment td:first-child {
-  white-space: nowrap;
-  width: 131px;
-}
-/*--------------------------------------------------------------------------------------------
-*
 *	Settings
 *
 *--------------------------------------------------------------------------------------------*/
@@ -1053,6 +1045,20 @@ img.acf-fw {
   top: 50%;
   left: 50%;
   margin: -10px 0 0 -10px;
+}
+/* submit p */
+.acf-submit {
+  margin-bottom: 0;
+}
+.acf-submit span {
+  float: right;
+  color: #999;
+}
+.acf-submit .acf-loading {
+  display: none;
+}
+.acf-submit .acf-button {
+  margin-right: 5px;
 }
 /*--------------------------------------------------------------------------------------------
 *
@@ -1175,7 +1181,8 @@ html[dir="rtl"] .acf-input-table > tbody > tr > td.order + td {
     background-image: url(../images/sprite@2x.png);
     background-size: 500px 500px;
   }
-  .acf-loading {
+  .acf-loading,
+  .acf-spinner {
     background-image: url(../images/spinner@2x.gif);
     background-size: 20px 20px;
   }
