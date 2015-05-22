@@ -13,8 +13,8 @@
 
 function sandbox_enqueue_scripts() {
   $application = sandbox_is_local() ? 'application.js' : 'application.min.js';
+  wp_enqueue_script('jquery');
   wp_enqueue_script(
-    'jquery',
     'application',
     get_stylesheet_directory_uri() . '/js/build/' . $application,
     array('jquery')
