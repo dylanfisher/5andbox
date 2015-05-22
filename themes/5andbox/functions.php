@@ -8,24 +8,27 @@
 
 
 //
-// Enables
-//
-
-// Custom menus
-add_theme_support('menus');
-
 // Enqueue scripts
-wp_enqueue_script('jquery');
+//
 
 function sandbox_enqueue_scripts() {
   $application = sandbox_is_local() ? 'application.js' : 'application.min.js';
   wp_enqueue_script(
+    'jquery',
     'application',
     get_stylesheet_directory_uri() . '/js/build/' . $application,
     array('jquery')
   );
 }
 add_action( 'wp_enqueue_scripts', 'sandbox_enqueue_scripts' );
+
+
+//
+// Enables
+//
+
+// Custom menus
+add_theme_support('menus');
 
 // Custom Image Sizes (Name, Width, Height, Hard Crop boolean)
 // add_image_size( 'medium-crop', 600, 325, true );
