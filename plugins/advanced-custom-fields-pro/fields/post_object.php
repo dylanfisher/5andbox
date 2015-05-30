@@ -356,6 +356,7 @@ class acf_field_post_object extends acf_field {
 			// get posts
 			$posts = acf_get_posts(array(
 				'post__in' => $field['value'],
+				'post_type'	=> $field['post_type']
 			));
 			
 			
@@ -540,6 +541,7 @@ class acf_field_post_object extends acf_field {
 			// get posts
 			$value = acf_get_posts(array(
 				'post__in' => $value,
+				'post_type'	=> $field['post_type']
 			));
 		
 		}

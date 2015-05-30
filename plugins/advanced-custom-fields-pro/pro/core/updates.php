@@ -28,7 +28,7 @@ class acf_pro_updates {
 	    
 	    
 		// append update information
-		add_filter('site_transient_update_plugins', array($this, 'inject_update'));
+		add_filter('pre_set_site_transient_update_plugins', array($this, 'inject_update'));
 		
 		
 		// add custom message when PRO not activated but update available
@@ -112,7 +112,7 @@ class acf_pro_updates {
 			
 		}
 		
-		
+				
 		// bail early if no update available
 		if( !acf_pro_is_update_available() ) {
 			
@@ -122,10 +122,10 @@ class acf_pro_updates {
 		
 		 
         // vars
-        $info = acf_pro_get_remote_info();
-        $basename = acf_get_setting('basename');
-        $slug = acf_get_setting('slug');
-
+		$info = acf_pro_get_remote_info();
+		$basename = acf_get_setting('basename');
+		$slug = acf_get_setting('slug');
+		
 		
         // create new object for update
         $obj = new stdClass();

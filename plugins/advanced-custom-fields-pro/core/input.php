@@ -125,9 +125,14 @@ class acf_input {
 		
 		// l10n
 		$l10n = apply_filters( 'acf/input/admin_l10n', array(
-			'unload'			=> __('The changes you made will be lost if you navigate away from this page','acf'),
-			'expand_details' 	=> __('Expand Details','acf'),
-			'collapse_details' 	=> __('Collapse Details','acf')
+			'unload'				=> __('The changes you made will be lost if you navigate away from this page','acf'),
+			'expand_details' 		=> __('Expand Details','acf'),
+			'collapse_details' 		=> __('Collapse Details','acf'),
+			'validation_successful'	=> __('Validation successful', 'acf'),
+			'validation_failed'		=> __('Validation failed', 'acf'),
+			'validation_failed_1'	=> __('1 field requires attention', 'acf'),
+			'validation_failed_2'	=> __('%d fields require attention', 'acf')
+
 		));
 		
 		
@@ -139,6 +144,8 @@ if( typeof acf !== 'undefined' ) {
 	acf.o = <?php echo json_encode($o); ?>;
 	acf.l10n = <?php echo json_encode($l10n); ?>;
 	<?php do_action('acf/input/admin_footer_js'); ?>
+	
+	acf.do_action('prepare');
 	
 }
 /* ]]> */
@@ -173,7 +180,6 @@ if( typeof acf !== 'undefined' ) {
 		
 		// vars
 		$json = array(
-			'message'	=> __('Validation successful', 'acf'),
 			'valid'		=> 1,
 			'errors'	=> 0
 		);
@@ -188,21 +194,8 @@ if( typeof acf !== 'undefined' ) {
 		
 		
 		// update vars
-		$json['message'] = __('Validation failed', 'acf');
 		$json['valid'] = 0;
 		$json['errors'] = acf_get_validation_errors();
-
-		
-		// update message
-		if( count($json['errors']) == 1 ) {
-			
-			$json['message'] .= '. ' . __('1 required field below is empty', 'acf');
-			
-		} else {
-			
-			$json['message'] .= '. ' . sprintf( __('%s required fields below are empty', 'acf'), count($json['errors']) );
-			
-		}
 		
 		
 		// return

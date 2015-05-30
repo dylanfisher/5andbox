@@ -35,9 +35,12 @@ class acf_form_widget {
 		add_action('in_widget_form', 			array($this, 'edit_widget'), 10, 3);
 		
 		
+		// filters
+		add_filter('widget_update_callback', 	array($this, 'widget_update_callback'), 10, 4);
+		
+		
 		// ajax
-		add_action('wp_ajax_save-widget', 		array($this, 'save_widget'), 0, 1);
-		add_action('wp_ajax_update-widget', 	array($this, 'save_widget'), 0, 1);
+		add_action('wp_ajax_update-widget', 	array($this, 'ajax_update_widget'), 0, 1);
 		
 	}
 	
@@ -150,17 +153,21 @@ class acf_form_widget {
 	/*
 	*  save_widget
 	*
-	*  This function will save the widget form data
+	*  This function will hook in before 'widget_update_callback' and save values to bypass customizer validation issues
 	*
 	*  @type	function
 	*  @date	11/06/2014
 	*  @since	5.0.0
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	n/a
+	*  @return	n/a
 	*/
 	
-	function save_widget() {
+	function ajax_update_widget() {
+		
+		// remove default save filter
+		remove_filter('widget_update_callback', array($this, 'widget_update_callback'), 10, 4);
+		
 		
 		// bail early if no nonce
 		if( !acf_verify_nonce('widget') ) {
@@ -180,6 +187,47 @@ class acf_form_widget {
 			acf_save_post( "widget_{$id}" );		
 		
 		}
+		
+	}
+
+	
+	
+	/*
+	*  widget_update_callback
+	*
+	*  This function will hook into the widget update filter and save ACF data
+	*
+	*  @type	function
+	*  @date	27/05/2015
+	*  @since	5.2.3
+	*
+	*  @param	$instance (array) widget settings
+	*  @param	$new_instance (array) widget settings
+	*  @param	$old_instance (array) widget settings
+	*  @param	$widget (object) widget info
+	*  @return	$instance
+	*/
+	
+	function widget_update_callback( $instance, $new_instance, $old_instance, $widget ) {
+		
+		// bail early if no nonce
+		if( !acf_verify_nonce('widget') ) {
+		
+			return $instance;
+			
+		}
+		
+		
+	    // save
+	    if( acf_validate_save_post() ) {
+	    	
+			acf_save_post( "widget_{$widget->id}" );		
+		
+		}
+		
+		
+		// return
+		return $instance;
 		
 	}
 	

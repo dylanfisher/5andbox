@@ -381,7 +381,12 @@ hr {
   padding: 0; }
 
 img {
-  vertical-align: middle; }
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto; }
+
+#map-canvas img {
+  max-width: none; }
 
 fieldset {
   border: 0;
@@ -605,11 +610,20 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 0 !important; }
 
 .chromeframe {
-  margin: 0 0 20px;
-  padding: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  padding: 80px;
   background: #DCDCDC;
   color: #000;
-  text-align: center; }
+  text-align: center;
+  font-size: 28px; }
+  .chromeframe p {
+    max-width: 680px;
+    margin: 1em auto; }
 
 .alignnone {
   margin: 5px 20px 20px 0; }

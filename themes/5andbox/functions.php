@@ -31,7 +31,7 @@ add_action( 'wp_enqueue_scripts', 'sandbox_enqueue_scripts' );
 add_theme_support('menus');
 
 // Custom Image Sizes (Name, Width, Height, Hard Crop boolean)
-// add_image_size( 'medium-crop', 600, 325, true );
+add_image_size( 'small', 400, 300, false );
 
 
 //
@@ -39,11 +39,12 @@ add_theme_support('menus');
 //
 
 // Disable automatic updates for certain plugins
-function filter_plugin_updates( $value ) {
-    unset( $value->response['wp-pjax/wp-pjax.php'] );
-    return $value;
+function sandbox_filter_plugin_updates( $value ) {
+  if ( isset( $value ) && is_object( $value ) ) {
+    unset($value->response['wp-pjax/wp-pjax.php']);
+  }
 }
-add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );
+add_filter( 'site_transient_update_plugins', 'sandbox_filter_plugin_updates' );
 
 // Disable Admin Bar
 add_filter('show_admin_bar', '__return_false');
@@ -105,16 +106,26 @@ function sandbox_is_local() {
 }
 
 // Get an <img> at size from an ACF image field
-function sandbox_image($acf_image_field_name='image', $image_size='large') {
-  $image = get_field($acf_image_field_name);
-  if(empty($image)) $image = get_sub_field($acf_image_field_name);
+function sandbox_image($acf_image_field_name='image', $image_size='large', $classes='') {
+  $image = get_field($acf_image_field_name); // check for a top level field
+  if(empty($image)) $image = get_sub_field($acf_image_field_name); // check for a sub-field
   $alt = $image['alt'];
   if(empty($alt)) $alt = $image['title'];
   $size = $image_size;
   $url = $image['sizes'][$size];
+  $url_small = $image['sizes']['small'];
   $width = $image['sizes'][$size.'-width'];
   $height = $image['sizes'][$size.'-height'];
-  echo '<img src="'.$url.'" width="'.$width.'" height="'.$height.'">';
+  echo '<img src="'.$url_small.'" data-src="'.$url.'" width="'.$width.'" height="'.$height.'" alt="'.$alt.'" class="lazyload '.$classes.'">';
+}
+
+// Get <img> tags from a ACF repeater
+function sandbox_images($acf_repeater='images', $acf_image_field_name='image', $image_size='large', $classes='') {
+  if(have_rows($acf_repeater)):
+    while (have_rows($acf_repeater)): the_row();
+      sandbox_image($acf_image_field_name, $image_size, $classes);
+    endwhile;
+  endif;
 }
 
 // Function to create slug out of text

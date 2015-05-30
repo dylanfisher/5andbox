@@ -153,14 +153,17 @@ function get_field( $selector, $post_id = false, $format_value = true ) {
 	
 	// create dummy field
 	if( !$field ) {
-	
+		
 		$field = acf_get_valid_field(array(
 			'name'	=> $selector,
 			'key'	=> '',
 			'type'	=> '',
 		));
 		
+		
+		// prevent formatting
 		$format_value = false;
+		
 	}
 	
 	
@@ -206,34 +209,36 @@ function get_field_object( $selector, $post_id = false, $format_value = true, $l
 	
 	
 	// compatibilty
-	if( is_array($format_value) )
-	{
-		$format_value = acf_parse_args($format_value, array(
-			'format_value'	=>	true,
-			'load_value'	=>	true,
-		));
+	if( is_array($format_value) ) {
 		
 		extract( $format_value );
+		
 	}
 	
 	
 	// vars
-	$override_name = false;
+	$field_name = false;
 	
 	
-	// filter post_id
+	// get valid post_id
 	$post_id = acf_get_valid_post_id( $post_id );
 	
 	
 	// load field reference if not a field_key
 	if( !acf_is_field_key($selector) ) {
 		
-		$override_name = $selector;
-		$reference = acf_get_field_reference( $selector, $post_id );
+		// save selector as field_name (could be sub field name)
+		$field_name = $selector;
 		
-		if( $reference ) {
+		
+		// get reference
+		$selector = acf_get_field_reference( $selector, $post_id );
+		
+		
+		// bail early if no reference for this field
+		if( !$selector ) {
 			
-			$selector = $reference;
+			return false;
 			
 		}
 		
@@ -252,11 +257,10 @@ function get_field_object( $selector, $post_id = false, $format_value = true, $l
 	}
 	
 	
-	// override name?
-	// This allows the $selector to be a sub field (images_0_image)
-	if( $override_name ) {
+	// Override name - allows the $selector to be a sub field (images_0_image)
+	if( $field_name ) {
 	
-		$field['name'] = $override_name;	
+		$field['name'] = $field_name;	
 		
 	}
 		
@@ -276,7 +280,6 @@ function get_field_object( $selector, $post_id = false, $format_value = true, $l
 		$field['value'] = acf_format_value( $field['value'], $post_id, $field );
 		
 	}
-	
 	
 	
 	// return
@@ -1060,35 +1063,43 @@ function acf_form_head() {
 	    if( acf_validate_save_post(true) ) {
 	    	
 	    	// form
-	    	$form = acf_extract_var($_POST, '_acf_form');
-	    	$form = @json_decode(base64_decode($form), true);
+	    	$GLOBALS['acf_form'] = acf_extract_var($_POST, '_acf_form');
+	    	$GLOBALS['acf_form'] = @json_decode(base64_decode($GLOBALS['acf_form']), true);
 	    	
 	    	
 	    	// validate
-	    	if( empty($form) ) {
+	    	if( empty($GLOBALS['acf_form']) ) {
 		    	
 		    	return;
 		    	
 	    	}
-	    		    	
+	    	
+	    	
+	    	// vars
+	    	$post_id = acf_maybe_get( $GLOBALS['acf_form'], 'post_id', 0 );
+	    	
 	    	
 			// allow for custom save
-			$form['post_id'] = apply_filters('acf/pre_save_post', $form['post_id'], $form);
+			$post_id = apply_filters('acf/pre_save_post', $post_id, $GLOBALS['acf_form']);
 			
 			
 			// save
-			acf_save_post( $form['post_id'] );
+			acf_save_post( $post_id );
+			
+			
+			// vars
+			$return = acf_maybe_get( $GLOBALS['acf_form'], 'return', '' );
 			
 			
 			// redirect
-			if( !empty($form['return']) ) {
+			if( $return ) {
 				
 				// update %placeholders%
-				$form['return'] = str_replace('%post_url%', get_permalink($form['post_id']), $form['return']);
+				$return = str_replace('%post_url%', get_permalink($post_id), $return);
 				
 				
 				// redirect
-				wp_redirect( $form['return'] );
+				wp_redirect( $return );
 				exit;
 			}
 			

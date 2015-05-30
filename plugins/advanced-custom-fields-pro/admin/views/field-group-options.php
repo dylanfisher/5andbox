@@ -105,6 +105,10 @@
 			)
 		), 'tr');
 		
+		
+		// 3rd party settings
+		do_action('acf/render_field_group_settings', $field_group);
+				
 		?>
 	</tbody>
 </table>

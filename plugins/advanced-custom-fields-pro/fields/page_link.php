@@ -378,7 +378,7 @@ class acf_field_page_link extends acf_field {
 	*  @return	$value
 	*/
 	
-	function get_posts( $value ) {
+	function get_posts( $value, $field ) {
 		
 		// force value to array
 		$value = acf_force_type_array( $value );
@@ -414,6 +414,7 @@ class acf_field_page_link extends acf_field {
 		// get posts
 		$posts = acf_get_posts(array(
 			'post__in' => $post__in,
+			'post_type'	=> $field['post_type']
 		));
 		
 		
@@ -478,7 +479,7 @@ class acf_field_page_link extends acf_field {
 		if( !empty($field['value']) ) {
 			
 			// get posts
-			$posts = $this->get_posts( $field['value'] );
+			$posts = $this->get_posts( $field['value'], $field );
 			
 			
 			// set choices
@@ -622,7 +623,7 @@ class acf_field_page_link extends acf_field {
 		
 		
 		// get posts
-		$value = $this->get_posts( $value );
+		$value = $this->get_posts( $value, $field );
 		
 		
 		// set choices

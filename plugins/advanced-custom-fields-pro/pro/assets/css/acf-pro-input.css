@@ -426,8 +426,8 @@ html[dir="rtl"] .acf-flexible-content .layout .acf-fc-layout-controlls {
   color: #666666;
   font-size: 12px;
   line-height: 25px;
-  padding: 0 4px 8px 0;
-  width: auto;
+  padding: 0 4px 8px 0 !important;
+  width: auto !important;
   vertical-align: top;
 }
 .acf-gallery .acf-gallery-side-data .acf-label label,
@@ -436,7 +436,7 @@ html[dir="rtl"] .acf-flexible-content .layout .acf-fc-layout-controlls {
 }
 .acf-gallery .acf-gallery-side-data .acf-input,
 .acf-gallery .acf-gallery-side-data td.field {
-  padding: 0 0 8px;
+  padding: 0 0 8px !important;
 }
 .acf-gallery .acf-gallery-side-data textarea {
   min-height: 0;

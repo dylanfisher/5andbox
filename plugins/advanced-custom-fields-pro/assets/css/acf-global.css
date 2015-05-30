@@ -505,13 +505,24 @@ img.acf-fw {
   min-height: 0px;
 }
 .acf-error-message p {
-  font-size: 12px !important;
-  line-height: 14px;
+  font-size: 13px !important;
+  line-height: 1;
   margin: 10px 0 !important;
   padding: 0;
   text-shadow: none;
   color: #fff;
   text-shadow: 0 1px 0 #DD4232;
+}
+.acf-error-message .acf-icon.dark {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background-color: #dd4232;
+  transition: none;
+  box-shadow: none;
+}
+.acf-error-message .acf-icon.dark:hover {
+  background-color: #F1F1F1;
 }
 /*--------------------------------------------------------------------------------------------
 *
@@ -619,8 +630,8 @@ img.acf-fw {
 }
 /* blue */
 .acf-button.blue {
-  background-color: #2EA2CC;
-  border-color: #0074A2;
+  background-color: #00a0d2;
+  border-color: #0073aa;
 }
 .acf-button.blue:hover {
   background-color: #298CBA;
@@ -731,6 +742,10 @@ img.acf-fw {
 }
 .acf-postbox .hndle .acf-hndle-cog:hover {
   color: #777777;
+}
+.acf-replace-with-fields {
+  padding: 15px;
+  text-align: center;
 }
 /*---------------------------------------------------------------------------------------------
 *

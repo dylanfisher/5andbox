@@ -313,7 +313,6 @@ ul.acf-hl.acf-checkbox-list li {
 ul.acf-radio-list li input,
 ul.acf-checkbox-list li input {
   margin: -1px 4px 0 0;
-  width: auto !important;
   vertical-align: middle;
 }
 ul.acf-radio-list li label,

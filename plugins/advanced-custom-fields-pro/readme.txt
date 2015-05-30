@@ -2,7 +2,7 @@
 Contributors: elliotcondon
 Tags: custom, field, custom field, advanced, simple fields, magic fields, more fields, repeater, matrix, post, type, text, textarea, file, image, edit, admin
 Requires at least: 3.6.0
-Tested up to: 4.1
+Tested up to: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,15 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.2.6 =
+* Core: Improved validation logic to display HTML5 validation messages
+* Core: Improved conditional logic performance for large field groups
+* Core: Removed updates menu item when not activated as a plugin (included within theme)
+* Core: Fixed various JS performance issues
+* Core: Minor fixes and improvements
+* Core: Added compatibility for saving widget in 'accessibility mode'
+* Language: Added Finnish translation - thanks to Sauli Rajala
 
 = 5.2.5 =
 * Core: Fixed JS error preventing changes to large field groups
