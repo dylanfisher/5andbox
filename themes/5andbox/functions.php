@@ -40,6 +40,9 @@ add_image_size( 'small', 400, 300, false );
 // Disables
 //
 
+// Disable the rich text visual editor
+// add_filter('user_can_richedit' , create_function('' , 'return false;') , 50);
+
 // Disable Admin Bar
 add_filter('show_admin_bar', '__return_false');
 
