@@ -17,7 +17,9 @@ function sandbox_enqueue_scripts() {
   wp_enqueue_script(
     'application',
     get_stylesheet_directory_uri() . '/js/build/' . $application,
-    array('jquery')
+    array('jquery'),
+    '1.0',
+    true
   );
 }
 add_action( 'wp_enqueue_scripts', 'sandbox_enqueue_scripts' );
@@ -37,14 +39,6 @@ add_image_size( 'small', 400, 300, false );
 //
 // Disables
 //
-
-// Disable automatic updates for certain plugins
-function sandbox_filter_plugin_updates( $value ) {
-  if ( isset( $value ) && is_object( $value ) ) {
-    unset($value->response['wp-pjax/wp-pjax.php']);
-  }
-}
-add_filter( 'site_transient_update_plugins', 'sandbox_filter_plugin_updates' );
 
 // Disable Admin Bar
 add_filter('show_admin_bar', '__return_false');

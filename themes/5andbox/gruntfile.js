@@ -11,33 +11,32 @@ module.exports = function(grunt) {
 
   sass: {
     dist: {
-    options: {
-      // cssmin will minify later
-      style: 'expanded'
-    },
-    files: {
-      'css/build/style.css': 'css/sass/style.scss'
-    }
+      options: {
+        style: 'expanded'
+      },
+      files: {
+        'css/build/style.css': 'css/sass/style.scss'
+      }
     }
   },
 
   autoprefixer: {
     options: {
-    browsers: ['last 2 version']
+     browsers: ['last 2 version']
     },
     multiple_files: {
-    expand: true,
-    flatten: true,
-    src: 'css/build/*.css',
-    dest: 'css/build/prefixed/'
+      expand: true,
+      flatten: true,
+      src: 'css/build/*.css',
+      dest: 'css/build/prefixed/'
     }
   },
 
   cssmin: {
     combine: {
-    files: {
-      'style.css': ['css/build/prefixed/style.css']
-    }
+      files: {
+        'style.css': ['css/build/prefixed/style.css']
+      }
     }
   },
 
@@ -47,11 +46,11 @@ module.exports = function(grunt) {
 
   concat: {
     dist: {
-    src: [
-      'js/application/vendor/*.js',
-      'js/application/*.js'
-    ],
-    dest: 'js/build/application.js'
+      src: [
+        'js/application/vendor/*.js',
+        'js/application/*.js'
+      ],
+      dest: 'js/build/application.js'
     }
   },
 
@@ -62,62 +61,44 @@ module.exports = function(grunt) {
     }
   },
 
-  imagemin: {
-    dynamic: {
-    files: [{
-      expand: true,
-      cwd: 'images/',
-      src: ['**/*.{png,jpg,gif}'],
-      dest: 'images/'
-    }]
-    }
-  },
-
   watch: {
     options: {
-    livereload: true,
+      livereload: true,
     },
     html: {
-    files: ['*.html'],
-    options: {
-      spawn: false,
-    }
+      files: ['*.html'],
+      options: {
+        spawn: false,
+      }
     },
     php: {
-    files: ['**/*.php'],
-    options: {
-      spawn: false,
-    }
+      files: ['**/*.php'],
+      options: {
+        spawn: false,
+      }
     },
     scripts: {
-    files: ['js/application/**/*.js'],
-    tasks: ['jshint', 'concat', 'uglify'],
-    options: {
-      spawn: false,
-    }
+      files: ['js/application/**/*.js'],
+      tasks: ['jshint', 'concat', 'uglify'],
+      options: {
+        spawn: false,
+      }
     },
     css: {
-    files: ['css/sass/**/*.scss'],
-    tasks: ['sass', 'autoprefixer', 'cssmin'],
-    options: {
-      spawn: false,
-    }
-    },
-    images: {
-    files: ['images/**/*.{png,jpg,gif}', 'images/*.{png,jpg,gif}'],
-    tasks: ['imagemin'],
-    options: {
-      spawn: false,
-    }
+      files: ['css/sass/**/*.scss'],
+      tasks: ['sass', 'autoprefixer', 'cssmin'],
+      options: {
+        spawn: false,
+      }
     }
   },
 
   connect: {
     server: {
-    options: {
-      port: 8000,
-      base: './'
-    }
+      options: {
+        port: 8000,
+        base: './'
+      }
     }
   },
 
@@ -126,7 +107,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Default Task is basically a rebuild
-  grunt.registerTask('default', ['concat', 'uglify', 'sass', 'imagemin']);
+  grunt.registerTask('default', ['concat', 'uglify', 'sass']);
 
   grunt.registerTask('dev', ['connect', 'watch']);
 
