@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields Pro
 Plugin URI: http://www.advancedcustomfields.com/
 Description: Customise WordPress with powerful, professional and intuitive fields
-Version: 5.2.6
+Version: 5.3.0
 Author: elliot condon
 Author URI: http://www.elliotcondon.com/
 Copyright: Elliot Condon
@@ -61,7 +61,7 @@ class acf {
 			
 			// basic
 			'name'				=> __('Advanced Custom Fields', 'acf'),
-			'version'			=> '5.2.6',
+			'version'			=> '5.3.0',
 						
 			// urls
 			'basename'			=> plugin_basename( __FILE__ ),
@@ -79,7 +79,8 @@ class acf {
 			'default_language'	=> '',
 			'current_language'	=> '',
 			'capability'		=> 'manage_options',
-			'uploader'			=> 'wp'
+			'uploader'			=> 'wp',
+			'autoload'			=> false
 		);
 		
 		
@@ -127,7 +128,7 @@ class acf {
 			acf_include('admin/field-group.php');
 			acf_include('admin/field-groups.php');
 			acf_include('admin/update.php');
-			acf_include('admin/settings-export.php');
+			acf_include('admin/settings-tools.php');
 			//acf_include('admin/settings-addons.php');
 			acf_include('admin/settings-info.php');
 		}
@@ -175,56 +176,6 @@ class acf {
 	
 	
 	/*
-	*  complete
-	*
-	*  This function will ensure all files are included
-	*
-	*  @type	function
-	*  @date	10/03/2014
-	*  @since	5.0.0
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	function complete() {
-		
-		// bail early if actions have not passed 'plugins_loaded'
-		if( ! did_action('plugins_loaded') ) {
-			
-			return;
-			
-		}
-		
-		
-		// once run once
-		if( acf_get_setting('complete') ) {
-		
-			return;
-			
-		}
-		
-		
-		// update setting
-		acf_update_setting('complete', true);
-		
-		
-		// wpml
-		if( defined('ICL_SITEPRESS_VERSION') ) {
-		
-			acf_include('core/wpml.php');
-			
-		}
-		
-		
-		// action for 3rd party customization
-		do_action('acf/include_field_types', 5);
-		do_action('acf/include_fields', 5);
-		
-	}
-	
-	
-	/*
 	*  wp_init
 	*
 	*  This function will run on the WP init action and setup many things
@@ -239,16 +190,17 @@ class acf {
 	
 	function wp_init() {
 		
-		// complete loading of ACF files
-		$this->complete();
-		
-		
 		// vars
 		$cap = acf_get_setting('capability');
+		$version = acf_get_setting('version');
+		$lang = get_locale();
+		$scripts = array();
+		$styles = array();
+		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
 		
-		// Create post type 'acf-field-group'
-		register_post_type( 'acf-field-group', array(
+		// register post type 'acf-field-group'
+		register_post_type('acf-field-group', array(
 			'labels'			=> array(
 			    'name'					=> __( 'Field Groups', 'acf' ),
 				'singular_name'			=> __( 'Field Group', 'acf' ),
@@ -279,8 +231,8 @@ class acf {
 		));
 		
 		
-		// Create post type 'acf-field'
-		register_post_type( 'acf-field', array(
+		// register post type 'acf-field'
+		register_post_type('acf-field', array(
 			'labels'			=> array(
 			    'name'					=> __( 'Fields', 'acf' ),
 				'singular_name'			=> __( 'Field', 'acf' ),
@@ -311,80 +263,184 @@ class acf {
 		));
 		
 		
-		// min
-		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		// register post status
+		register_post_status('acf-disabled', array(
+			'label'                     => __( 'Disabled', 'acf' ),
+			'public'                    => true,
+			'exclude_from_search'       => false,
+			'show_in_admin_all_list'    => true,
+			'show_in_admin_status_list' => true,
+			'label_count'               => _n_noop( 'Disabled <span class="count">(%s)</span>', 'Disabled <span class="count">(%s)</span>', 'acf' ),
+		));
+		
+		
+		// append scripts
+		$scripts['select2'] = array(
+			'src'	=> acf_get_dir("assets/inc/select2/select2{$min}.js"),
+			'deps'	=> array('jquery')
+		);
+		
+		$scripts['acf-input'] = array(
+			'src'	=> acf_get_dir("assets/js/acf-input{$min}.js"),
+			'deps'	=> array(
+				'jquery',
+				'jquery-ui-core',
+				'jquery-ui-sortable',
+				'jquery-ui-resizable',
+				'jquery-ui-datepicker',
+				'wp-color-picker',
+				'select2'
+			)
+		);
+		
+		$scripts['acf-field-group'] = array(
+			'src'	=> acf_get_dir("assets/js/acf-field-group{$min}.js"),
+			'deps'	=> array('acf-input')
+		);
+		
+		
+		// select2-l10n
+		if( $lang ) {
+			
+			// vars
+			$lang = str_replace('_', '-', $lang);
+			$lang_code = substr($lang, 0, 2);
+			$src = '';
+			
+			
+			// attempt 1
+			if( file_exists(acf_get_path("assets/inc/select2/select2_locale_{$lang_code}.js")) ) {
+				
+				$src = acf_get_dir("assets/inc/select2/select2_locale_{$lang_code}.js");
+				
+			} elseif( file_exists(acf_get_path("assets/inc/select2/select2_locale_{$lang}.js")) ) {
+				
+				$src = acf_get_dir("assets/inc/select2/select2_locale_{$lang}.js");
+				
+			}
+			
+			
+			// only append if file exists
+			if( $src ) {
+				
+				// append script
+				$scripts['select2-l10n'] = array(
+					'src'	=> $src,
+					'deps'	=> array('select2')
+				);
+				
+				
+				// append dep
+				$scripts['acf-input']['deps'][] = 'select2-l10n';
+				
+			}
+			
+		}
 		
 		
 		// register scripts
-		$scripts = array(
+		foreach( $scripts as $handle => $script ) {
 			
-			array(
-				'handle'	=> 'select2',
-				'src'		=> acf_get_dir( "assets/inc/select2/select2{$min}.js" ),
-				'deps'		=> array('jquery')
-			),
-			
-			array(
-				'handle'	=> 'acf-input',
-				'src'		=> acf_get_dir( "assets/js/acf-input{$min}.js" ),
-				'deps'		=> array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-resizable', 'jquery-ui-datepicker', 'wp-color-picker', 'select2')
-			),
-			
-			array(
-				'handle'	=> 'acf-field-group',
-				'src'		=> acf_get_dir( "assets/js/acf-field-group{$min}.js"),
-				'deps'		=> array('acf-input')
-			)
-			
-		);
-				
-		foreach( $scripts as $script ) {
-		
-			wp_register_script( $script['handle'], $script['src'], $script['deps'], acf_get_setting('version') );
+			wp_register_script( $handle, $script['src'], $script['deps'], $version );
 			
 		}
+		
+		
+		// append styles
+		$styles['select2'] = array(
+			'src'		=> acf_get_dir('assets/inc/select2/select2.css'),
+			'deps'		=> false
+		);
+		
+		$styles['acf-datepicker'] = array(
+			'src'		=> acf_get_dir('assets/inc/datepicker/jquery-ui-1.10.4.custom.min.css'),
+			'deps'		=> false
+		);
+		
+		$styles['acf-global'] = array(
+			'src'		=> acf_get_dir('assets/css/acf-global.css'),
+			'deps'		=> false
+		);
+		
+		$styles['acf-input'] = array(
+			'src'		=> acf_get_dir('assets/css/acf-input.css'),
+			'deps'		=> array('acf-global', 'wp-color-picker', 'select2', 'acf-datepicker')
+		);
+		
+		$styles['acf-field-group'] = array(
+			'src'		=> acf_get_dir('assets/css/acf-field-group.css'),
+			'deps'		=> array('acf-input')
+		);
 		
 		
 		// register styles
-		$styles = array(
-			
-			array(
-				'handle'	=> 'select2',
-				'src'		=> acf_get_dir('assets/inc/select2/select2.css'),
-				'deps'		=> false
-			),
-			
-			array(
-				'handle'	=> 'acf-datepicker',
-				'src'		=> acf_get_dir('assets/inc/datepicker/jquery-ui-1.10.4.custom.min.css'),
-				'deps'		=> false
-			),
-			
-			array(
-				'handle'	=> 'acf-global',
-				'src'		=> acf_get_dir('assets/css/acf-global.css'),
-				'deps'		=> false
-			),
-			
-			array(
-				'handle'	=> 'acf-input',
-				'src'		=> acf_get_dir('assets/css/acf-input.css'),
-				'deps'		=> array('acf-global', 'wp-color-picker', 'select2', 'acf-datepicker')
-			),
-			
-			array(
-				'handle'	=> 'acf-field-group',
-				'src'		=> acf_get_dir('assets/css/acf-field-group.css'),
-				'deps'		=> array('acf-input')
-			)
-			
-		);		
+		foreach( $styles as $handle => $style ) {
 		
-		foreach( $styles as $style ) {
-		
-			wp_register_style( $style['handle'], $style['src'], $style['deps'], acf_get_setting('version') ); 
+			wp_register_style( $handle, $style['src'], $style['deps'], $version ); 
 			
 		}
+		
+		
+		// complete loading of ACF files
+		$this->complete();
+		
+	}
+	
+	
+	/*
+	*  complete
+	*
+	*  This function will ensure all files are included
+	*
+	*  @type	function
+	*  @date	10/03/2014
+	*  @since	5.0.0
+	*
+	*  @param	n/a
+	*  @return	n/a
+	*/
+	
+	function complete() {
+		
+		// bail early if actions have not passed 'plugins_loaded'
+		// this allows all plugins / theme to hook in
+		if( !did_action('plugins_loaded') ) {
+			
+			return;
+			
+		}
+		
+		
+		// once run once
+		if( acf_get_setting('complete') ) {
+		
+			return;
+			
+		}
+		
+		
+		// update setting
+		acf_update_setting('complete', true);
+		
+		
+		// wpml
+		if( defined('ICL_SITEPRESS_VERSION') ) {
+		
+			acf_include('core/wpml.php');
+			
+		}
+		
+		
+		// include field types
+		do_action('acf/include_field_types', 5);
+		
+		
+		// include local fields
+		do_action('acf/include_fields', 5);
+		
+		
+		// final action
+		do_action('acf/init');
 		
 	}
 	
@@ -433,6 +489,7 @@ class acf {
 	    }
 	    
 	    
+	    // return
 	    return $where;
 	    
 	}

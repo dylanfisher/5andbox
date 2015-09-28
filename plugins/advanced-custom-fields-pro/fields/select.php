@@ -157,7 +157,7 @@ class acf_field_select extends acf_field {
 	function render_field( $field ) {
 
 		// convert value to array
-		$field['value'] = acf_force_type_array($field['value']);
+		$field['value'] = acf_get_array($field['value'], false);
 		
 		
 		// add empty value (allows '' to be selected)

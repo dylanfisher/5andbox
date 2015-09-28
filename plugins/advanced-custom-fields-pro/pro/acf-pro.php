@@ -297,13 +297,13 @@ class acf_pro {
 		acf_extract_var( $field, 'parent_layout');
 		
 		
-		// sub fields
+		// repeater
 		if( $field['type'] == 'repeater' ) {
 			
 			$field['sub_fields'] = acf_prepare_fields_for_export( $field['sub_fields'] );
-			
-		}
-		elseif( $field['type'] == 'flexible_content' ) {
+		
+		// flexible content
+		} elseif( $field['type'] == 'flexible_content' ) {
 			
 			foreach( $field['layouts'] as $l => $layout ) {
 				

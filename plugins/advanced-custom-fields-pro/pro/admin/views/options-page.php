@@ -2,11 +2,7 @@
 
 // extract
 extract($args);
-
-
-// page
-$page = acf_get_options_page( $slug );
-			
+		
 ?>
 <div class="wrap acf-settings-wrap">
 	

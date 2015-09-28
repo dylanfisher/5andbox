@@ -40,7 +40,7 @@ class acf_form_post {
 		
 		// save
 		add_filter('wp_insert_post_empty_content',		array($this, 'wp_insert_post_empty_content'), 10, 2);
-		add_action('save_post', 						array($this, 'save_post'), 10, 1);
+		add_action('save_post', 						array($this, 'save_post'), 10, 2);
 		
 		
 		// ajax
@@ -215,13 +215,13 @@ class acf_form_post {
 					$style_found = true;
 					
 					$this->style = acf_get_field_group_style( $field_group );
+					
 				}
 				
 			}
-			// foreach($acfs as $acf)
+			
 		}
-		// if($acfs)
-		
+				
 		
 		// Allow 'acf_after_title' metabox position
 		add_action('edit_form_after_title', array($this, 'edit_form_after_title'));
@@ -514,10 +514,18 @@ if( typeof acf !== 'undefined' ) {
 	*  @return	$post_id (int)
 	*/
 	
-	function save_post( $post_id ) {
+	function save_post( $post_id, $post ) {
 		
 		// do not save if this is an auto save routine
 		if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+			
+			return $post_id;
+			
+		}
+		
+		
+		// bail early if is acf-field-group or acf-field
+		if( in_array($post->post_type, array('acf-field', 'acf-field-group'))) {
 			
 			return $post_id;
 			

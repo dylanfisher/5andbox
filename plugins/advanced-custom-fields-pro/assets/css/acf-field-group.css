@@ -12,8 +12,7 @@
 *
 *---------------------------------------------------------------------------------------------*/
 #minor-publishing-actions,
-#misc-publishing-actions #visibility,
-#misc-publishing-actions .curtime {
+#misc-publishing-actions #visibility {
   display: none;
 }
 #minor-publishing {
@@ -35,6 +34,10 @@
 #acf-field-group-options > .inside {
   padding: 0;
   margin: 0;
+}
+#acf-field-group-fields {
+  border: 0 none;
+  box-shadow: none;
 }
 #acf-field-group-fields > .handlediv,
 #acf-field-group-fields > .hndle {
@@ -114,6 +117,11 @@
   cursor: move;
   background: transparent;
   float: left;
+  height: 28px;
+  line-height: 27px;
+  width: 28px;
+  font-size: 13px;
+  color: #444;
 }
 .acf-field-object .handle strong {
   display: block;
@@ -159,6 +167,7 @@
 }
 .acf-field-object.open > .handle .acf-icon {
   border-color: #fff;
+  color: #fff;
 }
 /* field object settings */
 .acf-field-object .settings {

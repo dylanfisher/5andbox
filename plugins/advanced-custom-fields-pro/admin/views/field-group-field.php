@@ -46,7 +46,7 @@ $atts['class'] = str_replace('_', '-', $atts['class']);
 	<div class="handle">
 		<ul class="acf-hl acf-tbody">
 			<li class="li-field-order">
-				<span class="acf-icon large"><?php echo ($i + 1); ?></span>
+				<span class="acf-icon acf-icon-order"><?php echo ($i + 1); ?></span>
 				<pre class="pre-field-key"><?php echo $field['key']; ?></pre>
 			</li>
 			<li class="li-field-label">

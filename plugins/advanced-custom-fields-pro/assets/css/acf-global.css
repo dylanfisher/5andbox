@@ -54,15 +54,6 @@
 img.acf-fw {
   width: 100%;
 }
-/* icon */
-[class^="acf-sprite-"] {
-  display: block;
-  width: 8px;
-  height: 8px;
-  float: left;
-  background: url(../images/sprite.png);
-  margin: 0;
-}
 /* Browser */
 .acf-visible {
   display: block;
@@ -172,15 +163,52 @@ img.acf-fw {
   z-index: 9999;
   font-size: 12px;
 }
+.acf-tooltip.top {
+  margin-top: -8px;
+}
+.acf-tooltip.right {
+  margin-right: -8px;
+}
+.acf-tooltip.bottom {
+  margin-bottom: -8px;
+}
+.acf-tooltip.left {
+  margin-left: -8px;
+}
 .acf-tooltip:before {
   border: solid;
-  border-color: #2F353E transparent;
-  border-width: 6px 6px 0 6px;
-  bottom: 0px;
-  margin: 0 0 -6px -6px;
+  border-color: transparent;
+  border-width: 6px;
   content: "";
-  left: 50%;
   position: absolute;
+}
+.acf-tooltip.top:before {
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-top-color: #2F353E;
+  border-bottom-width: 0;
+}
+.acf-tooltip.right:before {
+  top: 50%;
+  margin-top: -6px;
+  right: 100%;
+  border-right-color: #2F353E;
+  border-left-width: 0;
+}
+.acf-tooltip.bottom:before {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-bottom-color: #2F353E;
+  border-top-width: 0;
+}
+.acf-tooltip.left:before {
+  top: 50%;
+  margin-top: -6px;
+  left: 100%;
+  border-left-color: #2F353E;
+  border-right-width: 0;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -219,43 +247,162 @@ img.acf-fw {
 *	acf-icon
 *
 *--------------------------------------------------------------------------------------------*/
+@font-face {
+  font-family: 'acf';
+  src: url('../font/acf.eot?37192481');
+  src: url('../font/acf.eot?37192481#iefix') format('embedded-opentype'), url('../font/acf.woff?37192481') format('woff'), url('../font/acf.ttf?37192481') format('truetype'), url('../font/acf.svg?37192481#acf') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.acf-icon:before {
+  font-family: "acf";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.acf-icon-plus:before {
+  content: '\e800';
+}
+/* '' */
+.acf-icon-minus:before {
+  content: '\e801';
+}
+/* '' */
+.acf-icon-cancel:before {
+  content: '\e802';
+}
+/* '' */
+.acf-icon-pencil:before {
+  content: '\e803';
+}
+/* '' */
+.acf-icon-location:before {
+  content: '\e804';
+}
+/* '' */
+.acf-icon-down:before {
+  content: '\e805';
+}
+/* '' */
+.acf-icon-left:before {
+  content: '\e806';
+}
+/* '' */
+.acf-icon-right:before {
+  content: '\e807';
+}
+/* '' */
+.acf-icon-up:before {
+  content: '\e808';
+}
+/* '' */
+.acf-icon-sync:before {
+  content: '\e809';
+}
+/* '' */
+.acf-icon-globe:before {
+  content: '\e80a';
+}
+/* '' */
+.acf-icon-picture:before {
+  content: '\e80b';
+}
+/* '' */
+.acf-icon-check:before {
+  content: '\e80c';
+}
+/* '' */
+.acf-icon-dot-3:before {
+  content: '\e80d';
+}
+/* '' */
+.acf-icon-arrow-combo:before {
+  content: '\e80e';
+}
+/* '' */
+/* default */
 .acf-icon {
-  display: block;
+  display: inline-block;
   height: 26px;
   width: 26px;
-  border: #BBB solid 1px;
-  border-radius: 15px;
+  border: transparent solid 1px;
+  border-radius: 100%;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+}
+/* elements */
+span.acf-icon {
+  color: #999;
+  border-color: #BBB;
+  background-color: #fff;
+}
+/* button */
+a.acf-icon {
+  color: #999;
+  border-color: #BBB;
+  background-color: #fff;
   position: relative;
   overflow: hidden;
-  font-size: 13px;
-  line-height: 25px;
-  text-align: center;
-  background: #fff;
+  transition: none;
 }
-.acf-icon:hover {
-  border-color: #999;
+/* minor tweaks */
+.acf-icon-pencil {
+  font-size: 14px;
 }
-.acf-icon:active,
-.acf-icon:focus {
+.acf-icon-pencil.small {
+  font-size: 12px;
+}
+.acf-icon-location {
+  font-size: 18px;
+}
+.acf-icon-left:before {
+  left: -1px;
+  position: relative;
+}
+.acf-icon-sync.small {
+  font-size: 14px;
+}
+/* states */
+a.acf-icon:hover {
+  border-color: transparent;
+  background: #b4b9be;
+  color: #fff;
+}
+a.acf-icon:active,
+a.acf-icon:focus {
   outline: none;
+}
+a.acf-icon-minus:hover,
+a.acf-icon-cancel:hover {
+  background-color: #F55E4F;
 }
 /* sizes */
 .acf-icon.small {
   width: 18px;
   height: 18px;
   line-height: 17px;
-}
-.acf-icon.large {
-  width: 28px;
-  height: 28px;
-  line-height: 27px;
-}
-/* sprite */
-.acf-icon [class^="acf-sprite-"] {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -4px 0 0 -4px;
 }
 /* styles */
 .acf-icon.light {
@@ -264,19 +411,54 @@ img.acf-fw {
   background: #F5F5F5;
 }
 .acf-icon.light:hover {
-  background: #EBEBEB;
+  background: #0073AA;
 }
+/* dark */
 .acf-icon.dark {
-  border: 0 none;
-  padding: 1px;
-  background: #0B0B0B;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  border-color: transparent;
+  background: #23282D;
+  color: #eee;
+}
+a.acf-icon.dark:hover {
+  border-color: transparent;
+  background: #191E23;
+  color: #00b9eb;
+}
+a.acf-icon-minus.dark:hover,
+a.acf-icon-cancel.dark:hover {
+  color: #D54E21;
+}
+/* grey */
+.acf-icon.grey {
+  border-color: transparent;
+  background: #b4b9be;
+  color: #fff;
+}
+a.acf-icon.grey:hover {
+  border-color: transparent;
+  background: #00A0D2;
+  color: #fff;
+}
+a.acf-icon-minus.grey:hover,
+a.acf-icon-cancel.grey:hover {
+  background: #32373C;
+}
+/* red */
+.acf-icon.red {
+  border-color: transparent;
+  background-color: #F55E4F;
+  color: #fff;
+}
+/* yellow */
+.acf-icon.yellow {
+  border-color: transparent;
+  background-color: #FDBC40;
+  color: #fff;
 }
 /* logo */
 .acf-icon.logo {
   width: 150px;
   height: 150px;
-  border-radius: 75px;
   background: #5EE8BF;
   border: 0 none;
   position: absolute;
@@ -288,150 +470,22 @@ img.acf-fw {
 *	Sprite
 *
 *--------------------------------------------------------------------------------------------*/
-/* add */
-.acf-sprite-add {
-  background-position: 0 0;
-  width: 8px;
-  height: 8px;
-}
-.acf-icon .acf-sprite-add {
-  margin: -4px 0 0 -4px;
-}
-.acf-icon.dark .acf-sprite-add {
-  background-position: 0 -50px;
-}
-.acf-sprite-add:hover,
-.acf-icon:hover .acf-sprite-add {
-  background-position: 0 -100px;
-}
-/* remove */
-.acf-sprite-remove {
-  background-position: -50px 0;
-  width: 9px;
-  height: 2px;
-}
-.acf-icon .acf-sprite-remove {
-  margin: -1px 0 0 -4px;
-}
-.acf-icon.dark .acf-sprite-remove {
-  background-position: -50px -50px;
-}
-.acf-sprite-remove:hover,
-.acf-icon:hover .acf-sprite-remove {
-  background-position: -50px -100px;
-}
-/* delete */
-.acf-sprite-delete {
-  background-position: -100px 0;
-  width: 10px;
-  height: 10px;
-}
-.acf-icon .acf-sprite-delete {
-  margin: -5px 0 0 -5px;
-}
-.acf-icon.dark .acf-sprite-delete {
-  background-position: -100px -50px;
-}
-.acf-sprite-delete:hover,
-.acf-icon:hover .acf-sprite-delete {
-  background-position: -100px -100px;
-}
-/* edit */
-.acf-sprite-edit {
-  background-position: -150px 0;
-  width: 14px;
-  height: 14px;
-}
-.acf-icon .acf-sprite-edit {
-  margin: -7px 0 0 -7px;
-}
-.acf-icon.dark .acf-sprite-edit {
-  background-position: -150px -50px;
-}
-.acf-sprite-edit:hover,
-.acf-icon:hover .acf-sprite-edit {
-  background-position: -150px -100px;
-}
-/* locate */
-.acf-sprite-locate {
-  background-position: -200px 0;
-  width: 12px;
-  height: 13px;
-}
-.acf-icon .acf-sprite-locate {
-  margin: -6px 0 0 -7px;
-}
-.acf-icon.dark .acf-sprite-locate {
-  background-position: -200px -50px;
-}
-.acf-sprite-locate:hover,
-.acf-icon:hover .acf-sprite-locate {
-  background-position: -200px -100px;
-}
-/* left */
-.acf-sprite-left {
-  background-position: -250px 0;
-  width: 6px;
-  height: 10px;
-}
-.acf-icon .acf-sprite-left {
-  margin: -5px 0 0 -4px;
-}
-.acf-icon.dark .acf-sprite-left {
-  background-position: -250px -50px;
-}
-.acf-sprite-left:hover,
-.acf-icon:hover .acf-sprite-left {
-  background-position: -250px -100px;
-}
-/* right */
-.acf-sprite-right {
-  background-position: -300px 0;
-  width: 6px;
-  height: 10px;
-}
-.acf-icon .acf-sprite-right {
-  margin: -5px 0 0 -3px;
-}
-.acf-icon.dark .acf-sprite-right {
-  background-position: -300px -50px;
-}
-.acf-sprite-right:hover,
-.acf-icon:hover .acf-sprite-right {
-  background-position: -300px -100px;
-}
-/* arrow */
-.acf-sprite-arrow {
-  background-position: 0 -150px;
-  margin: 4px 5px 0 7px;
+[class^="acf-sprite-"] {
+  display: inline-block;
   width: 16px;
   height: 16px;
+  background: url(../images/sprite.png);
 }
-/* gallery */
-.acf-sprite-media {
-  background-position: -50px -150px;
-  width: 36px;
-  height: 36px;
+.acf-icon [class^="acf-sprite-"] {
+  margin: 1px auto 0;
 }
-/*
-.acf-sprite-submit:hover,
-.acf-icon:hover .acf-sprite-submit {
-	background-position: -250px -50px;
-}
-*/
-/* acf */
 .acf-sprite-logo {
-  background-position: -100px -150px;
+  background-position: 0 0;
   width: 100px;
   height: 46px;
 }
 .acf-icon .acf-sprite-logo {
-  margin: -23px 0 0 -50px;
-}
-.acf-sprite-url {
-  background-position: -350px 0;
-  height: 14px;
-  width: 14px;
+  margin-top: 52px;
 }
 /*--------------------------------------------------------------------------------------------
 *
@@ -513,15 +567,15 @@ img.acf-fw {
   color: #fff;
   text-shadow: 0 1px 0 #DD4232;
 }
-.acf-error-message .acf-icon.dark {
+.acf-error-message .acf-icon {
   position: absolute;
   top: 8px;
   right: 10px;
   background-color: #dd4232;
-  transition: none;
-  box-shadow: none;
+  border-color: transparent;
+  color: #fff;
 }
-.acf-error-message .acf-icon.dark:hover {
+.acf-error-message .acf-icon:hover {
   background-color: #F1F1F1;
 }
 /*--------------------------------------------------------------------------------------------
@@ -685,10 +739,11 @@ img.acf-fw {
 .acf-postbox {
   position: relative;
 }
-.acf-postbox > .inside,
 .acf-fields {
   margin: 0 !important;
+  /* override WP style - do not delete - you have tried this before */
   padding: 0 !important;
+  /* override WP style - do not delete - you have tried this before */
   position: relative;
 }
 .acf-fields > .acf-field {
@@ -698,6 +753,10 @@ img.acf-fw {
 }
 .acf-fields > .acf-field:first-child {
   border-top-width: 0;
+}
+/* position high */
+#acf_after_title-sortables .acf-postbox {
+  margin: 20px 0 0;
 }
 /* seamless */
 .acf-postbox.seamless {
@@ -710,9 +769,12 @@ img.acf-fw {
   display: none;
 }
 .acf-postbox.seamless > .acf-fields > .acf-field {
-  margin: 0;
-  padding: 15px 0;
-  border: 0 none !important;
+  padding: 0;
+  margin: 20px 0 0;
+  border: 0 none;
+}
+.acf-postbox.seamless > .acf-fields > .acf-field:first-child {
+  margin-top: 0;
 }
 .acf-postbox.seamless > .acf-fields > .acf-table,
 .acf-postbox.seamless > .acf-fields > .acf-table > tbody > tr > td {
@@ -765,38 +827,56 @@ img.acf-fw {
 #icon-edit.icon32-posts-acf-field-group {
   background-position: -11px -5px;
 }
-#acf-col-wrap {
-  position: relative;
-  clear: both;
-}
-#acf-col-main {
-  margin-right: 300px;
-}
-#acf-col-main .tablenav,
-#acf-col-main p.search-box {
+#acf-field-group-wrap .tablenav,
+#acf-field-group-wrap p.search-box {
   display: none;
 }
-#acf-col-main .wp-list-table .check-column {
-  padding-left: 5px;
+#acf-field-group-wrap .wp-list-table .column-acf-fg-description {
+  display: none;
 }
-#acf-col-main .wp-list-table th#fields {
-  width: 25%;
+#acf-field-group-wrap .wp-list-table .column-acf-fg-count {
+  width: 10%;
 }
-#acf-col-main .tablenav.bottom {
+#acf-field-group-wrap .wp-list-table .column-acf-fg-status {
+  width: 10%;
+}
+#acf-field-group-wrap .tablenav.bottom {
   display: block;
 }
-#acf-col-main form {
-  position: relative;
+#acf-field-group-wrap .wp-list-table {
+  border-radius: 0;
+}
+#acf-field-group-wrap .acf-description {
+  font-weight: normal;
+  font-size: 13px;
+  color: #999;
+  margin-left: 7px;
+}
+/* WPML fix */
+#acf-field-group-wrap .subsubsub {
+  margin-bottom: 3px;
+}
+#acf-field-group-wrap .subsubsub ul {
+  margin: 0;
+}
+#acf-field-group-wrap .subsubsub + .subsubsub {
+  margin-top: 0;
+}
+/* columns (replicate post edit layout) */
+.acf-columns-2 {
+  margin-right: 300px;
+}
+.acf-columns-2 .acf-column-1 {
   float: left;
   width: 100%;
 }
-#acf-col-side {
+.acf-columns-2 .acf-column-2 {
   float: right;
-  width: 281px;
-  padding-top: 34px !important;
+  margin-right: -300px;
+  width: 280px;
 }
-#acf-col-main .wp-list-table {
-  border-radius: 0;
+.acf-clear {
+  clear: both;
 }
 /*---------------------------------------------------------------------------------------------
 *
@@ -1040,6 +1120,10 @@ img.acf-fw {
   top: 10px;
   right: 10px;
 }
+html[dir="rtl"] #acf-popup .title .acf-icon {
+  right: auto;
+  left: 10px;
+}
 #acf-popup .acf-popup-box .inner,
 #acf-popup .acf-popup-box .loading {
   position: absolute;
@@ -1123,6 +1207,38 @@ img.acf-fw {
   margin-top: 40px;
   padding-bottom: 20px;
 }
+.acf-three-col img {
+  border: #DDDDDD solid 1px;
+  margin: 0 0 20px;
+}
+.acf-three-col {
+  position: relative;
+  overflow: hidden;
+}
+.acf-three-col > div {
+  float: left;
+  margin: 0 0 10px 5%;
+  position: relative;
+  width: 30%;
+}
+.acf-three-col > div:first-child,
+.acf-three-col > br + div {
+  margin-left: 0;
+}
+.acf-three-col > br {
+  display: none;
+}
+.acf-wrap .acf-three-col h3,
+.acf-wrap .acf-three-col h4 {
+  margin-top: 0;
+}
+.acf-wrap .changelog {
+  list-style: disc;
+  padding-left: 15px;
+}
+.acf-wrap .changelog li {
+  margin: 0 0 0.75em;
+}
 /*--------------------------------------------------------------------------------------------
 *
 *	acf-hl cols
@@ -1200,5 +1316,20 @@ html[dir="rtl"] .acf-input-table > tbody > tr > td.order + td {
   .acf-spinner {
     background-image: url(../images/spinner@2x.gif);
     background-size: 20px 20px;
+  }
+}
+/*---------------------------------------------------------------------------------------------
+*
+*  Device
+*
+*---------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 850px) {
+  .acf-columns-2 {
+    margin-right: 0;
+  }
+  .acf-columns-2 .acf-column-1,
+  .acf-columns-2 .acf-column-2 {
+    float: none;
+    width: auto;
   }
 }

@@ -320,13 +320,21 @@ class acf_location {
 		
 			
 		// get term data
+		// - selected term may have a numeric slug '123' (user reported on forum), so always check slug first
 		$data = acf_decode_taxonomy_term( $rule['value'] );
-		$field = is_numeric( $data['term'] ) ? 'id' : 'slug';
-		$term = get_term_by( $field, $data['term'], $data['taxonomy'] );
+		$term = get_term_by( 'slug', $data['term'], $data['taxonomy'] );
 		
 		
-		// validate term
-		if( empty($term) ) {
+		// attempt get term via ID (ACF4 uses ID)
+		if( !$term && is_numeric($data['term']) ) {
+			
+			$term = get_term_by( 'id', $data['term'], $data['taxonomy'] );
+			
+		}
+		
+		
+		// bail early if no term
+		if( !$term ) {
 			
 			return false;
 						
@@ -1208,8 +1216,8 @@ new acf_location();
 *  @return	(boolean)
 */
 
-function acf_get_field_group_visibility( $field_group, $args = array() )
-{
+function acf_get_field_group_visibility( $field_group, $args = array() ) {
+	
 	// vars
 	$args = acf_parse_args($args, array(
 		'post_id'		=> 0,
@@ -1232,13 +1240,19 @@ function acf_get_field_group_visibility( $field_group, $args = array() )
 	));
 	
 	
+	// bail early if not active
+	if( !$field_group['active'] ) {
+		
+		return false;
+		
+	}
+	
+	
 	// WPML
 	if( defined('ICL_LANGUAGE_CODE') ) {
 		
 		$args['lang'] = ICL_LANGUAGE_CODE;
 		
-		//global $sitepress;
-		//$sitepress->switch_lang( $options['lang'] );
 	}
 	
 	
@@ -1260,13 +1274,15 @@ function acf_get_field_group_visibility( $field_group, $args = array() )
 				
 				$match = apply_filters( 'acf/location/rule_match/' . $rule['param'] , false, $rule, $args );
 				
-				if( !$match )
-				{
+				if( !$match ) {
+					
 					$match_group = false;
 					break;
+					
 				}
 				
 			}
+			
 		}
 		
 		

@@ -10,7 +10,7 @@ Customise WordPress with powerful, professional and intuitive fields
 
 == Description ==
 
-Advanced Custom Fields is the perfect solution for any wordpress website which needs more flexible data like other Content Management Systems. 
+Advanced Custom Fields is the perfect solution for any WordPress website which needs more flexible data like other Content Management Systems. 
 
 * Visually create your Fields
 * Select from multiple input types (text, textarea, wysiwyg, image, file, page link, post object, relationship, select, checkbox, radio buttons, date picker, true / false, repeater, flexible content, gallery and more to come!)
@@ -25,7 +25,7 @@ Advanced Custom Fields is the perfect solution for any wordpress website which n
 * Number (type number, api returns integer)
 * Email (type email, api returns text)
 * Password (type password, api returns text)
-* WYSIWYG (a wordpress wysiwyg editor, api returns html)
+* WYSIWYG (a WordPress wysiwyg editor, api returns html)
 * Image (upload an image, api returns the url)
 * File (upload a file, api returns the url)
 * Select (drop down list of choices, api returns chosen item)
@@ -105,6 +105,66 @@ http://support.advancedcustomfields.com/
 
 
 == Changelog ==
+
+= 5.3.0 =
+* WYSIWYG field: Fixed 'Visual/Text' toggle bug with WP 4.3
+* Select field: Fixed Select2 bug hiding selected choices
+
+= 5.2.9 =
+* Field group: Added new 'status' setting to enable/disable
+* Field group: Added new 'description' setting shown to developers when viewing the field group list
+* Field group: Moved 'Show field keys' Screen Option within existing 'Show on Screen' checkboxes
+* Tab field: Fixed missing min-height to left aligned tab wrapper
+* Relationship field: Added timeout to reduce AJAX requests whilst typing in search
+* Flexible Content field: Fixed minor JS bug where removing a layout would not update the order numbers
+* Core: Fixed bug validating uppercase file extensions
+* Core: Renamed menu items
+* Core: Replace sprite icons with font
+* Core: Added new setting 'export_textdomain' to add __() to generated export code
+* Core: Fixed conflict with Post Type Order plugin causing issues when querying posts
+* Core: Fixed conflict with WPML causing issues when querying posts
+* Core: Added compatibility for WP 4.3
+* Core: Minor fixes and improvements
+* Language: Updated German translation - thanks to Ralf Koller
+* Language: Updated Italian translation - thanks to Davide Pantè
+
+= 5.2.8 =
+* Image field: Added selection restrictions in media popup (width, height, size, type)
+* File field: Same as above
+* Gallery field: Same as above
+* Tab field: Added new 'endpoint' setting - allows multiple tab groups
+* Tab field: Improved CSS/JS to allow individual tab groups to use different alignments (left/top)
+* Repeater field: Added logic to delete nested sub field values (grand children)
+* Options page: Added new 'autoload' setting
+* Core: Added new filter 'acf/prepare_field'
+* Core: Added upload validation logic to ignore filetype case sensitivity
+* Core: Fixed upload issue when filesize restriction contained a decimal place
+* Core: Improved validation/save JS compatibility with 3rd party plugins
+* Core: Updated Select2 library to v3.5.2
+* Core: Fixed bug hiding Select2 choices when multiple found with the same label
+* Core: Minor fixes and improvements
+* Language: Updated Italian translation - thanks to Davide Pantè & Francesco Mazzola
+* Language: Updated German translation - thanks to Ralf Koller
+* Language: Updating Finnish translation - thanks to Sauli Rajala
+
+= 5.2.7 =
+* Taxonomy field: Split setting 'load_save_terms' into 'load_terms' and 'save_terms'
+* Select field: Fixed bug causing values containing ',' to fail
+* Checkbox field: Fixed bug causing values containing ',' to fail
+* Checkbox field: Added new 'toggle all' setting
+* User field: Added new filters 'acf/fields/user/result' and 'acf/fields/user/search_columns'
+* Gallery field: Added logic to increase sidebar width when space is available
+* Options page: Added new 'post_id' setting to customise where values are loaded and saved
+* API: Improved `get_field()` to better handle no value
+* API: Optimised asset loading when using the `acf_form()` function
+* API: Added new function `delete_sub_field()`
+* Core: Added new `acf/init` action when ACF has loaded all functionality
+* Core: Added compatibility with Select2 language translations
+* Core: Changed compatibility filter default to false
+* Core: Minor fixes and improvements
+* Language: Updated German translation - thanks to Thomas Meyer
+* Language: Updated French Translation - thanks to Maxime Bernard-Jacquet
+* Language: Updated Persian translation - thanks to Kamel
 
 = 5.2.6 =
 * Core: Improved validation logic to display HTML5 validation messages
@@ -1253,6 +1313,9 @@ http://support.advancedcustomfields.com/
 
 
 == Upgrade Notice ==
+
+= 5.2.7 =
+* Field class names have changed slightly in v5.2.7 from `field_type-{$type}` to `acf-field-{$type}`. This change was introduced to better optimise JS performance. The previous class names can be added back in with the following filter: http://www.advancedcustomfields.com/resources/acfcompatibility/
 
 = 3.0.0 =
 * Editor is broken in WordPress 3.3

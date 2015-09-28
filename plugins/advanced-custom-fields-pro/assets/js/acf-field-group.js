@@ -71,12 +71,6 @@
 				
 			});
 			
-			$(document).on('change', '#adv-settings input[name="show_field_keys"]', function(){
-				
-				self.toggle_field_keys( $(this).val() );
-				
-			});
-			
 			
 			// field events
 			this.$fields.on('click', '.edit-field', function( e ){
@@ -165,7 +159,6 @@
 			// modules
 			this.conditions.init();
 			this.locations.init();
-			this.options.init();
 			
 			
 			// render
@@ -198,43 +191,6 @@
 			
 			// show field keys	
 			if( options.show_field_keys ) {
-			
-				this.$fields.addClass('show-field-keys');
-			
-			} else {
-				
-				this.$fields.removeClass('show-field-keys');
-				
-			}
-			
-		},
-		
-		
-		/*
-		*  toggle_field_keys
-		*
-		*  description
-		*
-		*  @type	function
-		*  @date	15/07/2014
-		*  @since	5.0.0
-		*
-		*  @param	$post_id (int)
-		*  @return	$post_id (int)
-		*/
-		
-		toggle_field_keys : function( val ){
-			
-			// vars
-			val = parseInt(val);
-			
-			
-			// update user setting
-			acf.update_user_setting('show_field_keys', val);
-			
-			
-			// toggle class
-			if( val ) {
 			
 				this.$fields.addClass('show-field-keys');
 			
@@ -1479,39 +1435,20 @@
 				type = $el.attr('data-type');
 				
 			
+			// render name
 			if( $name.val() == '' ) {
 				
-				// thanks to https://gist.github.com/richardsweeney/5317392 for this code!
-				var val = $label.val(),
-					replace = {
-						'ä': 'a',
-						'æ': 'a',
-						'å': 'a',
-						'ö': 'o',
-						'ø': 'o',
-						'é': 'e',
-						'ë': 'e',
-						'ü': 'u',
-						'ó': 'o',
-						'ő': 'o',
-						'ú': 'u',
-						'é': 'e',
-						'á': 'a',
-						'ű': 'u',
-						'í': 'i',
-						' ' : '_',
-						'\'' : '',
-						'\\?' : ''
-					};
-				
-				$.each( replace, function(k, v){
-					var regex = new RegExp( k, 'g' );
-					val = val.replace( regex, v );
-				});
+				// vars
+				var s = $label.val();
 				
 				
-				val = val.toLowerCase();
-				$name.val( val ).trigger('change');
+				// sanitize
+				s = acf.str_sanitize(s);
+				
+				
+				// update name
+				$name.val( s ).trigger('change');
+				
 			}
 			
 			
@@ -2349,60 +2286,6 @@
 	};
 	
 	
-	acf.field_group.options = {
-		
-		$el : null,
-		
-		
-		/*
-		*  init
-		*
-		*  This function will run on document ready and initialize the module
-		*
-		*  @type	function
-		*  @date	8/04/2014
-		*  @since	5.0.0
-		*
-		*  @param	n/a
-		*  @return	n/a
-		*/
-		
-		init : function(){
-			
-			// vars
-			this.$el = acf.field_group.$options;
-			
-			
-			// hide on screen toggle
-			var $ul = this.$el.find('tr[data-name="hide_on_screen"] ul'),
-				$li = $('<li><label><input type="checkbox" value="" name="" >' + acf._e('hide_show_all') + '</label></li>');
-			
-			
-			// start checked?
-			if( $ul.find('input:not(:checked)').length == 0 )
-			{
-				$li.find('input').attr('checked', 'checked');
-			}
-			
-			
-			// event
-			$li.on('change', 'input', function(){
-				
-				var checked = $(this).is(':checked');
-				
-				$ul.find('input').attr('checked', checked);
-				
-			});
-			
-			
-			// add to ul
-			$ul.prepend( $li );
-			
-		}
-		
-	};
-	
-	
 	/*
 	*  ready
 	*
@@ -2571,7 +2454,7 @@
 		} else {
 			
 			$el.find('.acf-field[data-name="save_other_choice"]').hide();
-			$el.find('.acf-field[data-name="save_other_choice"] input').removeAttr('checked');
+			$el.find('.acf-field[data-name="save_other_choice"] input').prop('checked', false);
 			
 		}
 			
@@ -2711,6 +2594,78 @@
 		
 		// clear name
 		$el.find('tr[data-name="name"]:first input').val('').trigger('change');
+		
+	});
+	
+	
+	/*
+	*  screen
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	23/07/2015
+	*  @since	5.2.3
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	acf.field_group.screen = acf.model.extend({
+		
+		actions: {
+			'ready': 'ready'
+		},
+		
+		events: {
+			'click #acf-field-key-hide': 'toggle'
+		},
+		
+		ready: function(){
+			
+			// vars
+			var $el = $('#adv-settings'),
+				$append = $el.find('#acf-append-show-on-screen');
+			
+			
+			// append
+			$el.find('.metabox-prefs').append( $append.html() );
+			
+			
+			// move br
+			$el.find('.metabox-prefs br').remove();
+			
+			
+			// remove
+			$append.remove();
+			
+		},
+		
+		toggle: function( e ){
+			
+			// vars
+			var val = e.$el.prop('checked') ? 1 : 0;
+			
+			
+			// update user setting
+			acf.update_user_setting('show_field_keys', val);
+			
+			
+			// toggle class
+			var $fields = acf.field_group.$fields;
+			
+			if( val ) {
+			
+				$fields.addClass('show-field-keys');
+			
+			} else {
+				
+				$fields.removeClass('show-field-keys');
+				
+			}
+			
+		}
+		
 		
 	});
 	

@@ -131,8 +131,8 @@ class acf_input {
 			'validation_successful'	=> __('Validation successful', 'acf'),
 			'validation_failed'		=> __('Validation failed', 'acf'),
 			'validation_failed_1'	=> __('1 field requires attention', 'acf'),
-			'validation_failed_2'	=> __('%d fields require attention', 'acf')
-
+			'validation_failed_2'	=> __('%d fields require attention', 'acf'),
+			'restricted'			=> __('Restricted','acf')
 		));
 		
 		
@@ -334,7 +334,7 @@ function acf_enqueue_uploader() {
 	
 	
 	// bail early if acf has already loaded
-	if( acf_get_setting('enqueue_uploader', false) ) {
+	if( acf_get_setting('enqueue_uploader') ) {
 	
 		return;
 		
