@@ -44,15 +44,15 @@ Rename the 5andbox theme to your new website's name:
 
 `cd wp-content/themes/`
 
-`mv 5andbox/my-new-website`
+`mv 5andbox/ my-new-website/`
 
-Edit the `css/sass/style.scss` file and configure the Theme Name, URI, author and description.
+Edit the `scss/style.scss` file and configure the Theme Name, URI, author and description.
 
 Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
 
 `cd ~/projects/my-new-website/wp-content/`
 
-`rm -rf .git`
+`rm -rf .git/`
 
 `mv .gitignore themes/my-new-website/`
 
