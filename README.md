@@ -4,7 +4,7 @@ A bare bones Wordpress starter kit. Includes useful plugins, functions and a Gul
 
 ## Installation
 
-### 1. Create a new directory for your website:
+##### 1. Create a new directory for your website:
 
 `cd ~/projects/my-new-website`
 
@@ -26,29 +26,29 @@ Or with a terminal:
 
 `rm -f latest.tar.gz`
 
-### 1. Rename wp-config-sample.php to wp-config.php and configure it with your database information.
+##### 2. Rename wp-config-sample.php to wp-config.php and configure it with your database information.
 
-### 1. Remove the wp-content directory (this repository will replace it):
+##### 3. Remove the wp-content directory (this repository will replace it):
 
 `rm -rf wp-content/`
 
-### 1. Clone this repository:
+##### 4. Clone this repository:
 
 `git clone git@github.com:dylanfisher/5andbox.git`
 
-### 1. Rename the cloned repo to wp-content:
+##### 5. Rename the cloned repo to wp-content:
 
 `mv 5andbox/ wp-content/`
 
-### 1. Rename the 5andbox theme to your new website's name:
+##### 6. Rename the 5andbox theme to your new website's name:
 
 `cd wp-content/themes/`
 
 `mv 5andbox/ my-new-website/`
 
-### 1. Edit the `scss/style.scss` file and configure the Theme Name, URI, author and description.
+##### 7. Edit the `scss/style.scss` file and configure the Theme Name, URI, author and description.
 
-### 1. Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
+##### 8. Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
 
 `cd ~/projects/my-new-website/wp-content/`
 
@@ -66,15 +66,15 @@ Or with a terminal:
 
 ## Developing
 
-### 1. Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
+##### 1. Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
 
-### 1. Install npm development dependencies
+##### 2. Install npm development dependencies
 
 `cd ~/projects/my-new-website/wp-content/themes/my-new-website`
 
 `npm install`
 
-### 1. Run gulp
+##### 3. Run gulp
 
 `gulp`
 
