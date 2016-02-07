@@ -4,11 +4,11 @@ A bare bones Wordpress starter kit. Includes useful plugins, functions and a Gul
 
 ## Installation
 
-##### 1. Create a new directory for your website:
+Create a new directory for your website:
 
 `cd ~/projects/my-new-website`
 
-1. Download a fresh Wordpress install:
+Download a fresh Wordpress install:
 
 With WP-CLI http://wp-cli.org/:
 
@@ -26,33 +26,33 @@ Or with a terminal:
 
 `rm -f latest.tar.gz`
 
-##### 2. Rename wp-config-sample.php to wp-config.php and configure it with your database information.
+Rename wp-config-sample.php to wp-config.php and configure it with your database information.
 
-##### 3. Remove the wp-content directory (this repository will replace it):
+Remove the wp-content directory (this repository will replace it):
 
 `rm -rf wp-content/`
 
-##### 4. Clone this repository:
+Clone this repository:
 
 `git clone git@github.com:dylanfisher/5andbox.git`
 
-##### 5. Rename the cloned repo to wp-content:
+Rename the cloned repo to wp-content:
 
 `mv 5andbox/ wp-content/`
 
-##### 6. Rename the 5andbox theme to your new website's name:
+Rename the 5andbox theme to your new website's name:
 
 `cd wp-content/themes/`
 
 `mv 5andbox/ my-new-website/`
 
-##### 7. Edit the `scss/style.scss` file and configure the Theme Name, URI, author and description.
+Edit the `css/sass/style.scss` file and configure the Theme Name, URI, author and description.
 
-##### 8. Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
+Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
 
 `cd ~/projects/my-new-website/wp-content/`
 
-`rm -rf .git/`
+`rm -rf .git`
 
 `mv .gitignore themes/my-new-website/`
 
@@ -66,15 +66,15 @@ Or with a terminal:
 
 ## Developing
 
-##### 1. Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
+Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
 
-##### 2. Install npm development dependencies
+Install npm development dependencies
 
 `cd ~/projects/my-new-website/wp-content/themes/my-new-website`
 
 `npm install`
 
-##### 3. Run gulp
+Run gulp
 
 `gulp`
 
