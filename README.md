@@ -1,10 +1,10 @@
-### 5andbox
+# 5andbox
 
 A bare bones Wordpress starter kit. Includes useful plugins, functions and a Gulp workflow to compile Sass and JavaScript.
 
-### Installation
+## Installation
 
-1. Create a new directory for your website:
+### 1. Create a new directory for your website:
 
 `cd ~/projects/my-new-website`
 
@@ -26,29 +26,29 @@ Or with a terminal:
 
 `rm -f latest.tar.gz`
 
-1. Rename wp-config-sample.php to wp-config.php and configure it with your database information.
+### 1. Rename wp-config-sample.php to wp-config.php and configure it with your database information.
 
-1. Remove the wp-content directory (this repository will replace it):
+### 1. Remove the wp-content directory (this repository will replace it):
 
 `rm -rf wp-content/`
 
-1. Clone this repository:
+### 1. Clone this repository:
 
 `git clone git@github.com:dylanfisher/5andbox.git`
 
-1. Rename the cloned repo to wp-content:
+### 1. Rename the cloned repo to wp-content:
 
 `mv 5andbox/ wp-content/`
 
-1. Rename the 5andbox theme to your new website's name:
+### 1. Rename the 5andbox theme to your new website's name:
 
 `cd wp-content/themes/`
 
 `mv 5andbox/ my-new-website/`
 
-1. Edit the `scss/style.scss` file and configure the Theme Name, URI, author and description.
+### 1. Edit the `scss/style.scss` file and configure the Theme Name, URI, author and description.
 
-1. Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
+### 1. Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
 
 `cd ~/projects/my-new-website/wp-content/`
 
@@ -64,23 +64,23 @@ Or with a terminal:
 
 `git commit -m "first commit"`
 
-### Developing
+## Developing
 
-1. Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
+### 1. Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
 
-1. Install npm development dependencies
+### 1. Install npm development dependencies
 
 `cd ~/projects/my-new-website/wp-content/themes/my-new-website`
 
 `npm install`
 
-1. Run gulp
+### 1. Run gulp
 
 `gulp`
 
 Gulp automatically watches files and will livereload connected browsers.
 
-### Have fun!
+## Have fun!
 
 ```
                           . .7?..
