@@ -1,25 +1,31 @@
 {
-  "name": "dylan-fisher-5andbox",
-  "description": "A stripped down and repurposed version of the original Sandbox Wordpress theme. It incorporates the HTML5 boilerplate, SASS and a Grunt workflow.",
-  "author": "Dylan Fisher",
+  "name": "5andbox",
+  "version": "1.0.0",
+  "description": "Compiles Sass, autoprefixes, concatenates javascript, etc.",
+  "main": "main.js",
+  "dependencies": {
+    "gulp-sass": "^2.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.2",
+    "jshint": "^2.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dylanfisher/5andbox.git"
+    "url": "git+https://github.com/dylanfisher/5andbox.git"
   },
-  "version": "0.3.1",
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-uglify": "~0.9.2",
-    "grunt-contrib-concat": "~0.5.1",
-    "grunt-sass": "~1.0.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-contrib-connect": "~0.11.2",
-    "grunt-autoprefixer": "~3.0.3",
-    "grunt-contrib-cssmin": "~0.14.0",
-    "grunt-contrib-jshint": "~0.11.3",
-    "time-grunt": "~1.2.1"
+  "author": "Dylan Fisher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanfisher/5andbox/issues"
   },
-  "dependencies": {
-    "load-grunt-tasks": "~3.3.0"
-  }
+  "homepage": "https://github.com/dylanfisher/5andbox#readme"
 }

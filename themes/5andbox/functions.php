@@ -16,7 +16,7 @@ function sandbox_enqueue_scripts() {
   wp_enqueue_script('jquery');
   wp_enqueue_script(
     'application',
-    get_stylesheet_directory_uri() . '/js/build/' . $application,
+    get_stylesheet_directory_uri() . '/js/dist/' . $application,
     array('jquery'),
     '1.0',
     true
@@ -33,7 +33,7 @@ add_action( 'wp_enqueue_scripts', 'sandbox_enqueue_scripts' );
 add_theme_support('menus');
 
 // Custom Image Sizes (Name, Width, Height, Hard Crop boolean)
-add_image_size( 'small', 400, 300, false );
+// add_image_size( 'small', 400, 300, false );
 
 
 //
@@ -113,7 +113,7 @@ function sandbox_image($acf_image_field_name='image', $image_size='large', $clas
   $url_small = $image['sizes']['small'];
   $width = $image['sizes'][$size.'-width'];
   $height = $image['sizes'][$size.'-height'];
-  echo '<img src="'.$url_small.'" data-src="'.$url.'" width="'.$width.'" height="'.$height.'" alt="'.$alt.'" class="lazyload '.$classes.'">';
+  echo '<img src="'.$url_small.'" data-src="'.$url.'" width="'.$width.'" height="'.$height.'" alt="'.$alt.'" class="sandbox-image '.$classes.'">';
 }
 
 // Get <img> tags from a ACF repeater
