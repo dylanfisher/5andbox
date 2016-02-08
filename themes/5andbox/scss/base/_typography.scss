@@ -1,12 +1,15 @@
 html {
-  @include font--regular;
-  text-rendering: geometricPrecision;
+  font-size: 62.5%;
+  text-rendering: auto;
 
   @include breakpoint(sm) {
-    text-rendering: auto;
+    text-rendering: geometricPrecision;
   }
 }
 
+body {
+  @include font--regular;
+}
 
 h1, h2, h3, h4, h5, h6 {
   @include font--regular;
