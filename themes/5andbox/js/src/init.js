@@ -3,5 +3,3 @@
 $ = jQuery;
 
 var App = {};
-
-console.log('init.js');

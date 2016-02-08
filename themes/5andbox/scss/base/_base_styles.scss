@@ -1,7 +1,10 @@
-* {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+// apply a natural box layout model to all elements, but allowing components to change
+html {
   box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 html,
@@ -10,11 +13,6 @@ input,
 select,
 textarea {
   color: #000;
-}
-
-body {
-  font-size: 1em;
-  line-height: 1.4;
 }
 
 ::selection {
@@ -37,12 +35,6 @@ img {
   height: auto;
 }
 
-#map-canvas {
-  img {
-    max-width: none;
-  }
-}
-
 fieldset {
   border: 0;
   margin: 0;
@@ -55,9 +47,4 @@ textarea {
 
 div {
   vertical-align: top;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
 }
