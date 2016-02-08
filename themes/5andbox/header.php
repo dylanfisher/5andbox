@@ -31,9 +31,7 @@
   <meta name="twitter:description" content="<?php echo get_bloginfo('description'); ?>">
   <!-- <meta name="twitter:image" content="{{imageUrl}}"> -->
 
-  <link rel="stylesheet" type="text/css" href="<?php echo  bloginfo('stylesheet_url'); ?>" />
   <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
-
   <?php wp_head(); ?>
 </head>
 <body>
