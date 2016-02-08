@@ -27,12 +27,3 @@
       </h1>
       <nav><?php wp_nav_menu(); ?></nav>
     </header>
-
-  <div class="row">
-    <div class="col-sm-6">
-      column 1
-    </div>
-    <div class="col-sm-6">
-      column 2
-    </div>
-  </div>
