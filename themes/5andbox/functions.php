@@ -12,8 +12,20 @@
 //
 
 function sandbox_enqueue_scripts() {
+  // Register jQuery from Google CDN
+  if (sandbox_is_local() && !is_admin() && $GLOBALS['pagenow'] != 'wp-login.php') {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery',
+      'https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js',
+      false,
+      '2.2.0',
+      true);
+    wp_enqueue_script('jquery');
+  } else {
+    wp_enqueue_script('jquery');
+  }
+
   $application = sandbox_is_local() ? 'application.js' : 'application.min.js';
-  wp_enqueue_script('jquery');
   wp_enqueue_script(
     'application',
     get_stylesheet_directory_uri() . '/js/dist/' . $application,
@@ -86,6 +98,30 @@ function sandbox_remove_menus(){
   // remove_menu_page( 'options-general.php' );        //Settings
 }
 add_action( 'admin_menu', 'sandbox_remove_menus' );
+
+// Disable emoji scripts added in WP 4.2
+function disable_wp_emojicons() {
+  // all actions related to emojis
+  remove_action( 'admin_print_styles', 'print_emoji_styles' );
+  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+  remove_action( 'wp_print_styles', 'print_emoji_styles' );
+  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
+  // filter to remove TinyMCE emojis
+  add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
+}
+add_action( 'init', 'disable_wp_emojicons' );
+
+function disable_emojicons_tinymce($plugins) {
+  if ( is_array( $plugins ) ) {
+    return array_diff( $plugins, array( 'wpemoji' ) );
+  } else {
+    return array();
+  }
+}
 
 
 //

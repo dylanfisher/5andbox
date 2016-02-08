@@ -1,29 +1,47 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html data-home-url="<?php echo home_url('/'); ?>">
 <head>
-  <?php get_template_part('partials/ascii'); ?>
+  <?php get_template_part('partials/utilities/ascii'); ?>
+  <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
+
+  <!-- Basic meta tags -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
   <meta name="description" content="<?php echo get_bloginfo('description'); ?>">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
+
+  <!-- Facebook meta tags -->
+  <meta property="og:url" content="<?php the_permalink(); ?>">
+  <!-- <meta property="og:image" content="{{imageUrl}}"> -->
+  <meta property="og:description" content="<?php echo get_bloginfo('description'); ?>">
+  <meta property="og:title" content="<?php the_title(); ?>">
+  <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
+  <meta property="og:see_also" content="<?php echo home_url('/'); ?>">
+
+  <!-- Google meta tags -->
+  <meta itemprop="name" content="<?php the_title(); ?>">
+  <meta itemprop="description" content="<?php echo get_bloginfo('description'); ?>">
+  <!-- <meta itemprop="image" content="{{imageUrl}}"> -->
+
+  <!-- Twitter meta tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="<?php the_permalink(); ?>">
+  <meta name="twitter:title" content="<?php the_title(); ?>">
+  <meta name="twitter:description" content="<?php echo get_bloginfo('description'); ?>">
+  <!-- <meta name="twitter:image" content="{{imageUrl}}"> -->
+
   <link rel="stylesheet" type="text/css" href="<?php echo  bloginfo('stylesheet_url'); ?>" />
-  <script src="<?php echo get_bloginfo('template_url'); ?>/js/modernizr.custom.15544.js"></script>
-  <?php wp_head() // For plugins ?>
+  <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
+
+  <?php wp_head(); ?>
 </head>
 <body>
-  <!--[if lt IE 9]>
-    <div class="chromeframe">
-      <p>You are using an <strong>outdated</strong> browser.</p>
-      <p>Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    </div>
-  <![endif]-->
+  <?php get_template_part('partials/utilities/ie8_notice'); ?>
   <div <?php body_class('container-fluid') ?>>
-    <header>
+    <header class="header">
       <h1 class="site-title">
-        <a href="<?php bloginfo('url') ?>/" title="<?php echo esc_html( bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a>
+        <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
       </h1>
-      <nav><?php wp_nav_menu(); ?></nav>
+      <nav class="nav"><?php wp_nav_menu(); ?></nav>
     </header>

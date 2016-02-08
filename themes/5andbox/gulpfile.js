@@ -8,12 +8,26 @@ var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
 var rename     = require('gulp-rename');
 var livereload = require('gulp-livereload');
+var notify     = require('gulp-notify');
 
 // Lint Task
 gulp.task('lint', function() {
   return gulp.src('js/src/**/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    // Use gulp-notify as jshint reporter
+    .pipe(notify(function(file) {
+      if (file.jshint.success) {
+        // Don't show something if success
+        return false;
+      }
+
+      var errors = file.jshint.results.map(function(data) {
+        if (data.error) {
+          return "(" + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
+        }
+      }).join("\n");
+      return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
+    }));
 });
 
 // Compile Sass
