@@ -239,35 +239,13 @@ class acf_pro_options_page {
 		}
 		
 		
-		// actions
-		add_action('admin_enqueue_scripts', 	array($this,'admin_enqueue_scripts'));
-	
-	}
-	
-	
-	/*
-	*  admin_enqueue_scripts
-	*
-	*  This action is run after post query but before any admin script / head actions. 
-	*  It is a good place to register all actions.
-	*
-	*  @type	action (admin_enqueue_scripts)
-	*  @date	26/01/13
-	*  @since	3.6.0
-	*
-	*  @param	N/A
-	*  @return	N/A
-	*/
-	
-	function admin_enqueue_scripts() {
-		
 		// load acf scripts
 		acf_enqueue_scripts();
 		
 		
 		// actions
 		add_action( 'acf/input/admin_head',		array($this,'admin_head') );
-		
+	
 	}
 	
 	
@@ -369,6 +347,7 @@ class acf_pro_options_page {
 			'id'			=> $id,
 			'key'			=> $field_group['key'],
 			'style'			=> $field_group['style'],
+			'label'			=> $field_group['label_placement'],
 			'edit_url'		=> '',
 			'edit_title'	=> __('Edit field group', 'acf'),
 			'visibility'	=> true
@@ -379,27 +358,6 @@ class acf_pro_options_page {
 		$post_id = acf_get_valid_post_id($this->page['post_id']);
 		
 		
-		// load fields
-		$fields = acf_get_fields( $field_group );
-		
-		
-		// render
-		if( $field_group['label_placement'] == 'left' ) {
-		
-			?>
-			<table class="acf-table">
-				<tbody>
-					<?php acf_render_fields( $post_id, $fields, 'tr', $field_group['instruction_placement'] ); ?>
-				</tbody>
-			</table>
-			<?php
-		
-		} else {
-		
-			acf_render_fields( $post_id, $fields, 'div', $field_group['instruction_placement'] );
-			
-		}
-		
 		
 		// edit_url
 		if( $field_group['ID'] && acf_current_user_can_admin() ) {
@@ -407,6 +365,15 @@ class acf_pro_options_page {
 			$o['edit_url'] = admin_url('post.php?post=' . $field_group['ID'] . '&action=edit');
 				
 		}
+		
+		
+		// load fields
+		$fields = acf_get_fields( $field_group );
+		
+		
+		// render
+		acf_render_fields( $post_id, $fields, 'div', $field_group['instruction_placement'] );
+		
 		
 		
 ?>

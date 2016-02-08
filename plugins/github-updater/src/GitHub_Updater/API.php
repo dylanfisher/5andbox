@@ -10,7 +10,25 @@
 
 namespace Fragen\GitHub_Updater;
 
+/*
+ * Exit if called directly.
+ */
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+/**
+ * Class API
+ *
+ * @package Fragen\GitHub_Updater
+ */
 abstract class API extends Base {
+
+	/**
+	 * Variable to hold all repository remote info.
+	 * @var array
+	 */
+	protected $response = array();
 
 	/*
 	 * The following functions must be in any repository API.
@@ -22,9 +40,9 @@ abstract class API extends Base {
 	abstract public function get_repo_meta();
 	abstract public function get_remote_branches();
 	abstract public function construct_download_link();
+	abstract protected function add_endpoints( $git, $endpoint );
 
 	/**
-	 * Fixes {@link https://github.com/UCF/Theme-Updater/issues/3}.
 	 * Adds custom user agent for GitHub Updater.
 	 *
 	 * @param  array $args Existing HTTP Request arguments.
@@ -46,24 +64,28 @@ abstract class API extends Base {
 	 * @return array
 	 */
 	protected function return_repo_type() {
+		$arr = array();
 		switch ( $this->type->type ) {
 			case ( stristr( $this->type->type, 'github' ) ):
 				$arr['repo']          = 'github';
 				$arr['base_uri']      = 'https://api.github.com';
 				$arr['base_download'] = 'https://github.com';
 				break;
-			case( stristr( $this->type->type, 'bitbucket' ) ):
+			case ( stristr( $this->type->type, 'bitbucket' ) ):
 				$arr['repo']          = 'bitbucket';
 				$arr['base_uri']      = 'https://bitbucket.org/api';
 				$arr['base_download'] = 'https://bitbucket.org';
 				break;
-			case (stristr( $this->type->type, 'gitlab' ) ):
+			case ( stristr( $this->type->type, 'gitlab' ) ):
 				$arr['repo']          = 'gitlab';
 				$arr['base_uri']      = 'https://gitlab.com/api/v3';
 				$arr['base_download'] = 'https://gitlab.com';
 				break;
-			default:
-				$arr = array();
+		}
+		if ( false !== stristr( $this->type->type, 'plugin' ) ) {
+			$arr['type'] = 'plugin';
+		} elseif ( false !== stristr( $this->type->type, 'theme' ) ) {
+			$arr['type'] = 'theme';
 		}
 
 		return $arr;
@@ -98,7 +120,7 @@ abstract class API extends Base {
 					)
 				) );
 			if ( 'github' === $type['repo'] ) {
-				GitHub_API::_ratelimit_reset( $response, $this->type->repo );
+				GitHub_API::ratelimit_reset( $response, $this->type->repo );
 			}
 			Messages::create_error_message( $type['repo'] );
 			return false;
@@ -110,9 +132,10 @@ abstract class API extends Base {
 	/**
 	 * Return API url.
 	 *
+	 * @access private
 	 * @param string $endpoint
 	 *
-	 * @return string
+	 * @return string $endpoint
 	 */
 	private function _get_api_url( $endpoint ) {
 		$type     = $this->return_repo_type();
@@ -134,14 +157,16 @@ abstract class API extends Base {
 
 		switch ( $type['repo'] ) {
 			case 'github':
-				$endpoint = GitHub_API::add_endpoints( $this, $endpoint );
-				if ( $this->type->enterprise ) {
+				$api      = new GitHub_API( $type['type'] );
+				$endpoint = $api->add_endpoints( $this, $endpoint );
+				if ( $this->type->enterprise_api ) {
 					return $endpoint;
 				}
 				break;
 			case 'gitlab':
-				$endpoint = GitLab_API::add_endpoints( $this, $endpoint );
-				if ( $this->type->enterprise ) {
+				$api      = new GitLab_API( $type['type'] );
+				$endpoint = $api->add_endpoints( $this, $endpoint );
+				if ( $this->type->enterprise_api ) {
 					return $endpoint;
 				}
 				break;
@@ -158,12 +183,47 @@ abstract class API extends Base {
 	 *
 	 * @return bool true if invalid
 	 */
-	protected static function validate_response( $response ) {
+	protected function validate_response( $response ) {
 		if ( empty( $response ) || isset( $response->message ) ) {
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns site_transient and checks/stores transient id in array.
+	 *
+	 * @return array
+	 */
+	protected function get_transient() {
+		$repo      = isset( $this->type->repo ) ? $this->type->repo : 'ghu';
+		$transient = 'ghu-' . md5( $repo );
+		if ( ! in_array( $transient, self::$transients, true ) ) {
+			self::$transients[] = $transient;
+		}
+
+		return get_site_transient( $transient );
+	}
+
+	/**
+	 * Used to set_site_transient and checks/stores transient id in array.
+	 *
+	 * @param $id
+	 * @param $response
+	 *
+	 * @return bool
+	 */
+	protected function set_transient( $id, $response ) {
+		$repo                  = isset( $this->type ) ? $this->type->repo : 'ghu';
+		$transient             = 'ghu-' . md5( $repo );
+		$this->response[ $id ] = $response;
+		if ( ! in_array( $transient, self::$transients, true ) ) {
+			self::$transients[] = $transient;
+		}
+		set_site_transient( $transient, $this->response, ( self::$hours * HOUR_IN_SECONDS ) );
+
+		return true;
 	}
 
 }

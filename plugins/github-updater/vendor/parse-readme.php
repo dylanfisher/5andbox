@@ -2,8 +2,8 @@
 
 Class Automattic_Readme {
 
-	function Automattic_Readme() {
-		// This space intentially blank
+	function __construct() {
+		// This space intentionally blank
 	}
 
 	function parse_readme( $file ) {
@@ -71,7 +71,7 @@ Class Automattic_Readme {
 		}
 
 		// Donate Link: URL
-		if ( preg_match('|Donate link:(.*)|i', $file_contents, $_donate_link) )
+		if ( preg_match('|Donate link:\s+(.*)|i', $file_contents, $_donate_link) )
 			$donate_link = esc_url( $_donate_link[1] );
 		else
 			$donate_link = NULL;
@@ -83,7 +83,7 @@ Class Automattic_Readme {
 			$license = NULL;
 
 		// License URI: URL
-		if ( preg_match( '|License URI:(.*)|i', $file_contents, $_license_uri ) )
+		if ( preg_match( '|License URI:\s+(.*)|i', $file_contents, $_license_uri ) )
 			$license_uri = esc_url( $_license_uri[1] );
 		else
 			$license_uri = null;
@@ -155,8 +155,12 @@ Class Automattic_Readme {
 		$upgrade_notice = array();
 		if ( isset($final_sections['upgrade_notice']) ) {
 			$split = preg_split( '#<h4>(.*?)</h4>#', $final_sections['upgrade_notice'], -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
-			for ( $i = 0; $i < count( $split ); $i += 2 )
+			for ( $i = 0; $i < count( $split ); $i += 2 ) {
+				if ( empty( $split[$i + 1] ) ) {
+					break;
+				}
 				$upgrade_notice[$this->sanitize_text( $split[$i] )] = substr( $this->sanitize_text( $split[$i + 1] ), 0, 300 );
+			}
 			unset( $final_sections['upgrade_notice'] );
 		}
 

@@ -17,10 +17,6 @@
 
 function acf_get_field_reference( $field_name, $post_id ) {
 	
-	// vars
-	$reference = false;
-	
-	
 	// try cache
 	$found = false;
 	$cache = wp_cache_get( "field_reference/post_id={$post_id}/name={$field_name}", 'acf', false, $found );
@@ -32,57 +28,8 @@ function acf_get_field_reference( $field_name, $post_id ) {
 	}
 			
 	
-	// load value depending on the $type
-	if( is_numeric($post_id) ) {
-		
-		$v = get_post_meta( $post_id, "_{$field_name}", false );
-		
-		// value is an array
-		if( isset($v[0]) ) {
-			
-		 	$reference = $v[0];
-		 	
-	 	}
-
-	} elseif( strpos($post_id, 'user_') !== false ) {
-		
-		$user_id = str_replace('user_', '', $post_id);
-		$user_id = intval( $user_id );
-		
-		$v = get_user_meta( $user_id, "_{$field_name}", false );
-		
-		// value is an array
-		if( isset($v[0]) ) {
-			
-		 	$reference = $v[0];
-		 	
-	 	}
-	 	
-	} elseif( strpos($post_id, 'comment_') !== false ) {
-		
-		$comment_id = str_replace('comment_', '', $post_id);
-		$comment_id = intval( $comment_id );
-		
-		$v = get_comment_meta( $comment_id, "_{$field_name}", false );
-		
-		// value is an array
-		if( isset($v[0]) ) {
-			
-		 	$reference = $v[0];
-		 	
-	 	}
-	 	
-	} else {
-		
-		$v = get_option( "_{$post_id}_{$field_name}", false );
-	
-		if( ! is_null($v) ) {
-			
-			$reference = $v;
-			
-	 	}
-	 	
-	}
+	// get reference
+	$reference = acf_get_metadata( $post_id, $field_name, true );
 	
 	
 	//update cache
@@ -439,7 +386,7 @@ function get_field_objects( $post_id = false, $format_value = true, $load_value 
 *  have_rows
 *
 *  This function will instantiate a global variable containing the rows of a repeater or flexible content field,
-*  afterwhich, it will determin if another row exists to loop through
+*  afterwhich, it will determine if another row exists to loop through
 *
 *  @type	function
 *  @date	2/09/13
@@ -515,17 +462,17 @@ function have_rows( $selector, $post_id = false ) {
 		// If post_id has changed, this is most likely an archive loop
 		if( $change == 'post_id' ) {
 			
-			if( $prev && $prev['post_id'] == $post_id ) {
-				
-				// case: Change in $post_id was due to a nested loop ending
-				// action: move up one level through the loops
-				reset_rows();
-			
-			} elseif( empty($_post_id) && $sub_exists ) {
+			if( empty($_post_id) && $sub_exists ) {
 				
 				// case: Change in $post_id was due to this being a nested loop and not specifying the $post_id
 				// action: move down one level into a new loop
 				$new_child_loop = true;
+			
+			} elseif( $prev && $prev['post_id'] == $post_id ) {
+				
+				// case: Change in $post_id was due to a nested loop ending
+				// action: move up one level through the loops
+				reset_rows();
 			
 			} else {
 				
@@ -697,6 +644,21 @@ function acf_get_row() {
 	
 	// return
 	return false;
+	
+}
+
+function get_row_index() {
+	
+	// vars
+	$row = acf_get_row();
+	
+	
+	// bail early if no row
+	if( !$row ) return 0;
+	
+	
+	// return
+	return $row['i'] + 1;
 	
 }
 
@@ -1148,7 +1110,7 @@ function _acf_pre_save_post( $post_id, $form ) {
 	);
 	
 	
-	// determin save data
+	// determine save data
 	if( is_numeric($post_id) ) {
 		
 		// update post
@@ -1419,7 +1381,7 @@ function acf_form( $args = array() ) {
 	<div class="acf-hidden">
 		<?php acf_hidden_input(array( 'name' => '_acf_form', 'value' => base64_encode(json_encode($args)) )); ?>
 	</div>
-	<div class="acf-fields acf-form-fields">
+	<div class="acf-fields acf-form-fields -<?php echo $args['label_placement']; ?>">
 	
 		<?php
 		
@@ -1427,24 +1389,8 @@ function acf_form( $args = array() ) {
 		echo $args['html_before_fields'];
 		
 		
-		// start table
-		if( $args['label_placement'] == 'left' ) {
-			
-			$args['field_el'] = 'tr';
-			
-			?><table class="acf-table"><tbody><?php
-		}
-		
-		
+		// render
 		acf_render_fields( $post_id, $fields, $args['field_el'], $args['instruction_placement'] );
-		
-		
-		// end table
-		if( $args['label_placement'] == 'left' ) {
-			
-			?></tbody></table><?php
-				
-		}
 		
 		
 		// html after fields
@@ -1586,7 +1532,7 @@ function update_sub_field( $selector, $value, $post_id = false ) {
 		
 		
 		// add to name
-		$name = "{$field['name']}";
+		$name = $field['name'];
 		
 		
 		// sub fields
@@ -1594,6 +1540,7 @@ function update_sub_field( $selector, $value, $post_id = false ) {
 				
 			if( is_numeric($s) ) {
 				
+				// get row index
 				$row_i = intval($s) - 1;
 				
 				// add to name
@@ -1697,6 +1644,190 @@ function delete_sub_field( $selector, $post_id = false ) {
 	
 	return update_sub_field( $selector, null, $post_id );
 		
+}
+
+
+/*
+*  add_row
+*
+*  description
+*
+*  @type	function
+*  @date	16/10/2015
+*  @since	5.2.3
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function add_row( $selector, $value, $post_id = false ) {
+	
+	// filter post_id
+	$post_id = acf_get_valid_post_id( $post_id );
+	
+	
+	// get field
+	$field = acf_maybe_get_field( $selector, $post_id );
+	
+	
+	// bail early if no field
+	if( !$field ) {
+		
+		return false;
+		
+	}
+	
+	
+	// get row count
+	$i = (int) acf_get_metadata( $post_id, $field['name'] );
+	
+	
+	// if no rows, save this field via update_field() so that the reference field is created
+	if( !$i ) {
+		
+		// acf_update_value will return boolean, simply convert this to int for 1 | 0 (the number of rows!)
+		return (int) acf_update_value( array( $value ), $post_id, $field );
+		
+	}
+	
+	
+	// increase $i
+	$i++;
+	
+	
+	// update meta
+	$result = acf_update_metadata( $post_id, $field['name'], $i );
+	
+	
+	// update sub fields
+	if( $value ) {
+		
+		foreach( $value as $k => $v ) {
+		
+			update_sub_field( array( $field['key'], $i, $k ), $v, $post_id );
+			
+		}
+	
+	}
+	
+	
+	// return
+	return $i;
+	
+}
+
+
+/*
+*  update_row
+*
+*  description
+*
+*  @type	function
+*  @date	19/10/2015
+*  @since	5.2.3
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function update_row( $selector, $row = 1, $value = false, $post_id = false ) {
+	
+	// bail early if no value
+	if( empty($value) ) {
+		
+		return false;
+		
+	}
+	
+	
+	// filter post_id
+	$post_id = acf_get_valid_post_id( $post_id );
+	
+	
+	// get field
+	$field = acf_maybe_get_field( $selector, $post_id );
+	
+	
+	// bail early if no field
+	if( !$field ) return false;
+	
+	
+	// update sub fields
+	foreach( $value as $k => $v ) {
+		
+		update_sub_field( array( $field['key'], $row, $k ), $v, $post_id );
+		
+	}
+	
+	
+	// return
+	return true;
+	
+}
+
+
+/*
+*  delete_row
+*
+*  description
+*
+*  @type	function
+*  @date	19/10/2015
+*  @since	5.2.3
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function delete_row( $selector, $row = 1, $post_id = false ) {
+	
+	// filter post_id
+	$post_id = acf_get_valid_post_id( $post_id );
+	
+	
+	// get field
+	$field = acf_maybe_get_field( $selector, $post_id );
+	
+	
+	// bail early if no field
+	if( !$field ) {
+		
+		return false;
+		
+	}
+	
+	
+	// get value
+	$rows = acf_get_value( $post_id, $field );
+	
+	
+	// bail early if no value
+	if( empty($rows) ) {
+		
+		return false;
+		
+	}
+	
+	
+	// deincrement
+	if( $row = count($rows) ) {
+		
+		acf_update_metadata( $post_id, $field['name'], $row-1 );
+		
+	}
+	
+	
+	// update sub field values
+	foreach( $rows[0] as $k => $v ) {
+		
+		update_sub_field( array( $field['key'], $row, $k ), null, $post_id );
+		
+	}
+	
+	
+	// return
+	return true;
+	
 }
 
 

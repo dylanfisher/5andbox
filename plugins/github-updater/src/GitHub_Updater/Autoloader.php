@@ -1,13 +1,19 @@
 <?php
 
-// namespace must be unique to each plugin
 namespace Fragen\GitHub_Updater;
 
+/*
+ * Exit if called directly.
+ */
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
+ * Class Autoloader
  *
  * To use with different plugins be sure to create a new namespace.
  *
- * Class      Autoloader
  * @package   Fragen\GitHub_Updater
  * @author    Andy Fragen <andy@thefragens.com>
  * @author    Barry Hughes <barry@codingkillsme.com>
@@ -19,15 +25,13 @@ namespace Fragen\GitHub_Updater;
 class Autoloader {
 	/**
 	 * Roots to scan when autoloading.
-	 *
 	 * @var array
 	 */
 	protected $roots = array();
 
 	/**
-	 * List of classnames and locations in filesystem, for situations
+	 * List of class names and locations in filesystem, for situations
 	 * where they deviate from convention etc.
-	 *
 	 * @var array
 	 */
 	protected $map   = array();
@@ -41,7 +45,9 @@ class Autoloader {
 	 */
 	public function __construct( array $roots, array $static_map = null ) {
 		$this->roots = $roots;
-		if ( null !== $static_map ) $this->map = $static_map;
+		if ( null !== $static_map ) {
+			$this->map = $static_map;
+		}
 		spl_autoload_register( array( $this, 'autoload' ) );
 	}
 
@@ -52,8 +58,8 @@ class Autoloader {
 	 */
 	protected function autoload( $class ) {
 		// Check for a static mapping first of all
-		if ( isset( $this->map[$class] ) && file_exists( $this->map[$class] ) ) {
-			include $this->map[$class];
+		if ( isset( $this->map[ $class ] ) && file_exists( $this->map[ $class ] ) ) {
+			include $this->map[ $class ];
 			return;
 		}
 
