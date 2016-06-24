@@ -269,11 +269,11 @@
 			// row limit reached
 			if( this.o.max > 0 && this.count() >= this.o.max ) {
 				
-				this.$el.find('> .acf-actions .button').addClass('disabled');
+				this.$el.find('> .acf-hl .acf-button').addClass('disabled');
 				
 			} else {
 				
-				this.$el.find('> .acf-actions .button').removeClass('disabled');
+				this.$el.find('> .acf-hl .acf-button').removeClass('disabled');
 				
 			}
 			
@@ -494,13 +494,9 @@
 				
 				$tr.removeClass('-collapsed');
 				
-				acf.do_action('show', $tr, 'collapse');
-				
 			} else {
 				
 				$tr.addClass('-collapsed');
-				
-				acf.do_action('hide', $tr, 'collapse');
 				
 			}
 			
@@ -615,11 +611,11 @@
 			// row limit reached
 			if( this.o.max > 0 && this.count() >= this.o.max ) {
 				
-				this.$el.find('> .acf-actions .button').addClass('disabled');
+				this.$el.find('> .acf-hl .acf-button').addClass('disabled');
 				
 			} else {
 				
-				this.$el.find('> .acf-actions .button').removeClass('disabled');
+				this.$el.find('> .acf-hl .acf-button').removeClass('disabled');
 				
 			}
 			

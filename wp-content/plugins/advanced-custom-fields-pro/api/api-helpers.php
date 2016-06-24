@@ -2132,7 +2132,7 @@ function acf_decode_choices( $string = '' ) {
 		
 		return array();
 		
-	// allow numeric values (same as string)
+	// force array on single numeric values
 	} elseif( is_numeric($string) ) {
 		
 		// allow
@@ -2140,7 +2140,7 @@ function acf_decode_choices( $string = '' ) {
 	// bail early if not a a string
 	} elseif( !is_string($string) ) {
 		
-		return array();
+		return $string;
 		
 	}
 	
@@ -3154,20 +3154,24 @@ function acf_format_filesize( $size = 1 ) {
 
 function acf_get_valid_terms( $terms = false, $taxonomy = 'category' ) {
 	
-	// force into array
-	$terms = acf_get_array($terms);
-	
-	
-	// force ints
-	$terms = array_map('intval', $terms);
-	
-	
 	// bail early if function does not yet exist or
 	if( !function_exists('wp_get_split_term') || empty($terms) ) {
 		
 		return $terms;
 		
 	}
+	
+	
+	// vars
+	$is_array = is_array($terms);
+	
+	
+	// force into array
+	$terms = acf_get_array( $terms );
+	
+	
+	// force ints
+	$terms = array_map('intval', $terms);
 	
 	
 	// attempt to find new terms
@@ -3180,6 +3184,14 @@ function acf_get_valid_terms( $terms = false, $taxonomy = 'category' ) {
 			$terms[ $i ] = $new_term_id;
 			
 		}
+		
+	}
+	
+	
+	// revert array if needed
+	if( !$is_array ) {
+		
+		$terms = $terms[0];
 		
 	}
 	

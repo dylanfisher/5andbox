@@ -473,10 +473,6 @@ class acf_field_select extends acf_field {
 		$field['default_value'] = acf_decode_choices($field['default_value']);
 		
 		
-		// use only keys for default value
-		$field['default_value'] = array_keys($field['default_value']);
-		
-		
 		// return
 		return $field;
 	}

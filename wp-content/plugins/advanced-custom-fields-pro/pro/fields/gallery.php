@@ -540,7 +540,7 @@ class acf_field_gallery extends acf_field {
 			
 			<ul class="acf-hl">
 				<li>
-					<a href="#" class="acf-button button button-primary add-attachment"><?php _e('Add to gallery', 'acf'); ?></a>
+					<a href="#" class="acf-button blue add-attachment"><?php _e('Add to gallery', 'acf'); ?></a>
 				</li>
 				<li class="acf-fr">
 					<select class="bulk-actions">
@@ -566,10 +566,10 @@ class acf_field_gallery extends acf_field {
 			
 			<ul class="acf-hl">
 				<li>
-					<a href="#" class="acf-button button close-sidebar"><?php _e('Close', 'acf'); ?></a>
+					<a href="#" class="acf-button close-sidebar"><?php _e('Close', 'acf'); ?></a>
 				</li>
 				<li class="acf-fr">
-					<a class="acf-button button button-primary update-attachment"><?php _e('Update', 'acf'); ?></a>
+					<a class="acf-button blue update-attachment"><?php _e('Update', 'acf'); ?></a>
 				</li>
 			</ul>
 			

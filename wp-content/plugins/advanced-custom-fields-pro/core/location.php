@@ -66,20 +66,19 @@ class acf_location {
 	function rule_match_post_type( $match, $rule, $options ) {
 		
 		// vars
-		// - allow acf_form to exclude the post_id param and still work as expected
 		$post_type = $options['post_type'];
 		
 		
 		// find post type for current post
 		if( !$post_type ) {
 			
-			// bail early if not a post
-			if( !$options['post_id'] ) return false;
+			if( !$options['post_id'] ) {
+				
+				return false;
+				
+			}
 			
-			
-			// get post type
 			$post_type = get_post_type( $options['post_id'] );
-			
 		}
 		
 		
@@ -254,8 +253,16 @@ class acf_location {
 	
 	function rule_match_post( $match, $rule, $options ) {
 		
-		// bail early if not a post
-		if( !$options['post_id'] ) return false;
+		// vars
+		$post_id = $options['post_id'];
+		
+		
+		// validation
+		if( !$post_id ) {
+		
+			return false;
+			
+		}
 		
 		
 		// translate $rule['value']
@@ -300,8 +307,12 @@ class acf_location {
 	
 	function rule_match_post_taxonomy( $match, $rule, $options ) {
 		
-		// bail early if not a post
-		if( !$options['post_id'] ) return false;
+		// validate
+		if( !$options['post_id'] ) {
+		
+			return false;
+			
+		}
 		
 		
 		// vars
@@ -323,7 +334,11 @@ class acf_location {
 		
 		
 		// bail early if no term
-		if( !$term ) return false;
+		if( !$term ) {
+			
+			return false;
+						
+		}
 		
 		
 		// post type
@@ -388,17 +403,20 @@ class acf_location {
 	*/
 	
 	function rule_match_post_format( $match, $rule, $options ) {
-
+		
 		// vars
-		// - allow acf_form to exclude the post_id param and still work as expected
 		$post_format = $options['post_format'];
 		
 		
-		// find post format
+		// new post format?
 		if( !$post_format ) {	
 			
-			// bail early if not a post
-			if( !$options['post_id'] ) return false;
+			// validate
+			if( !$options['post_id'] ) {
+			
+				return false;
+				
+			}
 			
 			
 			// post type
@@ -458,25 +476,19 @@ class acf_location {
 	*/
 	
 	function rule_match_post_status( $match, $rule, $options ) {
-			
-		// vars
-		// - allow acf_form to exclude the post_id param and still work as expected
-		$post_status = $options['post_status'];
-	    
-	    
-	    // find post format
-		if( !$post_format ) {	
-			
-			// bail early if not a post
-			if( !$options['post_id'] ) return false;
-			
-			
-			// update var
-			$post_status = get_post_status( $options['post_id'] );
+		
+		// validate
+		if( !$options['post_id'] ) {
+		
+			return false;
 			
 		}
 		
-			
+					
+		// vars
+		$post_status = get_post_status( $options['post_id'] );
+	    
+	    
 	    // auto-draft = draft
 	    if( $post_status == 'auto-draft' )  {
 	    
@@ -519,8 +531,12 @@ class acf_location {
 		
 	function rule_match_page_type( $match, $rule, $options ) {
 	
-		// bail early if no post id
-		if( !$options['post_id'] ) return false;
+		// validation
+		if( !$options['post_id'] ) {
+		
+			return false;
+			
+		}
 		
 		
 		// get post
@@ -534,8 +550,16 @@ class acf_location {
 	        $front_page = (int) get_option('page_on_front');
 	        
 	        
-	        // compare
-	        $match = ( $front_page === $post->ID );
+	         // compare
+	        if( $rule['operator'] == "==" ) {
+	        	
+	        	$match = ( $front_page == $post->ID );
+	        	
+	        } elseif( $rule['operator'] == "!=" ) {
+	        	
+	        	$match = ( $front_page != $post->ID );
+	        
+	        }
 	        
         } elseif( $rule['value'] == 'posts_page') {
         	
@@ -544,7 +568,15 @@ class acf_location {
 	        
 	        
 	        // compare
-	        $match = ( $posts_page === $post->ID );
+	        if( $rule['operator'] == "==" ) {
+	        
+	        	$match = ( $posts_page == $post->ID );
+	        
+	        } elseif( $rule['operator'] == "!=" ) {
+	        	
+	        	$match = ( $posts_page != $post->ID );
+	        	
+	        }
 	        
         } elseif( $rule['value'] == 'top_level') {
         	
@@ -552,8 +584,8 @@ class acf_location {
         	$post_parent = $post->post_parent;
         	
         	
-        	// override via AJAX options
-        	if( !empty($options['page_parent']) ) {
+        	// override
+        	if( $options['page_parent'] ) {
 	        	
 	        	$post_parent = $options['page_parent'];
 	        	
@@ -561,21 +593,35 @@ class acf_location {
         	
         	
         	// compare
-			$match = ( $post_parent == 0 );
+	        if( $rule['operator'] == "==" ) {
+	        
+	        	$match = ( $post_parent == 0 );
+	        
+	        } elseif( $rule['operator'] == "!=" ) {
+	        	
+	        	$match = ( $post_parent != 0 );
+	        	
+	        }
 	            
         } elseif( $rule['value'] == 'parent' ) {
         	
         	// get children
-        	$children = get_posts(array(
-        		'post_type' 		=> $post->post_type,
-        		'post_parent' 		=> $post->ID,
-        		'posts_per_page'	=> 1,
-				'fields'			=> 'ids',
+        	$children = get_pages(array(
+        		'post_type' => $post->post_type,
+        		'child_of' =>  $post->ID,
         	));
         	
 	        
 	        // compare
-	        $match = !empty($children);
+	        if( $rule['operator'] == "==" ) {
+	        
+	        	$match = ( count($children) > 0 );
+	        
+	        } elseif( $rule['operator'] == "!=" ) {
+	        	
+	        	$match = ( count($children) == 0 );
+	        	
+	        }
 	        
         } elseif( $rule['value'] == 'child') {
         	
@@ -583,7 +629,7 @@ class acf_location {
         	$post_parent = $post->post_parent;
         	
         	
-        	// override via AJAX options
+        	// override
         	if( $options['page_parent'] ) {
         	
 	        	$post_parent = $options['page_parent'];
@@ -592,16 +638,16 @@ class acf_location {
 	        
 	        
 	        // compare
-			$match = ( $post_parent > 0 );
+	        if( $rule['operator'] == "==" ) {
 	        
-        }
-        
-        
-        // reverse if 'not equal to'
-        if( $rule['operator'] === '!=' ) {
+	        	$match = ( $post_parent != 0 );
+	        
+	        } elseif( $rule['operator'] == "!=" ) {
 	        	
-        	$match = !$match;
-        
+	        	$match = ( $post_parent == 0 );
+	        	
+	        }
+	        
         }
         
         
@@ -627,26 +673,25 @@ class acf_location {
 	
 	function rule_match_page_parent( $match, $rule, $options ) {
 		
-		// vars
-		// - allow acf_form to exclude the post_id param and still work as expected
-		$post_parent = $options['page_parent'];
+		// validation
+		if( !$options['post_id'] ) {
 		
-		
-		// find post parent
-		if( !$post_parent ) {
-			
-			// bail early if not a post
-			if( !$options['post_id'] ) return false;
-		
-		
-			// get post
-			$post = get_post( $options['post_id'] );
-			
-			
-			// update var
-			$post_parent = $post->post_parent;
+			return false;
 			
 		}
+		
+		
+		// vars
+		$post = get_post( $options['post_id'] );
+		
+		
+		// post parent
+		$post_parent = $post->post_parent;
+    	if( $options['page_parent'] ) {
+    	
+        	$post_parent = $options['page_parent'];
+        	
+    	}
         
         
         // compare
@@ -683,16 +728,12 @@ class acf_location {
 		
 	function rule_match_page_template( $match, $rule, $options ) {
 		
-		// bail early if not a post
-		if( !$options['post_id'] ) return false;
-		
-		
 		// vars
 		$page_template = $options['page_template'];
 		
 		
 		// get page template
-		if( !$page_template ) {
+		if( !$page_template && $options['post_id'] ) {
 		
 			$page_template = get_post_meta( $options['post_id'], '_wp_page_template', true );
 			
@@ -700,11 +741,11 @@ class acf_location {
 		
 		
 		// get page template again
-		if( !$page_template ) {
+		if( ! $page_template ) {
 			
 			$post_type = $options['post_type'];
 
-			if( !$post_type ) {
+			if( !$post_type && $options['post_id'] ) {
 			
 				$post_type = get_post_type( $options['post_id'] );
 				
@@ -715,7 +756,6 @@ class acf_location {
 				$page_template = "default";
 				
 			}
-			
 		}
 		
 		
@@ -1186,7 +1226,6 @@ function acf_get_field_group_visibility( $field_group, $args = array() ) {
 		'page_template'	=> 0,
 		'page_parent'	=> 0,
 		'page_type'		=> 0,
-		'post_status'	=> 0,
 		'post_format'	=> 0,
 		'post_taxonomy'	=> null,
 		'taxonomy'		=> 0,
@@ -1202,7 +1241,11 @@ function acf_get_field_group_visibility( $field_group, $args = array() ) {
 	
 	
 	// bail early if not active
-	if( !$field_group['active'] ) return false;
+	if( !$field_group['active'] ) {
+		
+		return false;
+		
+	}
 	
 	
 	// WPML

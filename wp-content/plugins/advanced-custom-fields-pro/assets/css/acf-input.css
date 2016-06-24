@@ -486,7 +486,7 @@ html[dir="rtl"] input.acf-is-prepended.acf-is-appended {
   padding: 5px 5px 5px 7px;
 }
 .select2-container.-acf .select2-search-choice-close {
-  margin-top: -1px;
+  top: 3px;
 }
 /* open */
 .select2-container.-acf.select2-container-active .select2-choices,
@@ -1642,6 +1642,11 @@ html[dir="rtl"] .acf-taxonomy-field[data-type="select"] .acf-icon {
   padding-top: 8px;
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+/* image select button fix */
+.media-frame a.acf-button {
+  border: 1px solid #bbbbbb;
+  color: #333;
 }
 /*---------------------------------------------------------------------------------------------
 *

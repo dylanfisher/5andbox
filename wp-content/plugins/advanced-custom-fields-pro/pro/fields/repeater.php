@@ -365,9 +365,9 @@ class acf_field_repeater extends acf_field {
 </table>
 <?php if( $show_add ): ?>
 	
-	<ul class="acf-actions acf-hl">
-		<li>
-			<a class="acf-button button button-primary" data-event="add-row"><?php echo $field['button_label']; ?></a>
+	<ul class="acf-hl">
+		<li class="acf-fr">
+			<a href="#" class="acf-button blue" data-event="add-row"><?php echo $field['button_label']; ?></a>
 		</li>
 	</ul>
 			

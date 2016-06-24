@@ -223,7 +223,6 @@ class acf_field_flexible_content extends acf_field {
 			<?php $this->render_layout( $field, $layout, 'acfcloneindex', array() ); ?>
 		<?php endforeach; ?>
 	</div>
-	
 	<div class="values">
 		<?php if( !empty($field['value']) ): ?>
 			<?php foreach( $field['value'] as $i => $value ): ?>
@@ -243,9 +242,9 @@ class acf_field_flexible_content extends acf_field {
 		<?php endif; ?>
 	</div>
 	
-	<ul class="acf-actions acf-hl">
-		<li>
-			<a class="acf-button button button-primary" data-event="add-layout"><?php echo $field['button_label']; ?></a>
+	<ul class="acf-hl">
+		<li class="acf-fr">
+			<a href="#" class="acf-button blue" data-event="add-layout"><?php echo $field['button_label']; ?></a>
 		</li>
 	</ul>
 	

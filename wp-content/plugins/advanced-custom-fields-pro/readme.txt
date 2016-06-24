@@ -106,22 +106,6 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
-= 5.3.4 =
-* User field: Added pagination for Select2 results
-* Tab field: Fixed issue where no tab was active within a widget
-* Taxonomy field: Fixed issue where term order was lost when using 'load_terms' setting
-* Image field: Alt tag will now update when editing/changing selected image
-* Field group: Removed Comic sans 'Drag/drop' text (OMG)
-* Core: Changed button classes from '.acf-button' to '.button'
-* Core: Fixed double `__()` issue when exporting field group with new l10n settings
-* Core: Removed some 'wp_cache_delete()' functions to improve load speed on heavily cached websites
-* Core: Removed `esc_html()` from field label and added new filter 'acf/get_field_label'
-* Core: Minor fixes and improvements
-* API: Added new 'honeypot' setting to the `acf_form()` function
-* Language: Added Bulgarian translation - thanks to Marin Atanasov
-* Language: Added Swiss German translation - thanks to Raphael Hüni
-* Language: Added Indonesian translation - thanks to Rio Bermano
-
 = 5.3.3.2 =
 * Core: Fixed bug preventing new translation settings 'l10n_field' and 'l10n_field_group'
 * Core: Fixed bug preventing plugin updates when included within theme

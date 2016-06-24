@@ -4912,9 +4912,8 @@ var acf;
 			}
 			
 			
-			// trigger resize on map 
+			// trigger resize on div
 			google.maps.event.trigger(this.map, 'resize');
-			
 			
 			
 			// center map
@@ -4924,18 +4923,8 @@ var acf;
 		
 		show: function(){
 			
-			// vars
-			var self = this,
-				$field = this.$field;
-			
-			
-			// center map when it is shown (by a tab / collapsed row)
-			// - use delay to avoid rendering issues with browsers (ensures div is visible)
-			setTimeout(function(){
-				
-				self.set('$field', $field).refresh();
-				
-			}, 10);
+			// center map when it is shown (by a tab)
+			this.refresh();
 			
 		},
 		
@@ -5136,8 +5125,6 @@ var acf;
 		
 		type: 'image',
 		$el: null,
-		$input: null,
-		$img: null,
 		
 		actions: {
 			'ready':	'initialize',
@@ -5153,11 +5140,8 @@ var acf;
 		
 		focus: function(){
 			
-			// vars
+			// get elements
 			this.$el = this.$field.find('.acf-image-uploader');
-			this.$input = this.$field.find('[data-name="id"]');
-			this.$img = this.$field.find('[data-name="image"]');
-			
 			
 			// get options
 			this.o = acf.get_data( this.$el );
@@ -5219,7 +5203,11 @@ var acf;
 							
 							
 							// bail early if $next was not found
-							if( !$field ) return;
+							if( !$field ) {
+								
+								return;
+								
+							}
 							
 							
 							// bail early if next file uploader has value
@@ -5244,7 +5232,11 @@ var acf;
 							
 							
 							// bail early if no $tr (maximum rows hit)
-							if( !$tr ) return false;
+							if( !$tr ) {
+								
+								return false;
+								
+							}
 							
 							
 							// get next $field
@@ -5268,11 +5260,10 @@ var acf;
 		},
 		
 		prepare: function( attachment ) {
-			
+		
 			// vars
 			var image = {
 		    	id:		attachment.id,
-		    	alt:	attachment.attributes.alt,
 		    	url:	attachment.attributes.url
 	    	};			
 			
@@ -5292,10 +5283,10 @@ var acf;
 		
 		render: function( image ){
 			
+	    	
 			// set atts
-		 	this.$img.attr('src', image.url);
-		 	this.$img.attr('alt', image.alt);
-			this.$input.val( image.id ).trigger('change');
+		 	this.$el.find('[data-name="image"]').attr( 'src', image.url );
+			this.$el.find('[data-name="id"]').val( image.id ).trigger('change');
 			
 			
 			// set div class
@@ -5306,12 +5297,11 @@ var acf;
 		edit: function() {
 			
 			// reference
-			var self = this,
-				$field = this.$field;
+			var self = this;
 			
 			
 			// vars
-			var id = this.$input.val();
+			var id = this.$el.find('[data-name="id"]').val();
 			
 			
 			// popup
@@ -5323,12 +5313,7 @@ var acf;
 				id:			id,
 				
 				select:	function( attachment, i ) {
-					
-					// focus
-					self.doFocus( $field );
-					
-					
-					// render
+				
 			    	self.render( self.prepare(attachment) );
 					
 				}
@@ -5341,9 +5326,8 @@ var acf;
 			
 			// vars
 	    	var attachment = {
-		    	id: '',
-		    	alt: '',
-		    	url: ''
+		    	id:		'',
+		    	url:	''
 	    	};
 	    	
 	    	
@@ -5358,7 +5342,7 @@ var acf;
 		
 		change: function( e ){
 			
-			this.$input.val( e.$el.val() );
+			this.$el.find('[data-name="id"]').val( e.$el.val() );
 			
 		}
 		
@@ -7726,6 +7710,7 @@ var acf;
 	}
 	
 	
+	
 	// select
 	acf.fields.select = acf.field.extend({
 		
@@ -7800,8 +7785,7 @@ var acf;
 	// user
 	acf.fields.user = acf.fields.select.extend({
 		
-		type: 'user',
-		pagination: true
+		type: 'user'
 		
 	});	
 	
@@ -7910,7 +7894,7 @@ var acf;
 			// select other tab if active
 			if( $li.hasClass('active') ) {
 				
-				$group.find('li:not(.hidden-by-conditional-logic):first a').trigger('click');
+				$group.find('a:visible:first').trigger('click');
 				
 			}
 			
@@ -8009,7 +7993,7 @@ var acf;
 				// trigger click
 				if( !$group.find('li.active').exists() ) {
 					
-					$group.find('li:not(.hidden-by-conditional-logic):first a').trigger('click');
+					$group.find('a:visible:first').trigger('click');
 					
 				}
 				

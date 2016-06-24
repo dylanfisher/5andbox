@@ -1100,7 +1100,7 @@ if( typeof acf !== 'undefined' ) {
 			echo '<p><strong>' . __('Move Complete.', 'acf') . '</strong></p>';
 			echo '<p>' . sprintf( __('The %s field can now be found in the %s field group', 'acf'), $v1, $v2 ). '</p>';
 			
-			echo '<a href="#" class="button button-primary acf-close-popup">' . __("Close Window",'acf') . '</a>';
+			echo '<a href="#" class="acf-button blue acf-close-popup">' . __("Close Window",'acf') . '</a>';
 			
 			die();
 			
@@ -1142,7 +1142,7 @@ if( typeof acf !== 'undefined' ) {
 			// render
 			acf_render_field_wrap( $field );
 			
-			echo '<button type="submit" class="button button-primary">' . __("Move Field",'acf') . '</button>';
+			echo '<button type="submit" class="acf-button blue">' . __("Move Field",'acf') . '</button>';
 			
 		echo '</form>';
 		

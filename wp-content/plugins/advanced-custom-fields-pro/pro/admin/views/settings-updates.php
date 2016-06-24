@@ -49,7 +49,7 @@ $readonly = $active ? 1 : 0;
 					<tr>
 						<th></th>
 						<td>
-							<input type="submit" value="<?php echo $button; ?>" class="button button-primary">
+							<input type="submit" value="<?php echo $button; ?>" class="acf-button blue">
 						</td>
 					</tr>
 				</tbody>
@@ -93,15 +93,15 @@ $readonly = $active ? 1 : 0;
 								<span style="margin-right: 5px;"><?php _e('Yes', 'acf'); ?></span>
 								
 								<?php if( $active ): ?>
-									<a class="button button-primary" href="<?php echo admin_url('plugins.php?s=Advanced+Custom+Fields+Pro'); ?>"><?php _e('Update Plugin', 'acf'); ?></a>
+									<a class="acf-button blue" href="<?php echo admin_url('plugins.php?s=Advanced+Custom+Fields+Pro'); ?>"><?php _e('Update Plugin', 'acf'); ?></a>
 								<?php else: ?>
-									<a class="button" disabled="disabled" href="#"><?php _e('Please enter your license key above to unlock updates', 'acf'); ?></a>
+									<a class="acf-button" disabled="disabled" href="#"><?php _e('Please enter your license key above to unlock updates', 'acf'); ?></a>
 								<?php endif; ?>
 								
 							<?php else: ?>
 								
 								<span style="margin-right: 5px;"><?php _e('No', 'acf'); ?></span>
-								<a class="button" href="<?php echo add_query_arg('force-check', 1); ?>"><?php _e('Check Again', 'acf'); ?></a>
+								<a class="acf-button" href="<?php echo add_query_arg('force-check', 1); ?>"><?php _e('Check Again', 'acf'); ?></a>
 							<?php endif; ?>
 						</td>
 					</tr>
