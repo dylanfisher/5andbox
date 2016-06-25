@@ -56,7 +56,7 @@ gulp.task('scripts', function() {
 // Watch Files for Changes
 gulp.task('watch', function() {
   livereload.listen();
-  gulp.watch('*.php', livereload.reload);
+  gulp.watch('**/*.php', livereload.reload);
   gulp.watch('js/src/**/*.js', ['lint', 'scripts']);
   gulp.watch('scss/**/*.scss', ['sass']);
 });
