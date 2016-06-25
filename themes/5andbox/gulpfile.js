@@ -41,8 +41,10 @@ gulp.task('sass', function() {
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
   return gulp.src([
+      'js/src/vendor/*.js',
       'js/src/vendor/**/*.js',
       'js/src/init.js',
+      'js/src/scripts/*.js',
       'js/src/scripts/**/*.js',
     ])
     .pipe(concat('application.js'))
