@@ -33,6 +33,8 @@ gulp.task('lint', function() {
 // Compile Sass
 gulp.task('sass', function() {
   return gulp.src('scss/style.scss')
+    .pipe(sass({outputStyle: 'expanded'})).on('error', sass.logError)
+    .pipe(gulp.dest('./scss'))
     .pipe(sass({outputStyle: 'compressed'})).on('error', sass.logError)
     .pipe(gulp.dest('./'))
     .pipe(livereload());

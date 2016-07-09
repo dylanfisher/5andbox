@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html data-home-url="<?php echo home_url('/'); ?>">
 <head>
-  <?php get_template_part('partials/utilities/ascii'); ?>
   <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
 
   <!-- Basic meta tags -->
