@@ -4,13 +4,13 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
-// Override these default variables in variables.scss
+// Override these default variables in variables.scss if necessary
 
 // Breakpoint sizes
 $breakpoint-xs : 480px !default;
 $breakpoint-sm : 768px !default;
-$breakpoint-md : 1092px !default;
-$breakpoint-lg : 1400px !default;
+$breakpoint-md : 992px !default;
+$breakpoint-lg : 1200px !default;
 
 // Gutter size
 $gutter: 15px !default;
@@ -19,7 +19,7 @@ $gutter: 15px !default;
 // Define the maximum width of `.container` for different screen sizes.
 $container-tablet-size        : 720px !default;
 $container-desktop-size       : 940px !default;
-$container-large-desktop-size : 11400px !default;
+$container-large-desktop-size : 1140px !default;
 
 // Grid columns
 $grid-column-count: 12 !default;

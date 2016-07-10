@@ -33,9 +33,9 @@
   <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
   <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
   <?php get_template_part('partials/utilities/ie8_notice'); ?>
-  <div <?php body_class('container-fluid') ?>>
+  <div class="container">
     <header class="header">
       <h1 class="site-title">
         <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
