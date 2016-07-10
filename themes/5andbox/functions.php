@@ -3,11 +3,20 @@
 // CSS and JS script enqueues
 require_once('includes/enqueue_scripts.php');
 
+// Security
+foreach (glob(get_stylesheet_directory() . "/includes/wordpress_security/*.php") as $filename) {
+  require_once $filename;
+}
+
 // Enable wordpress behaviors, like adding theme support for menus
-require_once('includes/wordpress_enables.php');
+foreach (glob(get_stylesheet_directory() . "/includes/wordpress_enables/*.php") as $filename) {
+  require_once $filename;
+}
 
 // Disable unwanted default wordpress behaviors
-require_once('includes/wordpress_disables.php');
+foreach (glob(get_stylesheet_directory() . "/includes/wordpress_disables/*.php") as $filename) {
+  require_once $filename;
+}
 
 // Register custom image sizes
 require_once('includes/custom_image_sizes.php');
