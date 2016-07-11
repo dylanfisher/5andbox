@@ -40,5 +40,7 @@
       <h1 class="site-title">
         <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
       </h1>
-      <nav class="nav"><?php wp_nav_menu(); ?></nav>
+      <nav class="nav">
+        <?php wp_nav_menu(); ?>
+      </nav>
     </header>
