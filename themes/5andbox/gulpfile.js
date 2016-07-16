@@ -12,7 +12,10 @@ var notify     = require('gulp-notify');
 
 // Lint Task
 gulp.task('lint', function() {
-  return gulp.src('js/src/**/*.js')
+  return gulp.src([
+      'js/src/scripts/init.js',
+      'js/src/scripts/**/*.js'
+    ])
     .pipe(jshint())
     // Use gulp-notify as jshint reporter
     .pipe(notify(function(file) {
@@ -34,7 +37,8 @@ gulp.task('lint', function() {
 gulp.task('sass', function() {
   return gulp.src('scss/style.scss')
     .pipe(sass({outputStyle: 'expanded'})).on('error', sass.logError)
-    .pipe(gulp.dest('./scss'))
+    .pipe(rename('style.full.css'))
+    .pipe(gulp.dest('./'))
     .pipe(sass({outputStyle: 'compressed'})).on('error', sass.logError)
     .pipe(gulp.dest('./'))
     .pipe(livereload());
