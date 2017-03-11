@@ -3,9 +3,12 @@
 <head>
   <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
 
+  <!-- 🌴 This website was developed by https://github.com/dylanfisher 🌴 -->
+
   <!-- Basic meta tags -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <?php // TODO: unique description for each page ?>
   <meta name="description" content="<?php echo get_bloginfo('description'); ?>">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width">

@@ -5,12 +5,18 @@ $ = jQuery;
 var App = {
   windowWidth: $(window).width(),
   windowHeight: $(window).height(),
+  documentWidth: $(document).width(),
+  documentHeight: $(document).height(),
   scrollTop: $(window).scrollTop(),
+  homeUrl: $('html').attr('data-home-url'),
+  ajaxUrl: $('html').attr('data-ajax-url'),
 };
 
 $(window).resize(function() {
-  App.windowWidth  = $(window).width();
-  App.windowHeight = $(window).height();
+  App.windowWidth    = $(window).width();
+  App.windowHeight   = $(window).height();
+  App.documentWidth  = $(document).width();
+  App.documentHeight = $(document).height();
 });
 
 $(window).scroll(function() {
@@ -52,3 +58,5 @@ App.breakpoint = function(checkIfSize) {
 App.breakpoint.isMobile = function() {
   return ( App.breakpoint('xs') || App.breakpoint('sm') );
 };
+
+console.log('%c🌴 hi there!', 'font-size: 36px;', new Date().toLocaleTimeString() + '\nThis website was developed by https://github.com/dylanfisher');
