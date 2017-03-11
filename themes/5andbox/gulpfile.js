@@ -30,18 +30,18 @@ gulp.task('lint', function() {
         }
       }).join("\n");
       return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
-    }));
+    }))
+    .on('error', onError);
 });
 
 // Compile Sass
 gulp.task('sass', function() {
-  return gulp.src('scss/style.scss')
-    .pipe(sass({outputStyle: 'expanded'})).on('error', sass.logError)
-    .pipe(rename('style.full.css'))
-    .pipe(gulp.dest('./'))
+  return gulp.src('css/style.scss')
     .pipe(sass({outputStyle: 'compressed'})).on('error', sass.logError)
+    .pipe(rename('style.css'))
     .pipe(gulp.dest('./'))
-    .pipe(livereload());
+    .pipe(livereload())
+    .on('error', onError);
 });
 
 // Concatenate & Minify JS
@@ -58,7 +58,8 @@ gulp.task('scripts', function() {
     .pipe(rename('application.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('js/dist'))
-    .pipe(livereload());
+    .pipe(livereload())
+    .on('error', onError);
 });
 
 // Watch Files for Changes
@@ -66,8 +67,14 @@ gulp.task('watch', function() {
   livereload.listen();
   gulp.watch('**/*.php', livereload.reload);
   gulp.watch('js/src/**/*.js', ['lint', 'scripts']);
-  gulp.watch('scss/**/*.scss', ['sass']);
+  gulp.watch('css/**/*.scss', ['sass']);;
 });
 
 // Default Task
 gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);
+
+// Catch errors
+function onError(err) {
+  console.log(err);
+  this.emit('end');
+}

@@ -12,7 +12,11 @@ $font-stack__regular : sans-serif;
 // Regular
 @mixin font--regular {
   font-family: $font-stack__regular;
-  font-size:      1.8rem;
-  line-height:    2.1rem;
-  letter-spacing: 0.025rem;
+  font-size:      16px;
+  line-height:    1.4;
+  letter-spacing: 0px;
+
+  @include breakpoint(sm) {
+    font-size: 18px;
+  }
 }

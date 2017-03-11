@@ -13,7 +13,7 @@ function sandbox_enqueue_scripts() {
       'https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js',
       false,
       NULL,
-      true
+      true // Load in footer
     );
   } elseif ( sandbox_is_local() && !is_admin() && $GLOBALS['pagenow'] != 'wp-login.php' ) {
     // DEVELOPMENT - Register jQuery locally
@@ -23,7 +23,7 @@ function sandbox_enqueue_scripts() {
       get_stylesheet_directory_uri() . '/js/lib/jquery.min.js',
       false,
       NULL,
-      true
+      true // Load in footer
     );
   }
 
@@ -35,15 +35,14 @@ function sandbox_enqueue_scripts() {
     get_stylesheet_directory_uri() . '/js/dist/' . $js_file,
     array('jquery'),
     $javascript_version,
-    true
+    true // Load in footer
   );
 
   // CSS
-  $css_file = sandbox_is_local() ? '/style.full.css' : '/style.css';
   $css_version = filemtime( get_stylesheet_directory() . '/style.css');
   wp_enqueue_style(
     'sandbox-stylesheet',
-    get_stylesheet_directory_uri() . $css_file,
+    get_stylesheet_directory_uri() . '/style.css',
     array(),
     $css_version,
     'all'
