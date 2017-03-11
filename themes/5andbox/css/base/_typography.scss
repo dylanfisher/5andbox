@@ -1,8 +1,6 @@
 html {
-  text-rendering: auto;
-
   @include breakpoint(sm) {
-    text-rendering: geometricPrecision;
+    text-rendering: optimizeLegibility;
   }
 }
 
