@@ -6,6 +6,11 @@ require_once('functions/enqueue_scripts.php');
 // Register custom image sizes
 require_once('functions/custom_image_sizes.php');
 
+// Custom post types
+foreach (glob(get_stylesheet_directory() . '/post-types/*.php') as $filename) {
+  require_once $filename;
+}
+
 // Security
 foreach (glob(get_stylesheet_directory() . '/functions/wordpress_security/*.php') as $filename) {
   require_once $filename;
