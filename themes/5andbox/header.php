@@ -37,12 +37,11 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <div class="container">
-    <header class="header">
-      <h1 class="site-title">
-        <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
-      </h1>
-      <nav class="nav">
-        <?php wp_nav_menu(); ?>
-      </nav>
-    </header>
+  <header class="header">
+    <h1 class="site-title">
+      <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
+    </h1>
+    <nav class="nav">
+      <?php wp_nav_menu(); ?>
+    </nav>
+  </header>
