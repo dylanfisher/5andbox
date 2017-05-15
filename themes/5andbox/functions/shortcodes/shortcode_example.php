@@ -1,11 +1,17 @@
 <?php
+// // Rows
+// function sandbox_row_shortcode( $atts, $content = null ) {
+//   return '<div class="shortcode-row row">' . do_shortcode( $content ) . '</div>';
+// }
+// add_shortcode( 'column', 'sandbox_row_shortcode' );
 
-// function sandbox_example_shortcode( $atts, $content = null ) {
+
+// // Columns
+// function sandbox_column_shortcode( $atts, $content = null ) {
 //   $a = shortcode_atts( array(
-//       'name' => 'Name of staff',
-//       'title' => 'Title of staff'
+//     'size' => 'col-sm-6'
 //   ), $atts );
 
-//   return '<div class="staff-member"><div class="staff-member-name">'.$a['name'].'</div><div class="staff-member-title">'.$a['title'].'</div><div class="staff-member-bio">'.$content.'</div><div class="staff-member-bio-link">View Bio</div></div>';
+//   return '<div class="shortcode-column ' . $a['size'] . '">' . do_shortcode( $content ) . '</div>';
 // }
-// add_shortcode( 'example', 'sandbox_example_shortcode' );
+// add_shortcode( 'column', 'sandbox_column_shortcode' );
