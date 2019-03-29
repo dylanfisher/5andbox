@@ -3,7 +3,7 @@
 <head>
   <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
 
-  <!-- 🌴 This website was developed by https://github.com/dylanfisher 🌴 -->
+  <!-- This website was developed by Dylan Fisher http://www.dylanfisher.com/ -->
 
   <!-- Basic meta tags -->
   <meta charset="utf-8">
@@ -37,6 +37,7 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+  <h1>test</h1>
   <header class="header">
     <h1 class="site-title">
       <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>

@@ -6,8 +6,6 @@ Description: A bare bones Wordpress starter kit. Includes useful plugins, functi
 Version: 3.0
 */
 
-@import "modules/ascii";
-
 // Modules (these shouldn't output any CSS)
 @import "modules/variables";
 @import "modules/variables_bootstrap";

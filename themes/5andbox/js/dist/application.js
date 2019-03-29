@@ -58,5 +58,3 @@ App.breakpoint = function(checkIfSize) {
 App.breakpoint.isMobile = function() {
   return ( App.breakpoint('xs') || App.breakpoint('sm') );
 };
-
-console.log('%c🌴 hi there!', 'font-size: 36px;', new Date().toLocaleTimeString() + '\nThis website was developed by https://github.com/dylanfisher');
