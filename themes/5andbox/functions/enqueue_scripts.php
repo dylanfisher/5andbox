@@ -10,7 +10,7 @@ function sandbox_enqueue_scripts() {
     wp_deregister_script('jquery');
     wp_register_script(
       'jquery',
-      'https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js',
+      'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
       false,
       NULL,
       true // Load in footer
