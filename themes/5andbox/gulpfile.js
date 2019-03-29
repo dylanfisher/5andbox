@@ -29,7 +29,7 @@ gulp.task('scripts', function() {
   return gulp.src([
       'js/src/vendor/*.js',
       'js/src/vendor/**/*.js',
-      'js/src/init.js',
+      'js/src/application.js',
       'js/src/scripts/*.js',
       'js/src/scripts/**/*.js',
     ])
