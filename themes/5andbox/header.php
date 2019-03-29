@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-home-url="<?php echo home_url('/'); ?>" data-ajax-url="<?php echo admin_url('admin-ajax.php'); ?>" class="<?php echo is_admin_bar_showing() ? 'is-showing-admin-bar' : ''; ?>">
+<html lang="en" data-home-url="<?php echo home_url('/'); ?>" data-ajax-url="<?php echo admin_url('admin-ajax.php'); ?>">
 <head>
   <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
 

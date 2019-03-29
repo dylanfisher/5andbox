@@ -40,6 +40,7 @@ remove_action( 'wp_head', 'rsd_link' );
 // hijack options updating for XMLRPC
 add_filter( 'pre_update_option_enable_xmlrpc', '__return_false' );
 add_filter( 'pre_option_enable_xmlrpc', '__return_zero' );
+add_filter( 'wp_xmlrpc_server_class', '__return_false' );
 add_filter( 'xmlrpc_enabled', '__return_false' );
 
 // Disable XMLRPC call
