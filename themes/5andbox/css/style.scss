@@ -6,27 +6,17 @@ Description: A bare bones Wordpress starter kit. Includes useful plugins, functi
 Version: 3.0
 */
 
-// Modules (these shouldn't output any CSS)
-@import "modules/variables";
-@import "modules/variables_bootstrap";
-@import "modules/extends";
-@import "modules/mixins/breakpoint";
+// Core - fonts, variables, mixins, etc. These shouldn't output any CSS on their own.
+@import "core/fonts";
+@import "core/variables";
+@import "core/mixins";
 
-// Base
+// Base - basic foundation and structural styles
 @import "base/normalize";
-@import "base/typography_engine";
-@import "base/typography";
 @import "base/bootstrap_custom";
-@import "base/base_styles";
+@import "base/typography";
+@import "base/foundation";
 @import "base/helper_classes";
 
-// UI
-@import "ui/links";
-@import "ui/buttons";
-@import "ui/lists";
-@import "ui/inputs";
-
-// Partials
+// Partials - reusable partials and page elements
 @import "partials/main";
-
-// Vendor

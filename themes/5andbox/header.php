@@ -37,12 +37,20 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <h1>test</h1>
-  <header class="header">
-    <h1 class="site-title">
-      <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
-    </h1>
-    <nav class="nav">
-      <?php wp_nav_menu(); ?>
-    </nav>
-  </header>
+  <main id="application-wrapper" class="application-wrapper">
+    <header id="header" class="header">
+      <div class="container-fluid">
+        <div class="site-container">
+          <div class="row">
+            <div class="col-sm-12">
+              <h1 class="site-title">
+                <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
+              </h1>
+              <nav id="nav" class="nav">
+                <?php wp_nav_menu(); ?>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>

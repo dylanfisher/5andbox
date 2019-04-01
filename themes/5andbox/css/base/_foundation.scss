@@ -1,0 +1,23 @@
+// Foundation
+
+html {
+  @include default-font;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+div {
+  vertical-align: top;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}

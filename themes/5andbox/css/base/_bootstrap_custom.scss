@@ -7,7 +7,15 @@
 // For a complete list of imports see:
 // https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/_bootstrap.scss
 
-@import "bootstrap_custom/mixins/clearfix";
-@import "bootstrap_custom/mixins/grid-framework";
-@import "bootstrap_custom/mixins/grid";
-@import "bootstrap_custom/grid";
+@import "bootstrap/mixins/clearfix";
+@import "bootstrap/mixins/responsive-visibility";
+@import "bootstrap/mixins/clearfix";
+
+@import "bootstrap/responsive-utilities";
+
+// Grid
+@import "bootstrap_overrides/mixins/grid-framework";
+@import "bootstrap_overrides/mixins/grid";
+@import "bootstrap_overrides/grid";
+
+@import "bootstrap_overrides/tables"

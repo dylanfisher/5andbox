@@ -1,0 +1,7 @@
+// Flex alignment
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}

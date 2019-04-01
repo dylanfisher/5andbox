@@ -1,32 +1,21 @@
-html {
-  @include breakpoint(sm) {
-    text-rendering: optimizeLegibility;
-  }
-}
+// Typography
 
-body {
-  @include font--regular;
+html {
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @include font--regular;
   font-size: inherit;
   font-weight: normal;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 p {
   margin-top: 0;
-
-  &:first-child {
-    margin-top: 0;
-  }
+  margin-bottom: 1.4em;
 
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.regular {
-  @include font--regular;
 }

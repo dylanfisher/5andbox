@@ -1,0 +1,44 @@
+@mixin link-hover {
+  border-bottom: 1px solid;
+}
+
+@mixin link-active {
+  border-bottom: 1px solid;
+}
+.link-active { @include link-active; }
+
+@mixin blank-link {
+  text-decoration: none;
+  border-bottom: 0;
+  color: inherit;
+}
+.blank-link { @include blank-link; }
+
+@mixin blank-link-hover {
+  @include blank-link;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    @include breakpoint(sm) {
+      @include link-hover;
+    }
+  }
+}
+.blank-link-hover { @include blank-link-hover; }
+
+@mixin default-link {
+  @include link-active;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    @include breakpoint(sm) {
+      border-bottom: 1px dashed;
+    }
+  }
+}
+.default-link { @include default-link; }
+
+.external-link {
+  cursor: alias;
+}

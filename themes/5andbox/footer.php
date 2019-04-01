@@ -1,4 +1,4 @@
-    <?php // TODO: add google analytics here ?>
-    <?php wp_footer(); ?>
+      <?php wp_footer(); ?>
+    </main>
   </body>
 </html>

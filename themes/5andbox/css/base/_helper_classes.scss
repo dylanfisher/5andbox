@@ -1,13 +1,37 @@
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
+// Helper classes
+
+// Alignment
+.text-left           { text-align: left; }
+.text-right          { text-align: right; }
+.text-center         { text-align: center; }
+.text-justify        { text-align: justify; }
+.text-nowrap         { white-space: nowrap; }
+
+// Vertical alignment
+.va-top    { vertical-align: top; }
+.va-middle { vertical-align: middle; }
+.va-bottom { vertical-align: bottom; }
+
+// Transformation
+.text-lowercase      { text-transform: lowercase; }
+.text-uppercase      { text-transform: uppercase; }
+.text-capitalize     { text-transform: capitalize; }
+
+.no-margin { margin: 0; }
+
+.display-block        { display: block; }
+.display-inline       { display: inline; }
+.display-inline-block { display: inline-block; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
 }
 
-.clearfix:after {
-  clear: both;
-}
-
-.clearfix {
-  *zoom: 1;
-}
+.clearfix { @include clearfix; }
