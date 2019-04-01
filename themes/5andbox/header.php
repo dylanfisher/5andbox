@@ -3,8 +3,6 @@
 <head>
   <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ); ?></title>
 
-  <!-- This website was developed by Dylan Fisher http://www.dylanfisher.com/ -->
-
   <!-- Basic meta tags -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -33,7 +31,10 @@
   <meta name="twitter:description" content="<?php echo get_bloginfo('description'); ?>">
   <!-- <meta name="twitter:image" content="{{imageUrl}}"> -->
 
-  <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
+  <?php if ( false ): ?>
+    <?php // TODO: Add favicon ?>
+    <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
+  <?php endif ?>
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
