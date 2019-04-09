@@ -15,7 +15,7 @@ var notify       = require('gulp-notify');
 
 // Compile Sass
 gulp.task('css', function() {
-  return gulp.src('css/style.scss')
+  return gulp.src('assets/stylesheets/style.scss')
     .pipe(sass({outputStyle: 'compressed'})).on('error', sass.logError)
     .pipe(rename('style.css'))
     .pipe(postcss([autoprefixer(), cssnano()]))
@@ -27,17 +27,17 @@ gulp.task('css', function() {
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
   return gulp.src([
-      'js/src/vendor/*.js',
-      'js/src/vendor/**/*.js',
-      'js/src/application.js',
-      'js/src/scripts/*.js',
-      'js/src/scripts/**/*.js',
+      'assets/javascripts/src/vendor/*.js',
+      'assets/javascripts/src/vendor/**/*.js',
+      'assets/javascripts/src/application.js',
+      'assets/javascripts/src/scripts/*.js',
+      'assets/javascripts/src/scripts/**/*.js',
     ])
     .pipe(concat('application.js'))
-    .pipe(gulp.dest('js/dist'))
+    .pipe(gulp.dest('assets/javascripts/dist'))
     .pipe(rename('application.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('js/dist'))
+    .pipe(gulp.dest('assets/javascripts/dist'))
     .pipe(livereload())
     .on('error', onError);
 });
@@ -48,8 +48,8 @@ gulp.task('watch', function() {
   gulp.watch('**/*.php').on('change', function(file) {
     livereload.changed(file);
   });
-  gulp.watch('js/src/**/*.js', gulp.series('scripts'));
-  gulp.watch('css/**/*.scss', gulp.series('css'));
+  gulp.watch('assets/javascripts/src/**/*.js', gulp.series('scripts'));
+  gulp.watch('assets/stylesheets/**/*.scss', gulp.series('css'));
 });
 
 // Default Task

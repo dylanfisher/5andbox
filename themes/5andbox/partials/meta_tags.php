@@ -46,8 +46,8 @@
   <?php endif; ?>
 <?php endif; ?>
 
-<meta property="og:description" content="<?php echo $meta_description ?>">
-<meta itemprop="description" content="<?php echo $meta_description ?>">
+<meta property="og:description" content="<?php echo $meta_description; ?>">
+<meta itemprop="description" content="<?php echo $meta_description; ?>">
 
 <meta property="og:title" content="<?php echo $meta_title; ?>">
 <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
@@ -56,4 +56,4 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:url" content="<?php the_permalink(); ?>">
 <meta name="twitter:title" content="<?php $meta_title; ?>">
-<meta name="twitter:description" content="<?php echo $meta_description ?>">
+<meta name="twitter:description" content="<?php echo $meta_description; ?>">

@@ -20,7 +20,7 @@ function sandbox_enqueue_scripts() {
     wp_deregister_script('jquery');
     wp_register_script(
       'jquery',
-      get_stylesheet_directory_uri() . '/js/lib/jquery.min.js',
+      get_stylesheet_directory_uri() . '/assets/javascripts/lib/jquery.min.js',
       false,
       NULL,
       true // Load in footer
@@ -29,10 +29,10 @@ function sandbox_enqueue_scripts() {
 
   // Application javascript - unminified in development, minified in production
   $js_file = sandbox_is_local() ? 'application.js' : 'application.min.js';
-  $javascript_version = filemtime( get_stylesheet_directory() . '/js/dist/' . $js_file);
+  $javascript_version = filemtime( get_stylesheet_directory() . '/assets/javascripts/dist/' . $js_file);
   wp_enqueue_script(
     'application',
-    get_stylesheet_directory_uri() . '/js/dist/' . $js_file,
+    get_stylesheet_directory_uri() . '/assets/javascripts/dist/' . $js_file,
     array('jquery'),
     $javascript_version,
     true // Load in footer
