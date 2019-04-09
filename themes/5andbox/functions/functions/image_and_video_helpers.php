@@ -1,6 +1,8 @@
 <?php
 
 // Get an <img> at size from an ACF image field
+// Note: lazy_image requires that you install a lazy load plugin such as
+//       https://github.com/aFarkas/lazysizes in order to work properly.
 function lazy_image($acf_image_field_name, $options = array()) {
   $media_item = get_field( $acf_image_field_name );
   if ( empty( $media_item ) ) $media_item = get_sub_field( $acf_image_field_name );
