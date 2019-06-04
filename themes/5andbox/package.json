@@ -12,7 +12,6 @@
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-livereload": "^4.0.1",
-    "gulp-notify": "^3.0.0",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.2"
@@ -29,5 +28,11 @@
   "bugs": {
     "url": "https://github.com/dylanfisher/5andbox/issues"
   },
-  "homepage": "https://github.com/dylanfisher/5andbox#readme"
+  "homepage": "https://github.com/dylanfisher/5andbox#readme",
+  "browserslist": [
+    "last 4 versions",
+    "> 1%",
+    "not dead",
+    "ie > 9"
+  ]
 }

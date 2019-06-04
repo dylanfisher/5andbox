@@ -11,7 +11,6 @@ var concat       = require('gulp-concat');
 var uglify       = require('gulp-uglify');
 var rename       = require('gulp-rename');
 var livereload   = require('gulp-livereload');
-var notify       = require('gulp-notify');
 
 // Compile Sass
 gulp.task('css', function() {
