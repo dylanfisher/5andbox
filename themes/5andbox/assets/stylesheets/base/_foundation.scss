@@ -2,35 +2,4 @@
 
 html {
   @include default-font;
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-div {
-  vertical-align: top;
-}
-
-a {
-  color: inherit;
-}
-
-img {
-  max-width: 100%;
-  vertical-align: bottom;
-}
-
-.sandbox-image-jump-fix {
-  position: relative;
-  height: 0;
-  overflow: hidden;
-
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
 }

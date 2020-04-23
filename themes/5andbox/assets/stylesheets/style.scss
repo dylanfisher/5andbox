@@ -3,7 +3,7 @@ Theme Name: 5andbox
 Theme URI: https://github.com/dylanfisher/5andbox
 Author: <a href="http://www.dylanfisher.com/">Dylan Fisher</a>
 Description: A bare bones Wordpress starter kit. Includes useful plugins, functions and a Gulp workflow to compile Sass and JavaScript.
-Version: 3.0
+Version: 4.0
 */
 
 // Core - fonts, variables, mixins, etc. These shouldn't output any CSS on their own.
@@ -11,12 +11,24 @@ Version: 3.0
 @import "core/variables";
 @import "core/mixins";
 
+// Vendor
+// @import "vendor/**/*";
+
+// Bootstrap 4 Grid
+@import "bootstrap_v4/bootstrap-grid";
+
 // Base - basic foundation and structural styles
 @import "base/normalize";
-@import "base/bootstrap_custom";
 @import "base/typography";
 @import "base/foundation";
 @import "base/helper_classes";
+@import "base/blocks";
 
 // Partials - reusable partials and page elements
 @import "partials/main";
+
+// Blocks - styles that apply to specific blocks
+@import "blocks/main";
+
+// Pages - styles that apply to specific pages
+@import "pages/main";

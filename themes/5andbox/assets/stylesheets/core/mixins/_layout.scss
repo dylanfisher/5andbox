@@ -4,10 +4,8 @@
   padding-left: $gutter / 2;
   padding-right: $gutter / 2;
 
-  [class*="col-xs-"],
-  [class*="col-sm-"],
-  [class*="col-md-"],
-  [class*="col-lg-"] {
+  & > .col,
+  & > [class*="col-"] {
     padding-left: $gutter / 2;
     padding-right: $gutter / 2;
   }
@@ -19,10 +17,8 @@
     padding-left: $gutter / 2;
     padding-right: $gutter / 2;
 
-    [class*="col-xs-"],
-    [class*="col-sm-"],
-    [class*="col-md-"],
-    [class*="col-lg-"] {
+    & > .col,
+    & > [class*="col-"] {
       padding-left: $gutter / 2;
       padding-right: $gutter / 2;
     }

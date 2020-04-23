@@ -1,11 +1,11 @@
 // Helper classes
 
 // Alignment
-.text-left           { text-align: left; }
-.text-right          { text-align: right; }
-.text-center         { text-align: center; }
-.text-justify        { text-align: justify; }
-.text-nowrap         { white-space: nowrap; }
+.text-left    { text-align: left; }
+.text-right   { text-align: right; }
+.text-center  { text-align: center; }
+.text-justify { text-align: justify; }
+.text-nowrap  { white-space: nowrap; }
 
 // Vertical alignment
 .va-top    { vertical-align: top; }
@@ -13,9 +13,9 @@
 .va-bottom { vertical-align: bottom; }
 
 // Transformation
-.text-lowercase      { text-transform: lowercase; }
-.text-uppercase      { text-transform: uppercase; }
-.text-capitalize     { text-transform: capitalize; }
+.text-lowercase  { text-transform: lowercase; }
+.text-uppercase  { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
 
 .no-margin { margin: 0; }
 
@@ -33,5 +33,3 @@
   clip: rect(0,0,0,0);
   border: 0;
 }
-
-.clearfix { @include clearfix; }

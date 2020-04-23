@@ -7,10 +7,6 @@
 
 @mixin breakpoint($class) {
   @if $class == xs {
-    @media (max-width: $screen-xs - 1) { @content; }
-  }
-
-  @else if $class == xs-sm {
     @media (max-width: $screen-sm - 1) { @content; }
   }
 
@@ -26,12 +22,16 @@
     @media (min-width: $screen-lg) { @content; }
   }
 
+  @else if $class == xl {
+    @media (min-width: $screen-xl) { @content; }
+  }
+
   // Vertical breakpoints
   @else if $class == sm-vert {
     @media (min-height: $vert-screen-sm) { @content; }
   }
 
   @else {
-    @warn "Breakpoint mixin supports: xs, sm, md, lg";
+    @warn "Breakpoint mixin supports: xs, sm, md, lg, xl";
   }
 }

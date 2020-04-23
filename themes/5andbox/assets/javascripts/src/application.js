@@ -2,58 +2,67 @@
 // App namespace
 //////////////////////////////////////////////////////////////
 
-$ = jQuery;
-
 window.App = window.App || {};
+
+App.pageLoad = [];
+App.pageResize = [];
+App.pageScroll = [];
+App.teardown = [];
+App.runFunctions = function(array) {
+  for (var i = array.length - 1; i >= 0; i--) {
+    array[i]();
+  }
+};
 
 //////////////////////////////////////////////////////////////
 // On page load
 //////////////////////////////////////////////////////////////
 
 $(function() {
-  App.windowWidth    = $(window).width();
-  App.windowHeight   = $(window).height();
-  App.documentWidth  = $(document).width();
-  App.documentHeight = $(document).height();
-
   App.scrollTop = $(window).scrollTop();
 
-  App.homeUrl = $('html').attr('data-home-url');
-  App.ajaxUrl = $('html').attr('data-ajax-url');
+  App.windowWidth  = $(window).width();
+  App.windowHeight = $(window).height();
+
+  App.runFunctions(App.pageLoad);
+  App.runFunctions(App.pageResize);
+  App.runFunctions(App.pageScroll);
 });
 
 //////////////////////////////////////////////////////////////
 // On scroll
 //////////////////////////////////////////////////////////////
 
-$(window).scroll(function() {
+$(window).on('scroll', function() {
   App.scrollTop = $(window).scrollTop();
+
+  App.runFunctions(App.pageScroll);
 });
 
 //////////////////////////////////////////////////////////////
 // On resize
 //////////////////////////////////////////////////////////////
 
-$(window).resize(function() {
-  App.windowWidth    = $(window).width();
-  App.windowHeight   = $(window).height();
-  App.documentWidth  = $(document).width();
-  App.documentHeight = $(document).height();
+$(window).on('resize', function() {
+  App.windowWidth  = $(window).width();
+  App.windowHeight = $(window).height();
+
+  App.runFunctions(App.pageResize);
 });
 
 App.breakpoint = function(checkIfSize) {
   // Make sure these match the breakpoint variables set in variables.scss
-  var xs = 480;
+  var xs = 576;
   var sm = 768;
   var md = 992;
   var lg = 1200;
   var breakpoint;
 
-  if ( App.windowWidth < xs ) {
+  if ( App.windowWidth < sm ) {
     breakpoint = 'xs';
-  } else if ( App.windowWidth >= md ) {
+  } else if ( App.windowWidth >= lg ) {
     breakpoint = 'lg';
-  } else if ( App.windowWidth >= sm ) {
+  } else if ( App.windowWidth >= md ) {
     breakpoint = 'md';
   } else {
     breakpoint = 'sm';
