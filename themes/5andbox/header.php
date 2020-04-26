@@ -17,8 +17,8 @@
 <body <?php body_class(); ?>>
   <main id="application-wrapper" class="application-wrapper">
     <header id="header" class="header">
-      <div class="container-fluid">
-        <div class="site-container">
+      <div class="site-container">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-sm-12">
               <h1 class="site-title">
