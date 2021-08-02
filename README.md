@@ -56,13 +56,13 @@ git commit -m "first commit"
 
 ## Developing
 
-- Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
+- Install Node, npm (Node Package Manager) and nvm (Node Version Manager) and Yarn
 
 - Install npm development dependencies
 
 `cd ~/projects/my-new-website/wp-content/themes/my-new-website`
 
-`npm install`
+`yarn`
 
 - Run gulp
 
