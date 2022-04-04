@@ -17,7 +17,7 @@ With WP-CLI http://wp-cli.org/:
 Or with a terminal:
 
 ```bash
-wget http://wordpress.org/latest.tar.gz
+curl https://wordpress.org/latest.tar.gz --output latest.tar.gz
 tar xfz latest.tar.gz
 mv wordpress/* ./
 rmdir ./wordpress/
