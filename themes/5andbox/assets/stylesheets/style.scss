@@ -6,6 +6,8 @@ Description: A bare bones Wordpress starter kit. Includes useful plugins, functi
 Version: 4.0
 */
 
+@use "sass:math";
+
 // Core - fonts, variables, mixins, etc. These shouldn't output any CSS on their own.
 @import "core/fonts";
 @import "core/variables";

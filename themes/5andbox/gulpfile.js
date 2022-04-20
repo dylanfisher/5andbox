@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 
 // Include Plugins
-var sass         = require('gulp-sass');
+var sass         = require('gulp-sass')(require('node-sass'));
 var postcss      = require('gulp-postcss');
 var gulp         = require('gulp');
 var autoprefixer = require('autoprefixer');
@@ -29,8 +29,8 @@ gulp.task('scripts', function() {
       'assets/javascripts/src/vendor/*.js',
       'assets/javascripts/src/vendor/**/*.js',
       'assets/javascripts/src/application.js',
-      'assets/javascripts/src/scripts/*.js',
-      'assets/javascripts/src/scripts/**/*.js',
+      'assets/javascripts/src/partials/*.js',
+      'assets/javascripts/src/partials/**/*.js',
     ])
     .pipe(concat('application.js'))
     .pipe(gulp.dest('assets/javascripts/dist'))
