@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width">
   <?php get_template_part('partials/meta_tags'); ?>
   <?php if ( false ): ?>
-    <?php // TODO: Add favicon ?>
+    <?php // TODO: Add favicon, analytics ?>
     <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
   <?php endif ?>
   <?php wp_head(); ?>
@@ -20,10 +20,10 @@
       <div class="site-container">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-12">
-              <h1 class="site-title">
+            <div class="col-md-12">
+              <div class="site-title">
                 <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
-              </h1>
+              </div>
               <nav id="nav" class="nav">
                 <?php wp_nav_menu(); ?>
               </nav>
