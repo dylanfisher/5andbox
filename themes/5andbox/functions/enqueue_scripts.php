@@ -5,27 +5,15 @@
 //
 
 function sandbox_enqueue_scripts() {
-  // PRODUCTION - Register jQuery from Google CDN
-  if ( !sandbox_is_local() && !is_admin() && $GLOBALS['pagenow'] != 'wp-login.php' ) {
-    wp_deregister_script('jquery');
-    wp_register_script(
-      'jquery',
-      'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-      false,
-      NULL,
-      true // Load in footer
-    );
-  } elseif ( sandbox_is_local() && !is_admin() && $GLOBALS['pagenow'] != 'wp-login.php' ) {
-    // DEVELOPMENT - Register jQuery locally
-    wp_deregister_script('jquery');
-    wp_register_script(
-      'jquery',
-      get_stylesheet_directory_uri() . '/assets/javascripts/lib/jquery.min.js',
-      false,
-      NULL,
-      true // Load in footer
-    );
-  }
+  // jQuery
+  wp_deregister_script('jquery');
+  wp_register_script(
+    'jquery',
+    get_stylesheet_directory_uri() . '/assets/javascripts/lib/jquery.min.js',
+    false,
+    NULL,
+    true // Load in footer
+  );
 
   // Application javascript - unminified in development, minified in production
   $js_file = sandbox_is_local() ? 'application.js' : 'application.min.js';
