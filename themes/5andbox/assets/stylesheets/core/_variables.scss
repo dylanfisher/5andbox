@@ -1,5 +1,33 @@
 /////////////////////////////////////////////////////////////////////////
 //
+// Bootstrap overrides
+//
+/////////////////////////////////////////////////////////////////////////
+
+$spacer: 1rem;
+$spacers: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 2),
+    6: ($spacer * 3),
+    7: ($spacer * 4),
+    8: ($spacer * 6)
+  ),
+  $spacers
+);
+
+// Grid columns
+// $grid-columns:                14 !default;
+// $grid-gutter-width:           60px !default;
+
+/////////////////////////////////////////////////////////////////////////
+//
 // APP VARIABLES
 //
 /////////////////////////////////////////////////////////////////////////
