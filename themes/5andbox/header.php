@@ -15,20 +15,18 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <main id="application-wrapper" class="application-wrapper">
-    <header id="header" class="header">
-      <div class="site-container">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="site-title">
-                <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
-              </div>
-              <nav id="nav" class="nav">
-                <?php wp_nav_menu(); ?>
-              </nav>
-            </div>
+  <header id="header" class="header">
+    <div class="site-container">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="<?php bloginfo('url'); ?>/" rel="home"><?php bloginfo('name'); ?></a>
+            <nav id="nav" class="nav">
+              <?php wp_nav_menu(); ?>
+            </nav>
           </div>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
+  <main id="application-wrapper" class="application-wrapper">

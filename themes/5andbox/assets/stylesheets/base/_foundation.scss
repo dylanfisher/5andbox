@@ -3,3 +3,18 @@
 html {
   @include default-font;
 }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  flex-direction: column;
+}
+
+div {
+  vertical-align: top;
+}
+
+.application-wrapper {
+  flex: 1;
+}
