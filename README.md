@@ -42,7 +42,7 @@ rm -f latest.tar.gz
 
 - Edit the `css/sass/style.scss` file and configure the Theme Name, URI, author and description.
 
-- You may want to install [Forest Assets](https://github.com/dylanfisher/forest-assets) at this point.
+- These theme includes a version of [Forest Assets](https://github.com/dylanfisher/forest-assets) adjusted to work with Wordpress.
 
 - Delete the .git directory and initialize a new git repo in the theme directory (unless you want to track plugins):
 
