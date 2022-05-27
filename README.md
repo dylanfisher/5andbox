@@ -72,6 +72,25 @@ git commit -m "first commit"
 
 Gulp automatically watches files and will livereload connected browsers.
 
+### Excluding build files from your text editor
+
+Add the following to your text editor's project configuration to exclude build files from being indexed.
+
+Sublime Text:
+
+```json
+{
+  "folders":
+  [
+    {
+      "path": "/Users/dylanfisher/projects/my-new-website/wp-content/themes/my-new-website",
+      "folder_exclude_patterns": ["dist", "build", "/Users/dylanfisher/projects/my-new-website/wp-content/themes/my-new-website/vendor"],
+      "file_exclude_patterns": ["style.css"]
+    }
+  ]
+}
+```
+
 ## Deploying
 
 - Update the htaccess file on your server with content from this theme's htaccess file.
