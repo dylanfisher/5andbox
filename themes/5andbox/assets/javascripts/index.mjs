@@ -13,11 +13,9 @@ esbuild.build({
   format: 'iife',
   platform: 'browser',
   outdir: 'assets/dist',
-  // outfile: 'assets/javascripts/dist/application.min.js',
   plugins: [
     sassPlugin({
       async transform(source) {
-        // const { css } = await postcss([autoprefixer], {from: undefined}).process(source);
         const { css } = await postcss([autoprefixer]).process(source, { from: undefined })
         return css
       }
