@@ -61,3 +61,6 @@ tmp
 cache/
 advanced-cache.php
 wp-cache-config.php
+/languages
+/upgrade
+/uploads

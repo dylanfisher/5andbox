@@ -1,3 +1,6 @@
+import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
+
 //////////////////////////////////////////////////////////////
 // App namespace
 //////////////////////////////////////////////////////////////
@@ -66,9 +69,9 @@ App.$window.on('scroll', function() {
   App.runFunctions(App.pageScroll);
 });
 
-App.$window.on('scroll', $.throttle(200, function() {
+App.$window.on('scroll', throttle(function() {
   App.runFunctions(App.pageThrottledScroll);
-}));
+}, 200));
 
 //////////////////////////////////////////////////////////////
 // On resize
@@ -84,9 +87,9 @@ App.$window.on('resize', function() {
   App.runFunctions(App.pageResize);
 });
 
-App.$window.on('resize', $.debounce(500, function() {
+App.$window.on('resize', debounce(function() {
   App.runFunctions(App.pageDebouncedResize);
-}));
+}, 500));
 
 //////////////////////////////////////////////////////////////
 // On breakpoint change

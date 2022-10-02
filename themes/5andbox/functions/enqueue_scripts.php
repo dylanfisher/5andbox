@@ -15,22 +15,21 @@ function sandbox_enqueue_scripts() {
     true // Load in footer
   );
 
-  // Application javascript - unminified in development, minified in production
-  $js_file = sandbox_is_local() ? 'application.js' : 'application.min.js';
-  $javascript_version = filemtime( get_stylesheet_directory() . '/assets/javascripts/dist/' . $js_file);
+  // Application javascript
+  $javascript_version = filemtime( get_stylesheet_directory() . '/assets/dist/javascripts/src/app.js');
   wp_enqueue_script(
     'application',
-    get_stylesheet_directory_uri() . '/assets/javascripts/dist/' . $js_file,
+    get_stylesheet_directory_uri() . '/assets/dist/javascripts/src/app.js',
     array('jquery'),
     $javascript_version,
     true // Load in footer
   );
 
   // CSS
-  $css_version = filemtime( get_stylesheet_directory() . '/style.css');
+  $css_version = filemtime( get_stylesheet_directory() . '/assets/dist/stylesheets/style.css');
   wp_enqueue_style(
     'sandbox-stylesheet',
-    get_stylesheet_directory_uri() . '/style.css',
+    get_stylesheet_directory_uri() . '/assets/dist/stylesheets/style.css',
     array(),
     $css_version,
     'all'
