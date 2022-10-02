@@ -1,6 +1,6 @@
 # 5andbox
 
-A bare bones Wordpress starter kit. Includes useful plugins, functions and a Gulp workflow to compile Sass and JavaScript.
+A bare bones Wordpress starter kit. Includes useful plugins, functions and an esbuild workflow to compile Sass and JavaScript.
 
 ## Installation
 
@@ -58,19 +58,19 @@ git commit -m "first commit"
 
 ## Developing
 
-- Install Node, npm (Node Package Manager) and nvm (Node Version Manager) and Yarn
+- Install Node, npm (Node Package Manager) and nvm (Node Version Manager)
 
 - Install npm development dependencies
 
 `cd ~/projects/my-new-website/wp-content/themes/my-new-website`
 
-`yarn`
+`npm`
 
-- Run gulp
+- Run esbuild
 
-`gulp`
+`npm run build`
 
-Gulp automatically watches files and will livereload connected browsers.
+esbuild automatically watches files and rebuilds assets on change.
 
 ### Excluding build files from your text editor
 
