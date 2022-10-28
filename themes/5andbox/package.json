@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "autoprefixer": "^10.4.12",
+    "bootstrap": "^5.2.1",
     "esbuild": "^0.15.10",
     "esbuild-sass-plugin": "^2.3.3",
     "postcss": "^8.4.17"
