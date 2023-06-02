@@ -40,7 +40,7 @@ rm -f latest.tar.gz
 
 `mv 5andbox/ my-new-website/`
 
-- Edit the `css/sass/style.scss` file and configure the Theme Name, URI, author and description.
+- Edit the `style.css` file and configure the Theme Name, URI, author and description (this is a duplicated plain CSS file, in addition to `style.scss` set up in SCSS).
 
 - This theme includes a version of [Forest Assets](https://github.com/dylanfisher/forest-assets) adjusted to work with Wordpress.
 
@@ -55,6 +55,14 @@ git init
 git add -A
 git commit -m "first commit"
 ```
+
+## Recommended Plugins
+
+> This theme ships with Advanced Custom Fields and Classic Editor. You may also find the following plugins helpful.
+
+- [Better Images](https://wordpress.org/plugins/better-images/)
+- [SVG Support](https://wordpress.org/plugins/svg-support/)
+- [WP Migrate DB Pro](https://deliciousbrains.com/wp-migrate-db-pro/)
 
 ## Developing
 
