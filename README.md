@@ -60,7 +60,6 @@ git commit -m "first commit"
 
 > This theme ships with Advanced Custom Fields and Classic Editor. You may also find the following plugins helpful.
 
-- [Better Images](https://wordpress.org/plugins/better-images/)
 - [SVG Support](https://wordpress.org/plugins/svg-support/)
 - [WP Migrate DB Pro](https://deliciousbrains.com/wp-migrate-db-pro/)
 
