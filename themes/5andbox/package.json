@@ -9,6 +9,7 @@
     "esbuild": "^0.15.10",
     "esbuild-sass-plugin": "^2.3.3",
     "postcss": "^8.4.17",
+    "node-notifier": "^10.0.1",
     "lodash": "^4.17.21"
   },
   "repository": {

@@ -2,8 +2,9 @@ import esbuild from 'esbuild';
 import { sassPlugin } from 'esbuild-sass-plugin';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
+import notifier from 'node-notifier';
 
-esbuild.build({
+const buildOptions = {
   entryPoints: [
     'assets/stylesheets/style.scss',
     'assets/javascripts/src/app.js'
@@ -13,25 +14,30 @@ esbuild.build({
   format: 'iife',
   platform: 'browser',
   outdir: 'assets/dist',
-  plugins: [
-    sassPlugin({
-      async transform(source) {
-        const { css } = await postcss([autoprefixer]).process(source, { from: undefined })
-        return css
-      }
-    })
-  ],
-  watch: {
-    onRebuild(error, result) {
-      if (error) {
-        console.error('watch build failed:', error);
+  external: ['*.woff', '*.woff2']
+};
+
+const plugins = [{
+  name: 'rebuild',
+  setup(build) {
+    build.onEnd(result => {
+      if ( !result || result.errors.length ) {
+        console.error('watch build error:', result);
+        notifier.notify({
+          title: 'esbuild error',
+          message: result.pluginName
+        });
       } else {
-        console.log('watch build succeeded:', result);
+        console.log(`Built at ${new Date().toLocaleTimeString()}`);
       }
-    },
+    });
   },
-}).then(result => {
-  console.log('watching...');
-}).catch((err) => {
-  console.log(err);
-});
+}, sassPlugin({
+  async transform(source, resolveDir) {
+    const { css } = await postcss([autoprefixer]).process(source, { from: undefined });
+    return css
+  }
+})];
+
+const ctx = await esbuild.context({ ...buildOptions, plugins });
+await ctx.watch();
