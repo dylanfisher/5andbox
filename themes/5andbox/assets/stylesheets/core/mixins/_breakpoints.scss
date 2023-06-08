@@ -35,6 +35,31 @@
     @media (min-height: $vert-screen-sm) { @content; }
   }
 
+  // Orientation breakpoints
+  @else if $class == landscape {
+    @media (orientation: landscape) {
+      @content;
+    }
+  }
+
+  @else if $class == portrait {
+    @media (orientation: portrait) {
+      @content;
+    }
+  }
+
+  @else if $class == hover {
+    @media (hover: hover) {
+      @content;
+    }
+  }
+
+  @else if $class == not-hover {
+    @media (not(hover)) {
+      @content;
+    }
+  }
+
   @else {
     @warn "Breakpoint mixin supports: xs, sm, md, lg, xl";
   }
