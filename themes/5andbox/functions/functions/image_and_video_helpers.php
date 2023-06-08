@@ -6,13 +6,14 @@
 function sandbox_image_tag($media_item, $options = array()) {
   if ( empty($media_item) ) return;
 
+  $is_svg = $media_item['mime_type'] == 'image/svg+xml';
   $lazy = array_key_exists( 'lazy', $options ) ? $options['lazy'] : false;
   $size = array_key_exists( 'size', $options ) ? $options['size'] : '2048x2048';
   $size_mobile = array_key_exists( 'size_mobile', $options ) ? $options['size_mobile'] : $size;
   $full_size = array_key_exists( 'full_size', $options ) ? $options['full_size'] : false;
   $data = array_key_exists( 'data', $options ) ? $options['data'] : array();
   $alt = array_key_exists( 'alt', $options ) ? htmlspecialchars($options['alt']) : htmlspecialchars(trim($media_item['alt']));
-  $skip_jump_fix = array_key_exists( 'skip_jump_fix', $options ) ? $options['skip_jump_fix'] : false;
+  $skip_jump_fix = $is_svg || (array_key_exists( 'skip_jump_fix', $options ) ? $options['skip_jump_fix'] : false);
   $wrapper_class = array_key_exists( 'wrapper_class', $options ) ? $options['wrapper_class'] : false;
   $class = array_key_exists( 'class', $options ) ? $options['class'] : false;
   $style_props = array_key_exists( 'style', $options ) ? $options['style'] : '';
@@ -73,18 +74,26 @@ function sandbox_image_tag($media_item, $options = array()) {
     echo $image;
   } else {
     echo '<div class="' . $wrapper_class . ' sandbox-image-jump-fix sandbox-image-jump-fix--' . $media_item['subtype'] . '"
-               style="aspect-ratio: ' . $ratio . ';">' . $image . '</div>';
+               style="aspect-ratio: ' . $ratio . ';" data-aspect-ratio="' . $ratio . '">' . $image . '</div>';
   }
 }
 
-// Get an images orientation. Returns either "landscape" or "portrait"
-function sandbox_get_image_orientation($image) {
+// Get an image's aspect ratio as a float
+function sandbox_get_image_aspect_ratio($image) {
   if ( empty($image) ) return;
 
   $width = $image['width'];
   $height = $image['height'];
   $ratio = $height / $width;
 
+  return $ratio;
+}
+
+// Get an image's orientation. Returns either "landscape" or "portrait"
+function sandbox_get_image_orientation($image) {
+  if ( empty($image) ) return;
+
+  $ratio = sandbox_get_image_aspect_ratio($image);
   $orientation = null;
 
   if ( $ratio <= 1 ) {
@@ -102,7 +111,7 @@ function sandbox_get_background_image_div($media_item, $options = array()) {
   $full_size = array_key_exists( 'full_size', $options ) ? $options['full_size'] : false;
   $data = array_key_exists( 'data', $options ) ? $options['data'] : array();
   $alt = array_key_exists( 'alt', $options ) ? htmlspecialchars($options['alt']) : htmlspecialchars(trim($media_item['alt']));
-  $lazy = array_key_exists( 'lazy', $options ) ? $options['lazy'] : false;
+  $lazy = array_key_exists( 'lazy', $options ) ? $options['lazy'] : true;
   $class = array_key_exists( 'class', $options ) ? $options['class'] : '';
   $class .= ' background-image';
   if ( $lazy ) $class .= ' lazy-image lazyload';
@@ -211,6 +220,7 @@ function sandbox_lazy_video($options = array()) {
   $muted = array_key_exists( 'muted', $options ) ? $options['muted'] : $autoplay;
   $playsinline = array_key_exists( 'playsinline', $options ) ? $options['playsinline'] : $autoplay;
   $ratio = array_key_exists( 'ratio', $options ) ? $options['ratio'] : (9 / 16);
+  $poster_image = array_key_exists( 'poster_image', $options ) ? $options['poster_image'] : false;
 
   $video_attrs = array();
   if ( $autoplay ) array_push($video_attrs, 'autoplay');
@@ -220,9 +230,10 @@ function sandbox_lazy_video($options = array()) {
   if ( !$autoplay ) array_push($video_attrs, 'controls');
   if ( !$autoplay ) array_push($video_attrs, 'preload="metadata"');
   if ( !$autoplay ) array_push($video_attrs, 'controlsList="nodownload"');
+  if ( !empty($poster_image) ) array_push($video_attrs, 'poster="' . $poster_image['sizes']['2048x2048'] . '"');
 
   $video_tag_html = htmlspecialchars('<video class="lazy-video ' . $class . '" data-src="' . $src . '" data-src-mobile="' . $src_mobile . '" ' . implode(' ', $video_attrs) .'></video>');
-  $video_placeholder_html = '<div class="lazy-video-placeholder" data-video-tag-html="' . $video_tag_html . '" style="height: 0; aspect-ratio: ' . $ratio . ';"></div>';
+  $video_placeholder_html = '<div class="lazy-video-placeholder" data-video-tag-html="' . $video_tag_html . '" style="height: 0; aspect-ratio: ' . $ratio . ';" data-aspect-ratio="' . $ratio . '"></div>';
 
   echo $video_placeholder_html;
 }

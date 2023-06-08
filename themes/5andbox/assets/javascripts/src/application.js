@@ -22,6 +22,9 @@ App.runFunctions = function(array) {
     array[i]();
   }
 };
+App.reflow = function() {
+  App.$document.trigger('app:reflow');
+};
 // App.isHomePage = function() {
 //   return App.$body.hasClass('controller--home_pages');
 // };

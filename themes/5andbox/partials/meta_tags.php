@@ -53,7 +53,7 @@
 <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
 <meta property="og:see_also" content="<?php echo home_url('/'); ?>">
 
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="<?php the_permalink(); ?>">
 <meta name="twitter:title" content="<?php $meta_title; ?>">
 <meta name="twitter:description" content="<?php echo $meta_description; ?>">
