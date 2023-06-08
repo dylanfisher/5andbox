@@ -55,7 +55,7 @@
   }
 
   @else if $class == not-hover {
-    @media (not(hover)) {
+    @media not all and (hover: none) {
       @content;
     }
   }
