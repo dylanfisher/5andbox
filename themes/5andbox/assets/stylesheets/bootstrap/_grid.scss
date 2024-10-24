@@ -3,20 +3,20 @@ $enable-negative-margins: true;
 $enable-dark-mode: false;
 
 // Functions first
-@import "../node_modules/bootstrap/scss/functions";
+@import "~bootstrap/scss/functions";
 
 // Variable overrides second
 // $primary: #900;
 
 // Required Bootstrap imports
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-// @import "../node_modules/bootstrap/scss/root";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/root";
 
 // Optional components
-@import "../node_modules/bootstrap/scss/utilities";
-@import "../node_modules/bootstrap/scss/containers";
-@import "../node_modules/bootstrap/scss/grid";
-@import "../node_modules/bootstrap/scss/helpers";
-@import "../node_modules/bootstrap/scss/utilities/api";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/utilities/api";

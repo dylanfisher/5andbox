@@ -14,10 +14,11 @@ const buildOptions = {
   format: 'iife',
   platform: 'browser',
   outdir: 'assets/dist',
-  external: ['*.woff', '*.woff2']
+  external: ['*.woff', '*.woff2'],
+  logLevel: 'error'
 };
 
-const plugins = [{
+const rebuildPlugin = {
   name: 'rebuild',
   setup(build) {
     build.onEnd(result => {
@@ -32,12 +33,15 @@ const plugins = [{
       }
     });
   },
-}, sassPlugin({
+};
+
+const sassPostcssPlugin = sassPlugin({
+  quietDeps: true,
   async transform(source, resolveDir) {
     const { css } = await postcss([autoprefixer]).process(source, { from: undefined });
-    return css
-  }
-})];
+    return css;
+  },
+});
 
-const ctx = await esbuild.context({ ...buildOptions, plugins });
+const ctx = await esbuild.context({ ...buildOptions, plugins: [rebuildPlugin, sassPostcssPlugin]  });
 await ctx.watch();

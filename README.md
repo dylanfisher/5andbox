@@ -71,7 +71,7 @@ git commit -m "first commit"
 
 `cd ~/projects/my-new-website/wp-content/themes/my-new-website`
 
-`npm`
+`npm install`
 
 - Run esbuild
 
