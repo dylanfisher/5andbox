@@ -21,6 +21,12 @@ const buildOptions = {
 const rebuildPlugin = {
   name: 'rebuild',
   setup(build) {
+    let buildStartTime;
+
+    build.onStart(() => {
+      buildStartTime = Date.now();
+    });
+
     build.onEnd(result => {
       if ( !result || result.errors.length ) {
         console.error('watch build error:', result);
@@ -29,7 +35,9 @@ const rebuildPlugin = {
           message: result.pluginName
         });
       } else {
-        console.log(`Built at ${new Date().toLocaleTimeString()}`);
+        const buildEndTime = Date.now();
+        const buildDuration = ((buildEndTime - buildStartTime) / 1000).toFixed(2);
+        console.log(`Built at ${new Date().toLocaleTimeString()} – ${buildDuration}s`);
       }
     });
   },
