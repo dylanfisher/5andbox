@@ -1,7 +1,8 @@
 // Typography
 
 html {
-  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  text-wrap-style: pretty;
 }
 
 h1, h2, h3, h4, h5, h6 {

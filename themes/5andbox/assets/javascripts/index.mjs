@@ -32,7 +32,7 @@ const rebuildPlugin = {
         console.error('watch build error:', result);
         notifier.notify({
           title: 'esbuild error',
-          message: result.pluginName
+          message: result?.pluginName ?? 'unknown plugin'
         });
       } else {
         const buildEndTime = Date.now();
