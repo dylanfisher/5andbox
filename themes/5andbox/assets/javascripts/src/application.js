@@ -25,10 +25,26 @@ App.runFunctions = function(array) {
 App.reflow = function() {
   App.$document.trigger('app:reflow');
 };
-// App.isHomePage = function() {
-//   return App.$body.hasClass('controller--home_pages');
-// };
+App.isHomePage = function() {
+  return App.$body.hasClass('page-template-page-home');
+};
 App.currentBreakpoint = undefined;
+App.currentOrientation = undefined;
+
+App.orientation = function() {
+  if (window.matchMedia("(orientation: portrait)").matches) {
+    return 'portrait';
+  }
+  return 'landscape';
+};
+
+App.isLandscape = function() {
+  return App.orientation() == 'landscape';
+}
+
+App.isPortrait = function() {
+  return App.orientation() == 'portrait';
+}
 
 //////////////////////////////////////////////////////////////
 // On page load
@@ -42,7 +58,9 @@ $(function() {
 
   App.$html = $('html');
   App.$body = $('body');
+  App.$applicationWrapper = $('#application-wrapper');
   App.$header = $('#header');
+  App.$footer = $('#footer');
 
   App.$html.removeClass('no-js');
 
@@ -86,6 +104,11 @@ App.$window.on('resize', function() {
 
   if ( App.currentBreakpoint != App.breakpoint() ) App.$document.trigger('app:breakpoint-change');
   App.currentBreakpoint = App.breakpoint();
+
+  // Detect orientation change
+  var newOrientation = (App.windowWidth > App.windowHeight) ? 'landscape' : 'portrait';
+  if ( App.currentOrientation != newOrientation ) App.$document.trigger('app:orientation-change');
+  App.currentOrientation = newOrientation;
 
   App.runFunctions(App.pageResize);
 });

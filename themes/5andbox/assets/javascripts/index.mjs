@@ -14,7 +14,7 @@ const buildOptions = {
   format: 'iife',
   platform: 'browser',
   outdir: 'assets/dist',
-  external: ['*.woff', '*.woff2'],
+  external: ['*.woff', '*.woff2', '*.png', '*.jpg', '*.svg'],
   logLevel: 'error'
 };
 

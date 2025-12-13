@@ -12,7 +12,9 @@ function sandbox_enqueue_scripts() {
     get_stylesheet_directory_uri() . '/assets/javascripts/lib/jquery.min.js',
     false,
     NULL,
-    true // Load in footer
+    array(
+      'strategy' => 'defer'
+    )
   );
 
   // Application javascript
@@ -22,7 +24,9 @@ function sandbox_enqueue_scripts() {
     get_stylesheet_directory_uri() . '/assets/dist/javascripts/src/app.js',
     array('jquery'),
     $javascript_version,
-    true // Load in footer
+    array(
+      'strategy' => 'defer'
+    )
   );
 
   // CSS

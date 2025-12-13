@@ -8,10 +8,6 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width">
   <?php get_template_part('partials/meta_tags'); ?>
-  <?php if ( false ): ?>
-    <?php // TODO: Add favicon, analytics ?>
-    <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
-  <?php endif ?>
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
