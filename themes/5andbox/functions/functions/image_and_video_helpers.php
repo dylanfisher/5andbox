@@ -1,18 +1,172 @@
 <?php
 
-function sandbox_media_item_is_image($media_item, $options = []) {
-  if ( empty($media_item) ) return false;
-
-  $is_image = (($media_item['type'] ?? null) === 'image')
-           || (($options['is_image'] ?? false) === true);
-
-  return $is_image;
+/**
+ * Safely read an option value while preserving explicit null/false values.
+ */
+function sandbox__opt($options, $key, $default = null) {
+  if (!is_array($options)) return $default;
+  return array_key_exists($key, $options) ? $options[$key] : $default;
 }
 
-function sandbox_media_item($media_item, $options = []) {
-  $skip_portrait = $options['skip_portrait'] ?? [];
+/**
+ * Swap http -> https when site is in SSL mode.
+ */
+function sandbox__https_url($url) {
+  if (!is_string($url) || $url === '') return $url;
+  return str_replace('http://', https_replacement(), $url);
+}
 
-  $portrait_on = !empty($media_item['alternate_portrait_media_item']) && !$skip_portrait;
+/**
+ * Convert a data array into HTML data-* attributes.
+ */
+function sandbox__data_attributes($data) {
+  if (!is_array($data) || empty($data)) return '';
+
+  $attrs = [];
+  foreach ($data as $key => $value) {
+    $attr_key = preg_replace('/[^a-zA-Z0-9\\-_]/', '', (string) $key);
+    if ($attr_key === '') continue;
+    $attrs[] = 'data-' . $attr_key . '="' . esc_attr((string) $value) . '"';
+  }
+
+  return implode(' ', $attrs);
+}
+
+/**
+ * Build a caption string (or null) from override/media caption.
+ */
+function sandbox__media_caption($media_item, $caption_override = '') {
+  $caption_override = is_string($caption_override) ? trim($caption_override) : '';
+  if ($caption_override !== '') return htmlspecialchars($caption_override);
+
+  $caption = is_array($media_item) ? (string) ($media_item['caption'] ?? '') : '';
+  $caption = trim($caption);
+  if ($caption === '') return null;
+
+  return htmlspecialchars(trim(apply_filters('the_content', $caption)));
+}
+
+/**
+ * Normalize an ACF image array into a URL for a named size (or full URL).
+ */
+function sandbox__image_url_for_size($image, $size, $full_size = false) {
+  if (empty($image) || !is_array($image)) return null;
+  if ($full_size && !empty($image['url'])) return sandbox__https_url($image['url']);
+
+  if (!empty($image['sizes']) && is_array($image['sizes']) && !empty($image['sizes'][$size])) {
+    return sandbox__https_url($image['sizes'][$size]);
+  }
+
+  return !empty($image['url']) ? sandbox__https_url($image['url']) : null;
+}
+
+function sandbox_media_item_detect_type($media_item, $options = []) {
+  if ( empty($media_item) ) return null;
+
+  if ( ($options['is_image'] ?? false) === true ) return 'image';
+  if ( ($options['is_video'] ?? false) === true ) return 'video';
+
+  $type = $media_item['type'] ?? null;
+  if ( $type === 'image' || $type === 'video' ) return $type;
+
+  $mime_type = $media_item['mime_type'] ?? null;
+  if ( is_string($mime_type) ) {
+    if ( strpos($mime_type, 'image/') === 0 ) return 'image';
+    if ( strpos($mime_type, 'video/') === 0 ) return 'video';
+  }
+
+  if ( !empty($media_item['image']) || !empty($media_item['portrait_image']) || !empty($media_item['image_portrait']) ) return 'image';
+  if ( !empty($media_item['video']) || !empty($media_item['portrait_video']) || !empty($media_item['video_portrait']) ) return 'video';
+
+  return null;
+}
+
+/**
+ * Normalize a media item into the expected "wrapper" structure.
+ *
+ * Accepts either a "media item" wrapper array (with `image`/`video` keys) or a
+ * plain ACF image/video array (with `url`, `mime_type`, etc) and returns a
+ * consistent structure for rendering.
+ *
+ * @param array $media_item
+ * @param array $options
+ * @return array
+ */
+function sandbox_media_item_normalize($media_item, $options = []) {
+  if ( empty($media_item) ) return [];
+
+  $normalized = $media_item;
+  $detected_type = sandbox_media_item_detect_type($media_item, $options);
+
+  $has_wrapped_fields = !empty($media_item['image']) || !empty($media_item['video']) || !empty($media_item['portrait_image']) || !empty($media_item['portrait_video']) || !empty($media_item['image_portrait']) || !empty($media_item['video_portrait']);
+  if ( !$has_wrapped_fields && !empty($media_item['url']) && ($detected_type === 'image' || $detected_type === 'video') ) {
+    $inner = $media_item;
+    unset($inner['type']);
+    $normalized = [
+      'type' => $detected_type,
+      $detected_type => $inner,
+      '__sandbox_wrapped' => true,
+    ];
+  }
+
+  if ( !empty($normalized['image_portrait']) && empty($normalized['portrait_image']) ) $normalized['portrait_image'] = $normalized['image_portrait'];
+  if ( !empty($normalized['video_portrait']) && empty($normalized['portrait_video']) ) $normalized['portrait_video'] = $normalized['video_portrait'];
+  if ( !empty($normalized['poster_image_portrait']) && empty($normalized['portrait_poster_image']) ) $normalized['portrait_poster_image'] = $normalized['poster_image_portrait'];
+
+  return $normalized;
+}
+
+/**
+ * Remove internal-only options before passing to underlying tag helpers.
+ *
+ * @param array $options
+ * @return array
+ */
+function sandbox_media_item_pass_through_options($options) {
+  unset($options['image_options']);
+  unset($options['video_options']);
+  unset($options['skip_portrait']);
+  unset($options['is_image']);
+  unset($options['is_video']);
+  return $options;
+}
+
+/**
+ * True when the given media item should be rendered as an image.
+ *
+ * @param array $media_item
+ * @param array $options
+ * @return bool
+ */
+function sandbox_media_item_is_image($media_item, $options = []) {
+  return sandbox_media_item_detect_type($media_item, $options) === 'image';
+}
+
+/**
+ * Render a responsive media item (image or video), optionally with portrait variant.
+ *
+ * Expected shape is produced by `sandbox_media_item_normalize()`.
+ *
+ * @param array $media_item
+ * @param array $options
+ * @return void
+ */
+function sandbox_media_item($media_item, $options = []) {
+  $media_item = sandbox_media_item_normalize($media_item, $options);
+  if ( empty($media_item) ) return;
+
+  $is_wrapped_single = !empty($media_item['__sandbox_wrapped']);
+  $has_explicit_image_options = array_key_exists('image_options', $options);
+  $has_explicit_video_options = array_key_exists('video_options', $options);
+
+  $skip_portrait = !empty($options['skip_portrait']);
+
+  $portrait_on = !$skip_portrait && (
+    !empty($media_item['alternate_portrait_media_item'])
+    || !empty($media_item['portrait_image'])
+    || !empty($media_item['portrait_video'])
+    || !empty($media_item['portrait_poster_image'])
+  );
   $image_options = $options['image_options'] ?? [];
 
   // Base video options
@@ -31,38 +185,58 @@ function sandbox_media_item($media_item, $options = []) {
   }
 
   if (sandbox_media_item_is_image($media_item, $options)) {
+    $image_tag_options = (!$has_explicit_image_options && $is_wrapped_single)
+      ? sandbox_media_item_pass_through_options($options)
+      : array_merge($options, $image_options);
+
     if ($portrait_on && !empty($media_item['portrait_image'])) {
-      echo '<div class="d-portrait">';
-        sandbox_image_tag($media_item['portrait_image'], array_merge($options, $image_options));
+      echo '<div class="d-portrait sandbox-responsive-media-container">';
+        sandbox_image_tag($media_item['portrait_image'], $image_tag_options);
       echo '</div>';
     }
     if (!empty($media_item['image'])) {
-      if ($portrait_on && !empty($media_item['portrait_image'])) echo '<div class="d-landscape">';
-      sandbox_image_tag($media_item['image'], array_merge($options, $image_options));
+      if ($portrait_on && !empty($media_item['portrait_image'])) echo '<div class="d-landscape sandbox-responsive-media-container">';
+      sandbox_image_tag($media_item['image'], $image_tag_options);
       if ($portrait_on && !empty($media_item['portrait_image'])) echo '</div>';
     }
   } else {
+    $video_tag_options_landscape = (!$has_explicit_video_options && $is_wrapped_single)
+      ? array_merge(sandbox_media_item_pass_through_options($options), $video_options_landscape)
+      : array_merge($options, $video_options_landscape);
+    $video_tag_options_portrait = (!$has_explicit_video_options && $is_wrapped_single)
+      ? array_merge(sandbox_media_item_pass_through_options($options), $video_options_portrait)
+      : array_merge($options, $video_options_portrait);
+
     if ($portrait_on && !empty($media_item['portrait_video'])) {
-      echo '<div class="d-portrait">';
-        sandbox_lazy_video($media_item['portrait_video'], array_merge($options, $video_options_portrait));
+      echo '<div class="d-portrait sandbox-responsive-media-container">';
+        sandbox_lazy_video($media_item['portrait_video'], $video_tag_options_portrait);
       echo '</div>';
     }
     if (!empty($media_item['video'])) {
-      if ($portrait_on && !empty($media_item['portrait_video'])) echo '<div class="d-landscape">';
-      sandbox_lazy_video($media_item['video'], array_merge($options, $video_options_landscape));
+      if ($portrait_on && !empty($media_item['portrait_video'])) echo '<div class="d-landscape sandbox-responsive-media-container">';
+      sandbox_lazy_video($media_item['video'], $video_tag_options_landscape);
       if ($portrait_on && !empty($media_item['portrait_video'])) echo '</div>';
     }
   }
 }
 
-function sandbox_media_item_output($media_item, $options) {
+/**
+ * Return the rendered HTML for a media item as an escaped attribute string.
+ *
+ * Useful when placing the HTML inside a data attribute.
+ *
+ * @param array $media_item
+ * @param array $options
+ * @return string
+ */
+function sandbox_media_item_output($media_item, $options = array()) {
   ob_start();
   sandbox_media_item($media_item, $options);
   $html = ob_get_clean();
   return esc_attr($html);
 }
 
-// Possible image sizes
+// Possible image sizes in a default WP install
 // thumbnail: 150x150
 // medium: 300x300
 // medium_large: 768x0
@@ -73,97 +247,118 @@ function sandbox_media_item_output($media_item, $options) {
 // Get an <img> at size from an ACF image field
 // Note: sandbox_image_tag requires that you install a lazy load plugin such as
 //       https://github.com/aFarkas/lazysizes in order to work properly.
+/**
+ * Echo an <img> tag for an ACF image array, with optional lazy-loading and jump-fix wrapper.
+ *
+ * @param array $media_item ACF image array.
+ * @param array $options
+ * @return void
+ */
 function sandbox_image_tag($media_item, $options = array()) {
   if ( empty($media_item) ) return;
 
-  $is_svg = $media_item['mime_type'] == 'image/svg+xml';
-  $lazy = array_key_exists( 'lazy', $options ) ? $options['lazy'] : true;
-  $size = array_key_exists( 'size', $options ) ? $options['size'] : '2048x2048';
-  if ( $size == '2048x2048' && $media_item['width'] < 3000 ) $options['full_size'] = true;
-  $size_mobile = array_key_exists( 'size_mobile', $options ) ? $options['size_mobile'] : '1536x1536';
-  $full_size = array_key_exists( 'full_size', $options ) ? $options['full_size'] : false;
-  $data = array_key_exists( 'data', $options ) ? $options['data'] : array();
-  $alt = array_key_exists( 'alt', $options ) ? htmlspecialchars($options['alt']) : htmlspecialchars(trim($media_item['alt']));
-  $skip_jump_fix = $is_svg || (array_key_exists( 'skip_jump_fix', $options ) ? $options['skip_jump_fix'] : false);
-  $wrapper_class = array_key_exists( 'wrapper_class', $options ) ? $options['wrapper_class'] : false;
-  $class = array_key_exists( 'class', $options ) ? $options['class'] : false;
-  $style_props = array_key_exists( 'style', $options ) ? $options['style'] : '';
-  $caption_override = array_key_exists( 'caption', $options ) ? $options['caption'] : '';
-  $width = array_key_exists( 'width', $options ) ? $options['width'] : $media_item['width'];
-  $height = array_key_exists( 'height', $options ) ? $options['height'] : $media_item['height'];
+  $is_svg = ($media_item['mime_type'] ?? '') === 'image/svg+xml';
 
-  $size_url = $media_item['sizes'][$size];
-  if ( $full_size ) {
-    $size_url = $media_item['url'];
+  $lazy = sandbox__opt($options, 'lazy', true);
+  $skip_lazy = sandbox__opt($options, 'skip_lazy', false);
+  if ($skip_lazy) $lazy = false;
+
+  $size = sandbox__opt($options, 'size', '2048x2048');
+  if ($size === '2048x2048' && !empty($media_item['width']) && $media_item['width'] < 3000) {
+    $options['full_size'] = true;
   }
 
-  $data_sources = array(
-    'src' => str_replace('http://', https_replacement(), $size_url),
-    'src-full' => str_replace('http://', https_replacement(), $media_item['url'])
-  );
+  $size_mobile = sandbox__opt($options, 'size_mobile', '1536x1536');
+  $full_size = sandbox__opt($options, 'full_size', false);
+  $data = sandbox__opt($options, 'data', []);
+  if (!is_array($data)) $data = [];
 
-  if ( $size_mobile != $size ) {
-    $data_sources = array_merge( $data_sources, array( 'src-mobile' => str_replace('http://', https_replacement(), $media_item['sizes'][$size_mobile]) ) );
+  $alt_raw = array_key_exists('alt', $options) ? (string) $options['alt'] : (string) ($media_item['alt'] ?? '');
+  $alt = htmlspecialchars(trim($alt_raw));
+
+  $skip_jump_fix = $is_svg || sandbox__opt($options, 'skip_jump_fix', false);
+  $wrapper_class = (string) sandbox__opt($options, 'wrapper_class', '');
+  $class = (string) sandbox__opt($options, 'class', '');
+  $style_props = (string) sandbox__opt($options, 'style', '');
+  $caption_override = (string) sandbox__opt($options, 'caption', '');
+
+  $width = sandbox__opt($options, 'width', $media_item['width'] ?? null);
+  $height = sandbox__opt($options, 'height', $media_item['height'] ?? null);
+
+  $src_url = sandbox__image_url_for_size($media_item, $size, $full_size);
+  $full_url = !empty($media_item['url']) ? sandbox__https_url($media_item['url']) : $src_url;
+  $src_mobile_url = ($size_mobile !== $size) ? sandbox__image_url_for_size($media_item, $size_mobile, $full_size) : null;
+
+  $data_sources = [
+    'src' => $src_url,
+    'src-full' => $full_url,
+  ];
+  if ($src_mobile_url) $data_sources['src-mobile'] = $src_mobile_url;
+
+  if ($skip_lazy) {
+    unset($data_sources['src']);
+    unset($data_sources['src-mobile']);
   }
 
-  $data = array_merge( $data, $data_sources );
+  $data = array_merge($data, array_filter($data_sources));
 
-  if ( !empty( trim($caption_override) ) ) {
-    $caption = htmlspecialchars( trim($caption_override) );
-  } elseif ( !empty( trim($media_item['caption']) ) ) {
-    $caption = htmlspecialchars( trim( apply_filters('the_content', $media_item['caption']) ) );
-  }
+  $caption = sandbox__media_caption($media_item, $caption_override);
+  if (!empty($caption)) $data['caption'] = $caption;
 
-  if ( !empty($caption) ) {
-    $data = array_merge( $data, array('caption' => $caption) );
-  }
+  $src_for_tag = $src_url ?: sandbox_uri_image_placeholder();
+  $img_src = $lazy ? sandbox_uri_image_placeholder() : $src_for_tag;
+  $img_classes = trim('sandbox-image sandbox-media-item ' . ($lazy ? 'lazy-image lazyload ' : '') . $class);
 
-  $data_attributes = array();
-  foreach ( $data as $key => $value ) {
-    array_push( $data_attributes, 'data-' . $key . '="' . $value . '"' );
-  }
-
-  if ( $lazy ) {
-    $image = '<img src="' . sandbox_uri_image_placeholder() . '"
-                   alt="' . $alt . '"
-                   style="' . $style_props . '"
-                   class="sandbox-image sandbox-media-item lazy-image lazyload ' . $class . '"
-                   ' . join( ' ', $data_attributes ) . '>';
-  } else {
-    $image = '<img src="' . $data_sources['src'] . '"
-                   alt="' . $alt . '"
-                   style="' . $style_props . '"
-                   class="sandbox-image sandbox-media-item ' . $class . '"
-                   ' . join( ' ', $data_attributes ) . '>';
-  }
+  $image = '<img src="' . $img_src . '" ' .
+    'alt="' . esc_attr($alt) . '" ' .
+    'style="' . esc_attr($style_props) . '" ' .
+    'class="' . esc_attr($img_classes) . '" ' .
+    sandbox__data_attributes($data) .
+  '>';
 
   // Jump fix
-  $ratio = $height / $width * 100;
+  $ratio = (!empty($width) && !empty($height) && $width > 0) ? (($height / $width) * 100) : 0;
 
   if ( $skip_jump_fix ) {
     echo $image;
   } else {
-    echo '<div class="' . $wrapper_class . ' sandbox-image-jump-fix sandbox-image-jump-fix--' . $media_item['subtype'] . '"
-               style="padding-bottom: ' . $ratio . '%;" data-aspect-ratio="' . $ratio . '">' . $image . '</div>';
+    $subtype = (string) ($media_item['subtype'] ?? '');
+    echo '<div class="' . esc_attr(trim($wrapper_class . ' sandbox-image-jump-fix sandbox-image-jump-fix--' . $subtype)) . '"' .
+      ' style="padding-bottom: ' . esc_attr((string) $ratio) . '%;"' .
+      ' data-aspect-ratio="' . esc_attr((string) $ratio) . '"' .
+      '>' . $image . '</div>';
   }
 }
 
 // Get an image's aspect ratio as a float
+/**
+ * Get an image's aspect ratio (height / width).
+ *
+ * @param array $image ACF image array.
+ * @return float|null
+ */
 function sandbox_get_image_aspect_ratio($image) {
   if ( empty($image) ) return;
 
-  $width = $image['width'];
-  $height = $image['height'];
-  $ratio = $height / $width;
+  $width = $image['width'] ?? null;
+  $height = $image['height'] ?? null;
+  if (empty($width) || empty($height) || $width <= 0) return null;
 
-  return $ratio;
+  return $height / $width;
 }
 
 // Get an image's orientation. Returns either "landscape" or "portrait"
+/**
+ * Get an image's orientation based on aspect ratio.
+ *
+ * @param array $image ACF image array.
+ * @return string|null "landscape" or "portrait"
+ */
 function sandbox_get_image_orientation($image) {
   if ( empty($image) ) return;
 
   $ratio = sandbox_get_image_aspect_ratio($image);
+  if ($ratio === null) return null;
   $orientation = null;
 
   if ( $ratio <= 1 ) {
@@ -175,77 +370,79 @@ function sandbox_get_image_orientation($image) {
   return $orientation;
 }
 
+/**
+ * Return a background-image <div> string with data attributes for lazy-loading.
+ *
+ * @param array $media_item ACF image array.
+ * @param array $options
+ * @return string
+ */
 function sandbox_get_background_image_div($media_item, $options = array()) {
-  $size = array_key_exists( 'size', $options ) ? $options['size'] : '2048x2048';
-  $size_mobile = array_key_exists( 'size_mobile', $options ) ? $options['size_mobile'] : '1536x1536';
-  $full_size = array_key_exists( 'full_size', $options ) ? $options['full_size'] : false;
-  $data = array_key_exists( 'data', $options ) ? $options['data'] : array();
-  $alt = array_key_exists( 'alt', $options ) ? htmlspecialchars($options['alt']) : htmlspecialchars(trim($media_item['alt']));
-  $lazy = array_key_exists( 'lazy', $options ) ? $options['lazy'] : true;
-  $set_aspect_ratio = array_key_exists( 'set_aspect_ratio', $options ) ? $options['set_aspect_ratio'] : false;
-  $options['lazy'] = $lazy;
-  $class = array_key_exists( 'class', $options ) ? $options['class'] : '';
-  $class .= ' background-image';
-  if ( $lazy ) $class .= ' lazy-image lazyload';
-  if ( empty($media_item) ) $class .= ' missing-image';
-  $caption_override = array_key_exists( 'caption', $options ) ? $options['caption'] : '';
+  $size = sandbox__opt($options, 'size', '2048x2048');
+  $size_mobile = sandbox__opt($options, 'size_mobile', '1536x1536');
+  $full_size = sandbox__opt($options, 'full_size', false);
+  $data = sandbox__opt($options, 'data', []);
+  if (!is_array($data)) $data = [];
+  $lazy = sandbox__opt($options, 'lazy', true);
+  $set_aspect_ratio = sandbox__opt($options, 'set_aspect_ratio', false);
 
-  $size_url = $media_item['sizes'][$size];
-  if ( $full_size ) {
-    $size_url = $media_item['url'];
+  $class = (string) sandbox__opt($options, 'class', '');
+  $class = trim($class . ' background-image' . ($lazy ? ' lazy-image lazyload' : ''));
+
+  $caption_override = (string) sandbox__opt($options, 'caption', '');
+  $caption = sandbox__media_caption($media_item, $caption_override);
+  if (!empty($caption)) $data['caption'] = $caption;
+
+  if (empty($media_item)) {
+    $class .= ' missing-image';
+    return '<div class="' . esc_attr($class) . '" ' . sandbox__data_attributes($data) . '></div>';
   }
 
-  $data_sources = array(
-    'bg' => str_replace('http://', https_replacement(), $size_url),
-    'src-full' => str_replace('http://', https_replacement(), $media_item['url'])
-  );
+  $bg_url = sandbox__image_url_for_size($media_item, $size, $full_size);
+  $full_url = !empty($media_item['url']) ? sandbox__https_url($media_item['url']) : $bg_url;
+  $bg_mobile_url = ($size_mobile !== $size) ? sandbox__image_url_for_size($media_item, $size_mobile, $full_size) : null;
 
-  if ( $size_mobile != $size ) {
-    $data_sources = array_merge( $data_sources, array( 'bg-mobile' => str_replace('http://', https_replacement(), $media_item['sizes'][$size_mobile]) ) );
-  }
-
-  $data = array_merge( $data, $data_sources );
-
-  if ( !empty( trim($caption_override) ) ) {
-    $caption = htmlspecialchars( trim($caption_override) );
-  } elseif ( !empty( trim($media_item['caption']) ) ) {
-    $caption = htmlspecialchars( trim( apply_filters('the_content', $media_item['caption']) ) );
-  }
-
-  if ( !empty($caption) ) {
-    $data = array_merge( $data, array('caption' => $caption) );
-  }
-
-  $data_attributes = array();
-  foreach ( $data as $key => $value ) {
-    array_push( $data_attributes, 'data-' . $key . '="' . $value . '"' );
-  }
+  if ($bg_url) $data['bg'] = $bg_url;
+  if ($full_url) $data['src-full'] = $full_url;
+  if ($bg_mobile_url) $data['bg-mobile'] = $bg_mobile_url;
 
   $aspect_ratio_style = '';
-  if ( $set_aspect_ratio ) {
-    $height_ratio = sandbox_get_image_aspect_ratio($media_item) * 100;
-    $aspect_ratio_style = 'padding-bottom: ' . $height_ratio . '%;';
+  if ($set_aspect_ratio) {
+    $height_ratio = sandbox_get_image_aspect_ratio($media_item);
+    if ($height_ratio !== null) {
+      $aspect_ratio_style = 'padding-bottom: ' . ($height_ratio * 100) . '%;';
+    }
   }
 
-  return '<div class="' . $class . '" style="' . sandbox_background_image_style($media_item, $options) . '; ' . $aspect_ratio_style . '" ' . join(' ', $data_attributes) . '></div>';
+  $style = trim((string) sandbox_background_image_style($media_item, array_merge($options, ['lazy' => $lazy])));
+  $style = trim($style . '; ' . $aspect_ratio_style);
+
+  return '<div class="' . esc_attr($class) . '" style="' . esc_attr($style) . '" ' . sandbox__data_attributes($data) . '></div>';
 }
 
+/**
+ * Return inline CSS for setting a background-image (plus point-of-interest if set).
+ *
+ * @param array $image ACF image array.
+ * @param array $options
+ * @return string|null
+ */
 function sandbox_background_image_style($image, $options = array()) {
   if ( empty($image) ) return;
 
-  $lazy = array_key_exists( 'lazy', $options ) ? $options['lazy'] : false;
-  $size = array_key_exists( 'size', $options ) ? $options['size'] : '2048x2048';
-  $full_size = array_key_exists( 'full_size', $options ) ? $options['full_size'] : false;
-  $image_url = $image['sizes'][$size];
-  if ( $full_size ) {
-    $image_url = $image['url'];
-  }
-  $image_url_or_placeholder = $lazy ? sandbox_uri_image_placeholder() : $image_url;
-  $image_url_or_placeholder = str_replace('http://', https_replacement(), $image_url_or_placeholder);
-  $class = array_key_exists( 'class', $options ) ? $options['class'] : '';
+  $lazy = sandbox__opt($options, 'lazy', false);
+  $skip_lazy = sandbox__opt($options, 'skip_lazy', false);
+  if ($skip_lazy) $lazy = false;
 
-  $style_props = '';
-  $style_props .= 'background-image: url(' . $image_url_or_placeholder . ');';
+  $size = sandbox__opt($options, 'size', '2048x2048');
+  $full_size = sandbox__opt($options, 'full_size', false);
+  $image_url = sandbox__image_url_for_size($image, $size, $full_size);
+  if (empty($image_url)) return;
+
+  $image_url_or_placeholder = $lazy ? sandbox_uri_image_placeholder() : $image_url;
+  $image_url_or_placeholder = sandbox__https_url($image_url_or_placeholder);
+
+  $style_props = 'background-image: url(' . $image_url_or_placeholder . ');';
   $style_props .= sandbox_get_image_poi($image);
 
   return $style_props;
@@ -253,6 +450,7 @@ function sandbox_background_image_style($image, $options = array()) {
 
 function sandbox_get_image_poi($image, $options = array()) {
   if ( empty($image) ) return;
+  if (empty($image['ID'])) return;
 
   // Position type can also be set as 'object-position' if aligning images via the object-fit property.
   $position_type = array_key_exists( 'position_type', $options ) ? $options['position_type'] : 'background-position';
@@ -260,18 +458,27 @@ function sandbox_get_image_poi($image, $options = array()) {
   $posX = get_field('point_of_interest_x', $image['ID']);
   $posY = get_field('point_of_interest_y', $image['ID']);
 
-  if ( empty($posX) || empty($posY) ) return;
+  if ($posX === false || $posY === false) return;
+  if ($posX === null || $posY === null) return;
+  if ($posX === '' || $posY === '') return;
 
   return $position_type . ': ' . $posX . '% ' . $posY . '%;';
 }
 
 // https://www.advancedcustomfields.com/resources/oembed/
+/**
+ * Add common query params/attrs to an ACF oEmbed iframe string.
+ *
+ * @param string $oembed_iframe_string
+ * @return string
+ */
 function sandbox_get_video_oembed($oembed_iframe_string) {
   $iframe = $oembed_iframe_string;
 
   // Use preg_match to find iframe src.
   preg_match('/src="(.+?)"/', $iframe, $matches);
-  $src = $matches[1];
+  $src = $matches[1] ?? null;
+  if (empty($src)) return $iframe;
 
   // Add extra parameters to src and replace HTML.
   $params = array(
@@ -290,36 +497,31 @@ function sandbox_get_video_oembed($oembed_iframe_string) {
   return $iframe;
 }
 
+/**
+ * Echo a lazy-loadable <video> placeholder (or the video tag directly).
+ *
+ * @param array $video ACF file/attachment array (or similar).
+ * @param array $options
+ * @return void
+ */
 function sandbox_lazy_video($video, $options = array()) {
-  $src = array_key_exists( 'src', $options ) ? $options['src'] : (!empty($video) ? $video['url'] : false);
-  $src_mobile = array_key_exists( 'src_mobile', $options ) ? $options['src_mobile'] : $src;
-  $class = array_key_exists( 'class', $options ) ? $options['class'] : '';
-  $wrapper_class = array_key_exists( 'wrapper_class', $options ) ? $options['wrapper_class'] : '';
-  $autoplay = array_key_exists( 'autoplay', $options ) ? $options['autoplay'] : false;
-  $loop = array_key_exists( 'loop', $options ) ? $options['loop'] : $autoplay;
-  $muted = array_key_exists( 'muted', $options ) ? $options['muted'] : $autoplay;
-  $playsinline = array_key_exists( 'playsinline', $options ) ? $options['playsinline'] : $autoplay;
-  $width = array_key_exists( 'width', $options ) ? $options['width'] : $video['width'];
-  $height = array_key_exists( 'height', $options ) ? $options['height'] : $video['height'];
-  $ratio = array_key_exists( 'ratio', $options ) ? $options['ratio'] : "$width / $height";
+  $src = sandbox__opt($options, 'src', $video['url'] ?? false);
+  $src_mobile = sandbox__opt($options, 'src_mobile', $src);
+  $class = (string) sandbox__opt($options, 'class', '');
+  $autoplay = sandbox__opt($options, 'autoplay', true);
+  $loop = sandbox__opt($options, 'loop', $autoplay);
+  $muted = sandbox__opt($options, 'muted', $autoplay);
+  $playsinline = sandbox__opt($options, 'playsinline', $autoplay);
+  $width = sandbox__opt($options, 'width', $video['width'] ?? null);
+  $height = sandbox__opt($options, 'height', $video['height'] ?? null);
+  $ratio = sandbox__opt($options, 'ratio', (!empty($width) && !empty($height)) ? "$width / $height" : null);
 
-  $skip_jump_fix = array_key_exists( 'skip_jump_fix', $options ) ? $options['skip_jump_fix'] : false;
-  $skip_placeholder = array_key_exists('skip_placeholder', $options) ? $options['skip_placeholder'] : false;
-  $skip_lazy = array_key_exists('skip_lazy', $options) ? $options['skip_lazy'] : false;
+  $skip_placeholder = sandbox__opt($options, 'skip_placeholder', false);
+  $skip_lazy = sandbox__opt($options, 'skip_lazy', false);
 
-  if ( empty($ratio) ) $ratio = '9 / 16';
-  $padding_pct = 0;
-  if (preg_match('/^\s*(\d+(?:\.\d+)?)\s*[\/:]\s*(\d+(?:\.\d+)?)\s*$/', $ratio, $m)) {
-    $rw = (float) $m[1];
-    $rh = (float) $m[2];
-    if ($rw > 0) $padding_pct = ($rh / $rw) * 100;
-  } elseif (!empty($width) && !empty($height) && $width > 0) {
-    $padding_pct = ($height / $width) * 100;
-  } else {
-    $padding_pct = 56.25; // sensible fallback (16:9)
-  }
+  if (empty($ratio)) $ratio = '9 / 16';
 
-  $poster_image = array_key_exists( 'poster_image', $options ) ? $options['poster_image'] : false;
+  $poster_image = sandbox__opt($options, 'poster_image', false);
 
   $video_attrs = array();
   if ( $autoplay ) array_push($video_attrs, 'autoplay');
@@ -329,11 +531,13 @@ function sandbox_lazy_video($video, $options = array()) {
   if ( !$autoplay ) array_push($video_attrs, 'controls');
   if ( !$autoplay ) array_push($video_attrs, 'preload="metadata"');
   if ( !$autoplay ) array_push($video_attrs, 'controlsList="nodownload"');
-  if ( !empty($poster_image) ) array_push($video_attrs, 'poster="' . $poster_image['sizes']['2048x2048'] . '"');
+  if ( !empty($poster_image) && !empty($poster_image['sizes']['2048x2048']) ) {
+    array_push($video_attrs, 'poster="' . esc_url(sandbox__https_url($poster_image['sizes']['2048x2048'])) . '"');
+  }
 
   $classes = trim('sandbox-video sandbox-media-item ' . $class . ($skip_lazy ? '' : ' lazy-video'));
-  $src_attr = $skip_lazy ? 'src="' . esc_url($src) . '"' : 'data-src="' . esc_url($src) . '"';
-  $src_mobile_attr = $skip_lazy ? '' : ' data-src-mobile="' . esc_url($src_mobile) . '"';
+  $src_attr = $skip_lazy ? 'src="' . esc_url(sandbox__https_url($src)) . '"' : 'data-src="' . esc_url(sandbox__https_url($src)) . '"';
+  $src_mobile_attr = $skip_lazy ? '' : ' data-src-mobile="' . esc_url(sandbox__https_url($src_mobile)) . '"';
 
   $video_html =
     '<video class="' . esc_attr($classes) . '" ' .
@@ -355,11 +559,21 @@ function sandbox_lazy_video($video, $options = array()) {
   echo $video_placeholder_html;
 }
 
+/**
+ * 1x1 transparent GIF used as an image placeholder.
+ *
+ * @return string
+ */
 function sandbox_uri_image_placeholder() {
   return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 }
 
 // If the server is in SSL mode but tries to insert an insecure image, swap the protocol.
+/**
+ * Return the correct URL protocol prefix for the current request.
+ *
+ * @return string "https://" or "http://"
+ */
 function https_replacement() {
   return is_ssl() ? 'https://' : 'http://';
 }

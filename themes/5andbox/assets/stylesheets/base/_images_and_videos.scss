@@ -11,6 +11,7 @@ svg {
 img,
 video {
   height: auto;
+  width: 100%;
 }
 
 .sandbox-image-jump-fix {
@@ -33,7 +34,8 @@ video {
     height: 100%;
   }
 
-  &.lazyloaded {
+  &.lazyloaded,
+  &.ls-is-cached {
     opacity: 1;
   }
 
@@ -44,6 +46,24 @@ video {
   &.no-placeholder-background {
     background-color: transparent;
   }
+
+  .scroll-reveal--opacity & {
+    opacity: 1;
+  }
+}
+
+.sandbox-video,
+.lazy-video-placeholder {
+  aspect-ratio: var(--aspect-ratio);
+}
+
+.media-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover
 }
 
 .background-image {
